@@ -1,0 +1,57 @@
+<extend name="base" />
+
+<block name="main">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">标签: #{$title} ({$tag.topics})</h3>
+                </div>
+                <div class="panel-body">
+                    <if condition="topic">
+                        <ul class="media-list">
+                            <volist name="topics" id="v">
+                                <li class="media">
+                                    <div class="pull-right">
+                                        <span class="badge badge-info topic-comment">{$v.comments}</span>
+                                    </div>
+                                    <a class="media-left" href="{$v.author.url}">
+                                        <img class="img-rounded" src="{$v.author.avatar}" alt="{$v.author.username}">
+                                    </a>
+
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="{$v.url}">{$v.title}</a>
+                                            <if condition="$v.is_top">
+                                                <span class="badge badge-info">置顶</span>
+                                            </if>
+                                        </h4>
+                                        <p class="text-muted">
+                                            <!--<span><a href="<?php echo url2('node_show', $v['node_id']); ?>"><?php echo $v['cname'] ?></a></span>&nbsp;•&nbsp;-->
+                                            <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
+                                            <span>{$v.updatetime}</span>&nbsp;•&nbsp;
+                                            <if condition="$v.ruser.isHave">
+                                                <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                                <else />
+                                                <span>暂无回复</span>
+                                            </if>
+                                        </p>
+                                    </div>
+
+                                </li>
+                            </volist>
+                        </ul>
+                        <else />
+                        暂无话题
+                    </if>
+                </div>
+            </div>
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            <include file="common/login" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</block>
+

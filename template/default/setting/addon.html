@@ -1,0 +1,59 @@
+<extend name="base" />
+<block name="main">
+    <div class="row">
+        <include file="setting/menu" />
+        <div class="col-md-10">
+            <div class="card module">
+                <h3 class="card-header">我的插件</h3>
+                <div class="card-body">
+                    <div class="heading">正在使用的功能</div>
+                    <div class="table-responsive-sm">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">名称</th>
+                                <th scope="col">描述</th>
+                                <th scope="col" width="10"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="activates" id="v">
+                                <tr>
+                                    <th scope="row">{$v.info.name}</th>
+                                    <td>{$v.info.description}</td>
+                                    <td><a href="#" class="btn btn-sm btn-light">禁用</a></td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="heading">未使用功能</div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">名称</th>
+                                <th scope="col">描述</th>
+                                <th scope="col" width="10"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="deactivates" id="v">
+                                <tr>
+                                    <th scope="row">{$v.info.name}</th>
+                                    <td>{$v.info.description}</td>
+                                    <td><a href="#" class="btn btn-sm btn-light">启用</a></td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-sm btn-light">获取更多功能</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

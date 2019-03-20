@@ -1,0 +1,113 @@
+<extend name="base" />
+
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+
+            <div class="card module">
+                <div class="card-header">
+                    <!--
+                    <a href="#">综合</a>
+                    <a href="#">未结</a>
+                    <a href="#">已结</a>
+                    -->
+                    <a href="#">综合</a> <span>|</span>
+                    <a href="#">未结</a> <span>|</span>
+                    <a href="#">已结</a> <span>|</span>
+                    <a href="#">精华</a>
+                </div>
+                <div class="card-body">
+                    <ul class="media-list topic-list">
+                        <volist name="topics" id="v">
+                            <li class="media">
+                                <a class="media-left" href="{$v.author.url}">
+                                    <img class="img-rounded medium" src="{$v.author.gravatar}" alt="{$v.author.username} medium avatar" />
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading topic-list-heading">
+                                        <a href="{$v.url}">{$v.title}</a>
+                                        <if condition="$v.is_top">
+                                            <span class="badge badge-info">置顶</span>
+                                        </if>
+                                    </h4>
+                                    <p class="text-muted">
+                                        <span><a href="{$v.node.url}">{$v.node.cname}</a></span>&nbsp;•&nbsp;
+                                        <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
+                                        <span>{$v.utFmt}</span>&nbsp;•&nbsp;
+                                        <if condition="$v.ruid">
+                                            <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                            <else />
+                                            <span>暂无回复</span>
+                                        </if>
+                                    </p>
+                                </div>
+                                <div class="media-right">
+                                    <span class="badge badge-info topic-comment">
+                                        <a href="{$v.replyUrl}">{$v.comments}</a>
+                                    </span>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+
+                </div>
+                <div class="card-footer text-center">
+                    <nav>
+                        <ul class="pagination justify-content-center"
+                            data-page="active"
+                            data-count="{$total}"
+                            data-size="{$size}"
+                            data-current="{$page}"
+                            data-step = "5"
+                        >
+                            <li data-item="prev" class="page-item"><a class="page-link" href="?page={href}">上一页</a></li>
+                            <li data-item="number" class="page-item {current}"><a class="page-link" href="?page={href}">{number}</a></li>
+                            <li data-item="next" class="page-item"><a class="page-link" href="?page={href}">下一页</a></li>
+                        </ul>
+                    </nav>
+                    <!--
+                    <a href="javascript:void(0)" id="getmore" class="startbbs">更多新主题</a>
+                    -->
+                </div>
+            </div><!-- /.topic list -->
+
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-3 fluid">
+
+            <div class="card module">
+                <h3 class="card-header">快捷导航</h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6"><a href="/node">社区板块</a> </div>
+                        <div class="col-6">新人必读</div>
+                        <div class="col-6">Git仓库</div>
+                        <div class="col-6">积分规则</div>
+                        <div class="col-6">提问的智慧</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <include file="parts/member" />
+
+            <div class="card module">
+                <h3 class="card-header">社区统计</h3>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li>最新会员： X库{$stats.last_username}</li>
+                        <!--<li>注册会员： {$stats.total_users}</li>-->
+                        <li>今日发帖： {$stats.today_topics}</li>
+                        <li>昨日发帖： {$stats.yesterday_topics}</li>
+                        <li>发帖总数： {$stats.total_topics}</li>
+                        <li>回帖数量：  {$stats.total_comments}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <include file="parts/ad" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</block>
+

@@ -1,0 +1,40 @@
+<extend name="base" />
+
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <include file="user/nav" />
+                </div>
+                <div class="card-body">
+                    <ul class="media-list list">
+                        <volist name="comments" id="v">
+                            <li class="media">
+                                <div class="media-body reply_content">
+                                    <h4 class="media-heading topic-list-heading">
+                                        <small>回复了 <a href="{$v.user.url}" title="{$v.user.username}">{$v.user.username}</a>
+                                            创建的主题
+                                        </small>
+                                        <a href="{$v.topic.url}">{$v.topic.title}</a>
+                                    </h4>
+                                    <blockquote>
+                                        {$v.content}
+                                        <small>{$v.replytime}</small>
+                                    </blockquote>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='col-md-3'>
+            <include file="parts/user" />
+            <include file="parts/ad" />
+        </div>
+    </div>
+</block>
+</html>

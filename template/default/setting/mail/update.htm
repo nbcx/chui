@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta content='True' name='HandheldFriendly'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <include file="common/meta" />
+</head>
+<body>
+<include file="common/header" />
+<div class="masthead">
+    <div class="container">
+    <div class="row">
+        <include file="user/setting/menu" />
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                    <div class="heading">修改安全邮箱</div>
+                    <div class="form-group">
+                        <p class="text-muted">安全邮箱是你忘记密码后，能够找回密码的方式之一。</p>
+                        <p class="text-muted">所以请尽量设置为你常用的电子邮箱。</p>
+                    </div>
+                    <form action="/setting/mail" method="post">
+                        <input type="hidden" name="do" value="update">
+                        <if condition="$auth.email">
+                            <div class="alert alert-success col-md-6" role="alert">{$auth.email}</div>
+
+                            <div class="form-group">
+                                <p class="text-muted">在下面输入框填写你要修改的新邮箱地址，然后点击获取验证码！</p>
+                                <p class="text-muted">系统将发送一份带有验证码的邮件到你原来绑定的邮箱里面</p>
+                            </div>
+                            <div class="form-group">
+                                <input placeholder="请输入你的新邮箱地址" class="form-control" name="email" type="text" check="email" />
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-sm">获取验证码</button>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-muted">将邮件里的验证码填入下面输入框，点击提交修改即可</p>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control col-md-4" placeholder="请输入你的验证码" name="email" type="text" check="email" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">提交修改</button>
+                        <else />
+                            <div class="alert alert-danger" role="alert">
+                                你还没有绑定邮箱，不能执行此项操作
+                            </div>
+                        </if>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<include file="common/validator" />
+<include file="common/footer" />
+</body>
+</html>

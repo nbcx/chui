@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$topic.title} - {$conf.site_name}</title>
+    <meta charset='UTF-8'>
+    <meta content='True' name='HandheldFriendly'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <meta name="keywords" content="{$topic.keywords}"/>
+    <meta name="description" content="{$topic.description}"/>
+    <include file="common/meta" />
+    <script src="_theme_res/js/plugins.js" type="text/javascript"></script>
+    <script src="_theme_res/js/jquery.upload.js" type="text/javascript"></script>
+    <script src="_theme_res/js/local.file.js" type="text/javascript"></script>
+    <link href="_pub_plugin/toastr/toastr.min.css" media="screen" rel="stylesheet" type="text/css"/>
+    <script src="_pub_plugin/toastr/toastr.min.js" type="text/javascript"></script>
+</head>
+<body name="top">
+<include file="common/header" />
+<include file="common/nav" />
+<div class="container main">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header topic-detail-heading">
+                    <h2 class="panel-title">{$topic.title}</h2>
+                    <small class="text-muted">
+                        <span>By <a href="{$topic.author.url}">{$topic.author.username}</a></span>&nbsp;•&nbsp;
+                        <span>{$topic.addtime}</span>&nbsp;•&nbsp;
+                        <span>{$topic.views}次点击</span>
+                    </small>
+                </div>
+                <!--
+                <div class="card-body content">
+                    {$topic.content}
+                </div>
+                -->
+                <div class="card-footer">{$title}：</div>
+                <div class="card-body">
+                    <form class="no-top" action="{$action}" method="post">
+                        <if condition="$auth.islogin">
+                            <input name="topic_id" id="topic_id" type="hidden" value="{$topic.id}"/>
+                            <input name="resolver" id="resolver" type="hidden" value="markdown"/>
+                            <div class="form-group">
+                                <textarea class="form-control" id="content" name="comment" rows="15">{$comment.original}</textarea>
+                                <p style="margin-top: 1rem">
+                                    <span class="text-muted">可直接粘贴链接和图片地址/发代码用&lt;pre&gt;标签</span>
+                                    <span class="pull-right">
+                                        <button id="upload_file" class="btn btn-sm btn-secondary">图片/附件</button>
+                                    </span>
+                                </p>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary" id="comment-submit"> 回 复 </button>
+                        <else />
+                            <div class="well text-center">
+                                <a class="btn btn-default" href="{$conf.login}">登录</a>发表 or 还没有账号？去<a href="{$conf.register}">注册</a>
+                            </div>
+                        </if>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <assign name="user" value="$auth" />
+            <include file="common/user" />
+            <include file="common/ad" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</div><!-- /.container -->
+<include file="common/footer" />
+<?php \nb\Hook::pos('themes/add.htm')->richEditor(); ?>
+</body>
+</html>

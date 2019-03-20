@@ -1,0 +1,7 @@
+{
+  "name":  "Markdown编辑器",
+  "author": "collin",
+  "version":"1.0",
+  "link":"https://simplemde.com",
+  "description":"基于simplemde开发的一款markdown编辑器插件"
+}

@@ -1,0 +1,45 @@
+<extend name="base" />
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card module">
+                <div class="card-header">
+                    <!--<div class="card-title">创建新主题</div>-->
+                    <include file="user/nav" />
+                </div>
+                <div class="card-body">
+                    <ul class="media-list list">
+                        <volist name="topics" id="v">
+                            <li class="media ">
+                                <div class="media-body">
+                                    <h4 class="media-heading topic-list-heading">
+                                        <a href="{$v.url}">{$v.title}</a>
+                                    </h4>
+                                    <p class="small text-muted">
+                                        <span><a href="{$v.node.url}">{$v.node.name}</a></span>&nbsp;•&nbsp;
+                                        <span>{$v.date}</span>&nbsp;•&nbsp;
+                                        <if condition="$v.rname.isHave" >
+                                            <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                            <else />
+                                            <span>暂无回复</span>
+                                        </if>
+                                    </p>
+                                </div>
+                                <div class="media-right">
+                                    <span class="badge badge-info">{$v.comments}</span>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                    <ul class="pagination"></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='col-md-3'>
+            <include file="parts/user" />
+            <include file="parts/ad" />
+        </div>
+    </div>
+</block>

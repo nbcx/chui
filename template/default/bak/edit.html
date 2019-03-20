@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="common/meta" />
+    <meta charset='UTF-8'>
+    <meta content='True' name='HandheldFriendly'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <include file="common/meta" />
+    <script src="_theme_res/js/plugins.js" type="text/javascript"></script>
+    <script src="_theme_res/js/jquery.upload.js" type="text/javascript"></script>
+    <script src="_theme_res/js/local.file.js" type="text/javascript"></script>
+</head>
+<body id="startbbs">
+<include file="common/header" />
+<div class="masthead">
+    <div class="container main">
+    <div class="row">
+        <div class="col-md-8">
+            <form id="form_topic" name="form_topic" class="form" accept-charset="UTF-8" action="{$conf.post}"  method="post" novalidate="novalidate" onkeydown="if(event.keyCode==13)return false;">
+                <div class="card">
+                    <h3 class="card-header">创建新主题</h3>
+                    <div class="card-body">
+                        <input type="hidden" name="{$csrf_name}" value="{$csrf_token}" id="token">
+                        <input name="uid" type="hidden" value="1"/>
+                        <input name="extend[hello]" type="hidden" value="hello"/>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <select name="nid" id="nid" class="form-control noborder">
+                                    <option selected="selected" value="">请选择板块</option>
+                                    <volist name="nodes" id="v">
+                                        <if condition="$v.hasChild">
+                                            <optgroup label="{$v.cname}">
+                                                <volist name="v.child" id="c">
+                                                    <option value="{$c.id}">{$c.cname}</option>
+                                                </volist>
+                                            </optgroup>
+                                        <else />
+                                            <option value="{$v.id}">{$v.cname}</option>
+                                        </if>
+                                    </volist>
+                                </select>
+                                <input class="form-control noborder" id="title" name="title"  type="text" value="{$topic.title}" placeholder="不得超过128个字母或64个汉字"/>
+                            </div>
+                        </div>
+                        <div style="height: 15px;"></div>
+
+                        <div class="content">
+                            <textarea autocomplete="off"  id="content" name="content" placeholder="话题内容" style="height: 300px;">{$topic.content}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <p style="margin-top: 1rem">
+                                <span text-muted>可直接粘贴链接和图片地址/发代码用&lt;pre&gt;标签</span>
+                                <span class="pull-right">
+                                    <button id="upload_file" class="btn btn-sm btn-secondary">图片/附件</button>
+                                </span>
+                            </p>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm"> 创 建 </button>
+                        <small class="text-muted"> (支持 Ctrl + Enter 快捷键)</small>
+                    </div>
+                </div>
+
+                <script type="text/javascript" src="_theme_res/js/jquery.autocomplete.min.js"></script>
+                <script type="text/javascript">
+                    var AllowEmptyTags = 0;//允许空话题
+                    var MaxTagNum = 5;//最多的话题数量
+                    var MaxTitleChars = 30;//主题标题最多字节数
+                    var MaxPostChars = 1000;//主题内容最多字节数
+                    $(document).ready(function(){
+                        loadScript("_theme_res/new.function.js",function () {
+                            $.each({$json},function(offset,tagName) {
+                                tagsListAppend(tagName, offset);
+                                initNewTopicEditor();
+                            });
+                        })
+                    });
+                </script>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tagForm">
+                            <div class="main-box" style="margin-top:20px;">
+                                <p>
+                                    <div class="tags-list item" style="width:100%;height:33px;border-bottom-width:2px;" onclick="javascript:document.form_topic.alternativeTag.focus();">
+                                        <span id="selectTags" class="item"></span>
+                                        <input class="tag-input" type="text" name="alternativeTag" id="alternativeTag" value="" onfocus="javascript:getTags();" placeholder="添加标签(按Enter添加)" />
+                                    </div>
+                                </p>
+                                <p><div id="tagsList" class="item"></div></p>
+                                <!--
+                                <p><div class="text-center"><input type="button" value="发布(Ctrl+Enter)" name="submit" class="textbtn" onclick="JavaScript:CreateNewTopic();" id="PublishButton" /></div><div class="c"></div></p>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            <assign name="user" value="$auth" />
+            <include file="common/user" />
+            <include file="common/ad" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</div><!-- /.container -->
+</div>
+
+<include file="common/footer" />
+<?php \nb\Hook::pos('themes/add.htm')->richEditor(); ?>
+</body>
+</html>

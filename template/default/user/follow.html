@@ -1,0 +1,72 @@
+<extend name="base" />
+
+<block name="main">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card module">
+                <div class="card-header">
+                    <include file="user/nav" />
+                </div>
+                <div class="card-body">
+                    <div>
+                        <ul class='user-list clearfix'>
+                            <volist name="follows" id="v" empty="暂无关注会员">
+                                <li>
+                                    <a href="{$v.user.url}" title="{$v.user.username}">
+                                        <img src="{$v.user.avatar}"/>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card module">
+                <div class="card-header">
+                    关注会员的话题
+                </div>
+                <div class="card-body">
+                    <?php if (isset($follow_user_topics)): ?>
+                    <ul class="media-list">
+                        <?php foreach ($follow_user_topics as $v): ?>
+                        <li class="media">
+                            <a class="media-left"
+                               href="<?php echo site_url('user/profile/' . $v['uid']); ?>"><img
+                                    class="img-rounded"
+                                    src="<?php echo base_url($v['avatar'] . 'normal.png'); ?>"
+                                    alt="<?php echo $v['username']; ?>"></a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a
+                                        href="<?php echo url2('topic_show', $v['topic_id']); ?>"><?php echo $v['title']; ?></a><?php if ($v['is_top'] == '1') echo '<span class="badge badge-info">置顶</span>'; ?>
+                                </h4>
+                                <p class="text-muted">
+                                            <span>
+                                                <a href="<?php echo url2('node_show', $v['node_id']); ?>"><?php echo $v['cname'] ?></a></span>&nbsp;•&nbsp;
+                                    <span>
+                                                <a href="<?php echo site_url('user/profile/' . $v['uid']); ?>"><?php echo $v['username']; ?></a></span>&nbsp;•&nbsp;
+                                    <span><?php echo friendly_date($v['updatetime']) ?></span>&nbsp;•&nbsp;
+                                    <?php if ($v['rname'] != null): ?>
+                                    <span>最后回复来自
+                                                    <a href="<?php echo site_url('user/profile/' . $v['ruid']); ?>"><?php echo $v['rname']; ?></a>
+                                                </span>
+                                    <?php else: ?>
+                                    <span>暂无回复</span>
+                                    <?php endif; ?>
+                                </p>
+                            </div>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php else: ?>暂无话题<?php endif ?>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='col-md-4'>
+            <include file="parts/user" />
+            <include file="parts/ad" />
+        </div>
+    </div>
+</block>

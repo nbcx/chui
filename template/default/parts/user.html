@@ -1,0 +1,80 @@
+<style>
+    .module.user .media {
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+    .module.user .media>img {
+        width: 48px;
+    }
+</style>
+<div class="card module user" data-margin-top="60">
+    <h3 class="card-header">楼主信息</h3>
+    <div class="card-body">
+        <div class="media">
+            <img class="mr-2 rounded" src="{$auth.gravatar}" alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">Admin</h5>
+                <span class="badge badge-danger">版主</span>
+                <span class="badge badge-success">Success</span>
+            </div>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">主题数：123</li>
+            <li class="list-group-item">话题数：345</li>
+            <li class="list-group-item">回复数：44555</li>
+        </ul>
+    </div>
+</div>
+<!--
+<div class="card module" data-margin-top="60">
+    <h3 class="card-header">楼主信息</h3>
+    <div class="card-body text-center">
+        <div class="avatar">
+            <a href="{$user.url}">
+                <img alt="{$user.username} large avatar" class="rounded-circle" src="http://chui.ol.cx/uploads/avatar/1/normal.png?1531130710"/>
+            </a>
+        </div>
+        <div>
+            <strong>{$user.username}</strong>
+            <i class="fa fa-phone"></i>
+            <span style="color: red">
+                <i class="fa fa-fire"></i>
+            </span>
+            <span class="label label-danger">vip</span>
+        </div>
+        <if condition="!$user.isSelf">
+            <div class="btn-group btn-group-sm" role="group">
+                <a href="{$user.followPost}" class="btn btn-outline-secondary" role="button">
+                    <span class="fa fa-commenting" aria-hidden="true"></span> 私信
+                </a>
+                <if condition="$topic.author.isFollow">
+                    <a href="#" class="btn btn-outline-secondary">
+                        <span class="fa fa-eye-slash" aria-hidden="true"></span> 取消关注
+                    </a>
+                    <else />
+                    <a href="{$user.followPost}" class="btn btn-outline-secondary" role="button">
+                        <span class="fa fa-eye"></span> 关注
+                    </a>
+                </if>
+            </div>
+        </if>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="row">
+            <div class="col">
+                <div>主题数</div>
+                <div>123</div>
+            </div>
+            <div class="col">
+                <div>话题数</div>
+                <div>123</div>
+            </div>
+            <div class="col">
+                <div>回复数</div>
+                <div>12.3w</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->

@@ -1,0 +1,124 @@
+/* --- 3.1.2 MENU --- */
+#menu ul {
+  list-style-type:none;
+}
+#menu ul li {
+  clear:both;
+  float:left;
+  background:url('img/menu_spacer.png') 0 100% no-repeat;
+  width:220px;
+  padding:3px 0;
+}
+#menu ul li.nobg {
+  background:none;
+}
+#menu ul li>a {
+  clear:both;
+  float:left;
+  text-decoration:none;
+  color:#bbb;
+  padding-left:16px;
+  height:40px;
+}
+#menu ul li>a img {
+  clear:both;
+  float:left;
+  width:32px;
+  height:32px;
+  margin:4px;
+}
+#menu ul li>a span {
+  text-transform:uppercase;
+  font-size:13px;
+  text-shadow:1px 1px #000;
+  float:left;
+  width:137px;
+  padding:10px 10px 7px 10px;
+  font-family:Arial, Helvetica, sans-serif;
+}
+#menu ul li.current a span {
+  background:url('img/menu_arrow.png')  100% 50% no-repeat;
+  color:#fff;
+  margin-left:5px;
+  text-shadow:#0A5482 1px 1px 0px;
+}
+#menu ul li.current a span {
+  margin-left:5px!important;
+}
+#menu ul li a:hover span {
+  color:#fff;
+}
+#menu ul li.current a {
+  /*padding-left:43px;*/
+}
+#menu ul li.current {
+  background:url('img/menu_current.png') top right no-repeat;
+}
+#menu ul li.current li a {
+
+}
+#menu ul ul {
+  clear:both;
+  float:left;
+  width:175px;
+  display:inline;
+  padding:10px 0 10px 30px;
+  margin-bottom:3px;
+}
+
+#menu ul ul li {
+
+}
+
+#menu ul ul li, #menu ul ul li a {
+  background:none;
+  height:auto!important;
+  font-size:11px;
+}
+#menu ul ul li a {
+  clear:both;
+  float:left;
+  width:140px;
+  padding:3px;
+  text-shadow:1px 1px #000!important;
+}
+#menu ul ul li a:hover {
+  color:#fff;
+}
+
+/***menu****/
+#menu .recomend-list {
+  min-height: 30px;
+  margin: 5px;
+  padding-left: 6px;
+  display: none;
+}
+#menu .current .recomend-list{
+  display: block;
+}
+.clearfix:after {
+  clear: both;
+  content: " ";
+  display: table;
+  line-height: 0;
+}
+#menu ul div a {
+  float: left;
+  margin: 0 0 5px 5px;
+  width: 60px;
+  height: 24px;
+  line-height: 24px;
+  color: silver;
+  text-align: center;
+  background: #3f3f3f;
+  border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  text-decoration:none;
+}
+#menu ul div a.on {
+  background: #ff7e00;
+  color: #fff;
+}

@@ -1,0 +1,44 @@
+<if condition="$auth.islogin">
+    <div class="card">
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col-md-5" style="text-align: right;">
+                    <a href="{$auth.url}">
+                        <img alt="{$auth.username} large avatar" class="img-rounded" src="{$auth.avatar}"/>
+                    </a>
+                </div>
+                <div class="col-md-7" style="text-align: left;">
+                    <ul class="list-unstyled">
+                        <li><a href="{$auth.url}" title="{$auth.username}">{$auth.username}</a></li>
+                        <li>用户组：{$auth.group.name}</li>
+                        <li>积分：{$auth.credit}</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="row text-center">
+                <div class="btn-group" style="margin-top: 10px">
+                    <a href="#" type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 私信
+                    </a>
+                    <button type="button" class="btn btn-default" aria-label="Center Align"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-default" aria-label="Right Align"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
+                    <a href="/follow" class="btn btn-default" aria-label="Justify">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 关注
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<else />
+    <div class="card">
+        <div class="card-header">
+            {$conf.site_name}
+        </div>
+        <div class="card-body">
+            <a href="{$conf.registerUrl}" class="btn btn-secondary">现在注册</a> 已注册请
+            <a href="{$conf.loginUrl}">登入</a>
+        </div>
+    </div>
+</if>
+

@@ -1,0 +1,56 @@
+<div class="col-md-2 col-sm-2 col-md-offset-1 setting-menu">
+    <div class="card">
+        <style>
+            @media (min-width: 1026px) {
+                .setting-menu {
+                    padding-right: 0;
+                }
+                .setting-menu li{
+                    border-bottom: 1px solid #eee;
+                }
+                .setting-menu li:last-child{
+                    border-bottom:none;
+                }
+                .setting-menu .nav-pills{
+                    margin-bottom: 0px;
+                }
+            }
+            .nav-stacked.nav-pills>li>a {
+                border-radius: 0px;
+            }
+        </style>
+        <ul class="nav nav-pills flex-column nav-stacked" data-nav="active" data-item="a" data-index="0">
+            <li class="nav-item">
+                <a class="nav-link" href="/setting/index">
+                    <i class="fa fa-address-card"></i>&nbsp;
+                    <span>基本信息</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/setting/avatar">
+                    <i class="fa fa-user-circle"></i>&nbsp;
+                    <span>头像</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="/setting/account">
+                    <i class="fa fa-gear"></i>&nbsp;
+                    <span>账户设置</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hide-ios" href="/setting/password">
+                    <i class="fa fa-keyboard-o"></i>&nbsp;
+                    <span>密码安全</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hide-ios" href="/setting/addon">
+                    <i class="fa fa-cube"></i>&nbsp;
+                    <span>管理我的应用</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta content='True' name='HandheldFriendly'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <include file="common/meta" />
+</head>
+<body>
+<include file="common/header" />
+<div class="masthead">
+    <div class="container">
+    <div class="row">
+        <include file="user/setting/menu" />
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                    <div class="heading">安全邮箱</div>
+                    <form action="" method="post">
+
+                        <if condition="$auth.email">
+                            <div class="form-group">
+                                <p class="text-muted">安全邮箱是你忘记密码后，能够找回密码的方式之一。</p>
+                                <p class="text-muted">所以请尽量设置为你常用的电子邮箱。</p>
+                            </div>
+
+                            <if condition="$auth.is_active">
+                                <div class="alert alert-success" role="alert">{$auth.email}</div>
+                                <div class='form-group'>
+                                    <a href="/mail/update" class="btn btn-primary btn-sm">更换安全邮箱</a>
+                                </div>
+                            <else />
+                                <div class="alert alert-danger col-md-6" role="alert">{$auth.email}</div>
+                                <div class='form-group'>
+                                    <a href="/mail/activate" class="btn btn-primary btn-sm">前往激活安全邮箱</a>
+                                </div>
+                            </if>
+                        <else />
+                            <div class="form-group">
+                                <p class="text-muted">你还没有绑定安全邮箱，请点击下面按钮进行绑定。</p>
+                                <p class="text-muted">安全邮箱是你找回密码的重要方式。</p>
+                            </div>
+                            <div class='form-group'>
+                                <a href="/mail/bind" class="btn btn-primary btn-sm">绑定安全邮箱</a>
+                            </div>
+                        </if>
+                    </form>
+                    <!--
+                    <div class="heading">安全手机</div>
+                    <form action="" method="post">
+
+                        <if condition="$auth.email">
+                            <div class="form-group">
+                                <p class="text-muted">安全邮箱是你忘记密码后，能够找回密码的方式之一。</p>
+                                <p class="text-muted">所以请尽量设置为你常用的电子邮箱。</p>
+                            </div>
+
+                            <div class="alert alert-success col-md-6" role="alert">{$auth.email}</div>
+
+                            <if condition="$auth.is_active">
+                                <a href="/mail/update" class="btn btn-primary btn-sm">更换安全手机</a>
+                                <else />
+                                <div class='form-group'>
+                                    <button type="submit" class="btn btn-primary btn-sm">重新发送激活邮件</button>
+                                </div>
+                            </if>
+                            <else />
+                            <div class="form-group">
+                                <p class="text-muted">你还没有绑定安全邮箱，请点击下面按钮进行绑定。</p>
+                                <p class="text-muted">安全邮箱是你找回密码的重要方式。</p>
+                            </div>
+                            <div class='form-group'>
+                                <a href="#" class="btn btn-primary btn-sm">绑定安全手机</a>
+                            </div>
+                        </if>
+                    </form>
+                    -->
+
+                    <div class="heading">绑定其他帐号用于登录</div>
+                    <form>
+                        <ul class="list-group col-sm-6">
+                            <li class="list-group-item">
+                                GitHub
+                                <a rel="twitsy nofollow" title="点击解除绑定" data-method="delete" href="/setting/auth/github"><i class="fa fa-remove"></i></a>
+                            </li>
+                        </ul>
+                    </form>
+                    <!--
+                    <div class="heading">删除我的账号</div>
+                    <form action="/setting" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="delete"><input type="hidden" name="authenticity_token" value="p3eyl448yXnrHhpQtX5VyiVKWz19hJhl/pzKlYUR5bdJN1SKzSRVkj9BVhOyc+5FpxDJt07owBwia72Oth3pkQ==">
+                        <input type="hidden" name="by" value="destroy">
+                        <div class="form-group">
+                            <p>当然不在想使用这个账号的时候，可以选择删除账号。</p>
+                            <p>删除以后数据将会保留，以匿名的方式存在，你的账号将无法再登陆。</p>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="要删除账号，请输入你的密码" type="password" name="user[current_password]" id="user_current_password">
+                        </div>
+                        <input type="submit" name="commit" value="确定删除我的账号" class="btn btn-danger btn-sm" data-disable-with="正在提交">
+                    </form>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<include file="common/validator" />
+<include file="common/footer" />
+</body>
+</html>

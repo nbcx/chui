@@ -1,0 +1,267 @@
+<style>
+    /* tag */
+    .tag-module {
+        margin-top:20px;
+    }
+    .tag-module .tags-list {
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        /*margin-bottom: 1px;*/
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #A6A6A6;
+        vertical-align: middle;
+        background-color: white;
+    }
+
+    .tag-module .tags-list:focus,
+    .tag-module .tags-list:hover {
+        color: #676767;
+        margin-bottom: 0;
+        border-bottom: 2px solid #33B5E5;
+    }
+
+    .tag-module .tags-list {
+        padding: 6px 12px 0 0px;
+        width:100%;
+        height:33px;
+        border-bottom-width:2px;
+    }
+    .tag-module .tag-input {
+        outline: 0 !important;
+        float: left !important;
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+        border: none !important;
+        margin-bottom: 6px !important;
+        width: 25% !important;
+        -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0) !important;
+        box-shadow: inset 0 0 0 rgba(0, 0, 0, 0) !important;
+    }
+    .tag-module .tag-input:focus {
+        outline: 0;
+        float: left;
+        font-size: 12px;
+        padding: 4px 8px;
+        border: none;
+        margin-bottom: 6px;
+        width: 25%;
+    }
+    .tag-module .item {
+        overflow: hidden;
+        height: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding-top: 0px;
+    }
+    .tag-module .item a {
+        display: inline;
+        padding: 4px 8px;
+        font-size: 12px;
+        float: left;
+        margin: 0 4px 6px 0;
+        color: #262626;
+        border: 1px solid #bfbfbf;
+        background-color: #fff;
+        white-space: nowrap;
+        transition: background-color 0.2s ease-in-out;
+    }
+    .tag-module .item a:hover {
+        text-decoration: none;
+        background-color: #E5E5E5;
+    }
+    .tag-module label {
+        cursor: pointer;
+    }
+    .autocomplete-suggestions {
+        color: #000;
+        background: #f3f3f3;
+        cursor: default;
+        overflow: auto;
+        -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+        -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+        box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    }
+    .autocomplete-suggestion {
+        padding: 5px 10px;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .autocomplete-suggestions strong {
+        font-weight: 700;
+        color: #000;
+    }
+</style>
+<div class="tag-module">
+    <!--onclick="javascript:document.form_topic.alternativeTag.focus();"-->
+    <div class="tags-list item">
+        <span id="selectTags" class="item"></span>
+        <!--value="" onfocus="javascript:getTags();"-->
+        <input class="tag-input" type="text" name="alternativeTag" id="alternativeTag"  placeholder="添加标签(按Enter添加)" />
+    </div>
+    <div id="tagsList" class="item"></div>
+</div>
+<script type="text/javascript" src="_pub_base.js"></script>
+<script type="text/javascript" src="_theme_jquery.autocomplete.min.js"></script>
+<script type="text/javascript">
+    (function ($) {
+
+        var options = {
+            allowEmptyTags: 0,//允许空话题
+            maxTagNum: 5,//最多的话题数量
+        }
+
+        //Ctrl + Enter操作接收函数
+        var ctrlAndEnter = function(event, isPreventDefault) {
+            //console.log("keydown");
+            if (event.keyCode === 13) {
+                if (isPreventDefault) {
+                    //屏蔽Tag输入框的回车提交，阻止回车的默认操作
+                    event.preventDefault ? event.preventDefault() : event.returnValue = false;
+                }
+                if (event.ctrlKey) {
+                    $("#PublishButton").click();
+                }
+            }
+        }
+
+        var checkTag = function(tagName, isAdd) {
+            tagName = $.trim(tagName);
+            var show = true;
+            var i = 1;
+            $("input[name='tag[]']").each(function (index) {
+                if (isAdd && i >= options.maxTagNum) {
+                    alert("最多只能插入{{MaxTagNum}}个话题！".replace("{{MaxTagNum}}", options.maxTagNum));
+                    show = false;
+                }
+                if (tagName === $(this).val() || tagName === '') {
+                    show = false;
+                }
+                //简单的前端过滤，后端有更严格的白名单过滤所以这里随便写个正则应付下了。
+                if (tagName.match(/[&|<|>|"|']/g) !== null) {
+                    //alert('Invalid input! ')
+                    show = false;
+                }
+                i++;
+            });
+            return show;
+        }
+
+        var getTags = function() {
+            return;
+        }
+
+        var tagsListAppend = function(tagName, id) {
+            $("#tagsList").append('<a href="###" title="' + tagName + '">' + tagName + '&nbsp;+</a>');
+        }
+
+        var add = function(tag) {
+            var tagName,isRemove=false;
+            if(typeof(tag) == "string") {
+                tagName =  tag;
+            }
+            else {
+                tagName = tag.attr('title');
+                isRemove = true;
+            }
+            if (checkTag(tagName, 1)) {
+                $("#selectTags").append('<a href="###" title="' + tagName + '">' + tagName + '&nbsp;×<input type="hidden" name="tag[]" value="' + tagName + '" /></a>');
+                if(isRemove) {
+                    tag.remove();
+                }
+            }
+            //document.NewForm.AlternativeTag.focus();
+            $("#alternativeTag").val("");
+            if ($("input[name='tag[]']").length === options.maxTagNum) {
+                $("#alternativeTag").attr("disabled", true);
+                $("#alternativeTag").attr("placeholder", "最多只能插入{{MaxTagNum}}个话题！".replace("{{MaxTagNum}}", options.maxTagNum));
+            }
+        }
+
+        var initNewTopicEditor = function() {
+            //编辑器外Ctrl + Enter提交回复
+            document.body.onkeydown = function (event) {
+                ctrlAndEnter(event, true);
+            };
+            //话题自动补全
+            // Initialize ajax autocomplete:
+            $("#alternativeTag").autocomplete({
+                serviceUrl: '/tag/autocomplete',
+                minChars: 2,
+                type: 'post'
+            });
+            $("#alternativeTag").keydown(function (e) {
+                var e = e || event;
+                switch (e.keyCode) {
+                    case 13:
+                        if ($("#alternativeTag").val().length !== 0) {
+                            add($("#alternativeTag").val());//, Math.round(new Date().getTime() / 1000)
+                        }
+                        break;
+                    case 8:
+                        if ($("#alternativeTag").val().length === 0) {
+                            var LastTag = $("#selectTags").children().last();
+                            tagRemove(LastTag.children().attr("value"), LastTag.attr("id").replace("Tag", ""));
+                        }
+                        break;
+                    default:
+                        return true;
+                }
+            });
+        }
+
+        $.extend({
+            tags: function(select,selectd,config) {
+                $.extend(options, config);
+                //备选
+                $.each(select,function(offset,tagName) {
+                    tagsListAppend(tagName);
+                    initNewTopicEditor();
+                });
+
+                //已选
+                $.each(selectd,function(offset,tagName) {
+                    add(tagName);
+                });
+                
+                $(".tags-list .item").click(function () {
+                    document.form_topic.alternativeTag.focus();
+                })
+                
+                $("#alternativeTag").focus(function () {
+                    getTags()
+                })
+
+                //可选标签列表的选中事件
+                $("#tagsList").on('click','a',function (e) {
+                    var $this = $(this);
+                    add($this);
+                    getTags();
+                })
+
+                //已选标签列表的移除事件
+                $("#selectTags").on('click','a',function (e) {
+                    var $this = $(this);
+                    var tagName = $this.attr('title');
+
+                    $this.remove();
+                    tagsListAppend(tagName);
+                    if ($("input[name='tag[]']").length < options.maxTagNum) {
+                        $("#alternativeTag").attr("disabled", false);
+                        $("#alternativeTag").attr("placeholder", '添加话题(按Enter添加)');
+                    }
+                    document.form_topic.alternativeTag.focus();
+                })
+            }
+        })
+    })(jQuery);
+
+
+    $(document).ready(function(){
+        $.tags({$candidateTags|json_encode},{$tags|json_encode},{
+            allowEmptyTags: 0,//允许空话题
+            maxTagNum: 2,//最多的话题数量
+        });
+    });
+</script>

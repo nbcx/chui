@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="common/meta" />
+    <meta charset='UTF-8'>
+    <meta content='True' name='HandheldFriendly'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <title>{$title}- {$conf.site_name}</title>
+</head>
+<body id="startbbs">
+<include file="common/header" />
+<div class="masthead">
+    <div class="container main">
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="card">
+                <h3 class="card-header">最新会员</h3>
+                <div class="card-body">
+                    <if condition="$newusers.have">
+                        <ul class='user-list clearfix'>
+                            <volist name="newusers" id="u">
+                                <li>
+                                    <a href="{$u.url}" title="{$u.username}">
+                                        <img class="img-rounded" alt="{$u.username}" src="{$u.avatar}"/>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    <else />
+                        <div>暂无新会员</div>
+                    </if>
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="panel-heading">
+                    <h3 class="panel-title">活跃会员</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class='user-list clearfix'>
+                        <volist name="hotusers" id="u">
+                            <li>
+                                <a href="{$u.url}" title="{$u.username}">
+                                    <img class="img-rounded" alt="{$u.username}" src="{$u.avatar}"/>
+                                </a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            <include file="common/login" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</div><!-- /.container -->
+</div>
+<include file="common/footer" />
+</body>
+</html>

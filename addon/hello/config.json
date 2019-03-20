@@ -1,0 +1,13 @@
+{
+    "name":  "Hello",
+    "author": "collin",
+    "version":"1.1.0",
+    "link":"https://nb.cx",
+    "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+    "install":"plugins\\hello\\Plugin",
+    "label":"plugins\\hello\\Label",
+    "router":{
+        "hello":["plugins\\hello\\Manage","index"],
+        "hello2":["plugins\\hello\\Manage","index2"]
+    }
+}

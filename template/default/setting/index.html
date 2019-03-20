@@ -1,0 +1,87 @@
+<extend name="base" />
+<block name="main">
+    <div class="row">
+        <include file="setting/menu" />
+        <div class="col-md-10">
+            <div class="card module">
+                <h3 class="card-header">个人设置</h3>
+                <div class="card-body">
+                    <form method="post" action="{$action}">
+                        <div class="form-group">
+                            <label>所在地</label>
+                            <input class="form-control col-md-6" name="location" type="text" value="{$auth.location}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>性别</label>
+                            <div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input value="1" type="radio" id="sex-1" name="sex" class="custom-control-input" checked>
+                                    <label class="custom-control-label" for="sex-1">男</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input value="2" type="radio" id="sex-2" name="sex" class="custom-control-input">
+                                    <label class="custom-control-label" for="sex-2">女</label>
+                                </div>
+                            </div>
+                            <small class="text-muted"></small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label>生日</label>
+                                <select class="custom-select d-block w-100" name="year">
+                                    <option value="0">年</option>
+                                    <option value="1991">1991年</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label>&nbsp;</label>
+                                <select class="custom-select d-block w-100" name="month">
+                                    <option value="0">月</option>
+                                    <option value="9">9月</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label>&nbsp;</label>
+                                <select class="custom-select d-block w-100" name="day">
+                                    <option value="0">日</option>
+                                    <option value="15">15日</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>职业</label>
+                            <input class="form-control" name="occupation" type="text" value="{$auth.occupation}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>个人网页</label>
+                            <input class="form-control" name="homepage" type="text" value="{$auth.homepage}" placeholder="需要以https:// 或 http://开头"/>
+                            <small class="text-muted">你的个人网页信息会出现在你的个人面板等处展示</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>签名</label>
+                            <textarea class="form-control" cols="40" name="signature" rows="5">{$auth.signature}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"> 更新资料 </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</block>
+<block name="js">
+    <script>
+        $(function() {
+            $("select[name='year']").val('{$auth.birth.year}');
+            $("select[name='month']").val('{$auth.birth.month}');
+            $("select[name='day']").val('{$auth.birth.day}');
+            $("#sex-{$auth.sex}").prop("checked","checked");
+        })
+    </script>
+</block>
+

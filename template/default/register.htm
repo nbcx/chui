@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <include file="common/meta" />
+</head>
+<body id="startbbs">
+<include file="common/header" />
+<div class="masthead">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header"> 注册用户</div>
+                <div class="card-body sm">
+                    <form action="{$conf.registerUrl}" method="post" data-validate="true">
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="username">用户名</label>
+                            <div class="col-sm-6">
+                                <input class="form-control form-control-sm" id="username" name="username" type="text" check="username"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="username"></label>
+                            <div class="col-sm-9">
+                                <p class="text-muted">用户名需使用英文字母，阿拉伯数字以及`_`组成，且不区分大小写。</p>
+                                <p class="text-muted">用户名长度必须在5-12之间，且不能有违规字符。</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" >电子邮件</label>
+                            <div class="col-sm-6">
+                                <input class="form-control form-control-sm" name="email" size="50" check="email"/>
+                                <span class="help-block red"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="username"></label>
+                            <div class="col-sm-9">
+                                <p class="text-muted">安全邮箱可以找回密码，接收系统消息。</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="password">密码</label>
+                            <div class="col-sm-6">
+                                <input class="form-control form-control-sm" id="password" name="password" type="password" check="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" >密码确认</label>
+                            <div class="col-sm-6">
+                                <input class="form-control form-control-sm" name="repassword" type="password" check="repassword"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="username"></label>
+                            <div class="col-sm-9">
+                                <p class="text-muted">密码长度必须在6到30之间，且区分大小写。</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <if condition="$conf.show_captcha == 'on'">
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label" >验证码</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control form-control-sm" name="captcha" size="50" type="text" check="captcha" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="javascript:reloadcode();" title="更换验证码">
+                                        <img src="{$conf.captchaUrl}" id="checkCodeImg" border="0"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <script language="javascript">
+                                //刷新图片
+                                function reloadcode() {//刷新验证码函数
+                                    var verify = document.getElementById('checkCodeImg');
+                                    verify.setAttribute('src', '{$conf.captchaUrl}?' + Math.random());
+                                }
+                            </script>
+                        </if>
+                        <div class='form-group row'>
+                            <label class="col-md-2 col-form-label"></label>
+                            <div class="col-sm-offset-2 col-sm-9">
+                                <button type="submit" name="commit" class="btn btn-sm btn-primary"> 注册账号 </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            <include file="common/login" />
+            <include file="common/ad" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</div><!-- /.container -->
+</div>
+<include file="common/footer" />
+<include file="common/validator" />
+</body>
+</html>

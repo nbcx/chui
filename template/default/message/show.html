@@ -1,0 +1,94 @@
+<extend name="base" />
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card module">
+                <h3 class="card-header">
+                    与{$message.fromer.username}的对话
+                    <small class="pull-right"><a href="<?php echo site_url('message') ?>">返回私信列表</a></small>
+                </h3>
+                <div class="card-body">
+                    <div class="clearfix">
+                        <form action="{$conf.letterUrl}" method="post" style="margin-top: 0">
+                            <textarea class="textarea" name="content" ></textarea>
+                            <p class="text-muted">
+                                <input type="hidden" id="receiver_uid" name="receiver_uid" value="{$message.fromer.uid}"/>
+                                <span class="text-muted">可以使用Markdown语法</span>
+                                <button type="submit" class="btn btn-info pull-right btn-sm" > 发送(Ctrl+Enter) </button>
+                            </p>
+                        </form>
+                    </div>
+                    <hr />
+                    <style>
+                        .talk img {
+                            max-width: 48px;
+                        }
+                        .talk .time {
+                            font-size: 10px;
+                            color: grey;
+                        }
+                    </style>
+                    <div class="talk">
+                        <volist name="talks" id="v">
+                            <if condition="$v.sender_uid==$auth.uid">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <div class="alert alert-warning" style="float: right">
+                                            {$v.content}
+                                            <p class="time">{$v.ctFriendly}</p>
+                                        </div>
+                                    </div>
+                                    <a class="ml-2" href="#"><img class="rounded" src="{$v.sender.avatar}"></a>
+                                </div>
+                            <else />
+                                <div class="media">
+                                    <a class="mr-2" href="{$v.sender.url}">
+                                        <img class="rounded" src="{$v.sender.avatar}" alt="{$v.sender.username}">
+                                    </a>
+                                    <div class="alert alert-info">
+                                        {$v.content}
+                                        <p class="time">{$v.ctFriendly}</p>
+                                    </div>
+                                </div>
+                            </if>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <assign name="user" value="$message.fromer" />
+            <include file="parts/user" />
+            <include file="parts/ad" />
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script>
+        $(function(){
+            $('#send-message').on('submit',function(e) {
+                e.preventDefault();
+                var receiver_uid = $('#receiver_uid').val();
+                var content =$.trim($('#content').val());
+                var token=$('#token').val();
+                if (content == '') {
+                    $('#error').html('内容不能为空!');
+                    return  false;
+                }
+                $.ajax({
+                    url: '/message/send',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {receiver_uid:receiver_uid,content:content,{$csrf_name}:token},
+                    success: function(data) {
+                        //$('#content').val('');
+                        //$('#message').modal('hide');
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+</block>
+

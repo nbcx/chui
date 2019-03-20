@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$topic.title} - {$conf.site_name}</title>
+    <meta charset='UTF-8'>
+    <meta content='True' name='HandheldFriendly'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <meta name="keywords" content="{$topic.keywords}"/>
+    <meta name="description" content="{$topic.description}"/>
+    <include file="common/meta" />
+    <script src="_theme_res/js/topic.js" type="text/javascript"></script>
+    <script src="_theme_res/js/plugins.js" type="text/javascript"></script>
+    <script src="_theme_res/js/jquery.upload.js" type="text/javascript"></script>
+    <script src="_theme_res/js/local.file.js" type="text/javascript"></script>
+
+    <link href="_pub_plugin/toastr/toastr.min.css" media="screen" rel="stylesheet" type="text/css"/>
+    <script src="_pub_plugin/toastr/toastr.min.js" type="text/javascript"></script>
+
+</head>
+<body name="top">
+<include file="common/header" />
+<!--
+<include file="common/nav" />
+-->
+<div class="masthead">
+    <div class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-default">
+                <div class="card-header topic-detail-heading">
+                    <div class="pull-right">
+                        <span style="color: red">
+                            <i class="glyphicon glyphicon-fire"></i>
+                        </span>
+                    </div>
+                    <h2 class="card-title">{$topic.title}</h2>
+                    <small class="text-muted">
+                        <span>by <a href="{$topic.author.url}">{$topic.author.username}</a></span>&nbsp;•&nbsp;
+                        <span>{$topic.ctFmt}</span>&nbsp;•&nbsp;
+                        <if condition="$topic.comments">
+                            <span>最后由 <a href="{$topic.author.url}">{$topic.author.username}</a> </span>&nbsp;•
+                            <span>回复于 {$topic.rtFmt}</span>&nbsp;•
+                        </if>
+
+                        <span>{$topic.views}次阅读</span>
+
+                        <!--<span>• <a href="javascript:void(0)" class="reply">回复</a></span>-->
+                    </small>
+                </div>
+                <?php if ($page == 1) : ?>
+                    <div class="card-body content">
+                        {$topic.content}
+                        <p class="tag">
+                            <volist name="topic.tags" id="v">
+                                <a href='{$v.url}'><span class="badge badge-secondary">{$v.name}</span></a>&nbsp;
+                            </volist>
+                        </p>
+                    </div>
+                <?php endif; ?>
+                <div class="card-footer opts">
+
+                    <a class="likeable deactive tooltipstered" href="#"><i class="fa fa-heart"></i> <span>2 个赞</span></a>
+                    <!--
+                    <a class="likeable deactive tooltipstered" href="#"><i class="fa fa-heart-o"></i> <span>赞(23.1w)</span></a>
+                    -->
+                    <a title="收藏" class="bookmark" href="#"><i class="fa fa-bookmark"></i> 收藏</a>
+                    <!--
+                    <a title="收藏" class="bookmark" href="#"><i class="fa fa-bookmark-o"></i> 收藏</a>
+                    -->
+                    <a class="follow" href="#"><i class="fa fa-edit"></i> 修改</a>
+                    <a class="follow" href="#"><i class="fa fa-trash"></i> 删除</a>
+                    <if condition="$topic.isEdit">
+                        <a href="{$topic.editUrl}" class="btn btn-default btn-sm unbookmark" data-method="edit" rel="nofollow">编辑</a>
+                    </if>
+                    <if condition="$topic.isDel">
+                        <a href="javascript:if(confirm('确实要删除吗?'))location='{$topic.editUrl}'" class="btn btn-sm btn-danger" data-method="edit" rel="nofollow">删除</a>
+                    </if>
+                    <if condition="$topic.isTop">
+                        <a href="<?php echo site_url('topic/show/' . $topic['topic_id'] . '?act=set_top'); ?>" class="btn btn-default btn-sm unbookmark" data-method="edit" rel="nofollow">
+                            <?php if($topic['is_top'] == 0): ?> 置顶 <?php else: ?> 取消置顶 <?php endif; ?>
+                        </a>
+                    </if>
+                </div>
+            </div><!-- /.panel content -->
+
+            <if condition="$comments.isHave">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h5>
+                            <span id="comments">{$topic.comments}</span>
+                            <span> 回复 | 直到<?php echo date('Y-m-d H:i', time()); ?></span>
+                            <a href="javascript:void(0)" class="pull-right"><span class="text-muted">添加回复</span></a>
+                        </h5>
+                    </div>
+                    <div class="card-body reply list">
+                        <ul id="comment_list" class="media-list">
+                            <volist name="comments" id="v">
+                                <li class="media" id="r<?php echo ($page - 1) * 10 + $key + 1; ?>">
+                                    <a class="media-left" href="{$v.user.url}">
+                                        <img class="img-rounded medium" src="{$v.user.avatar}" alt="{$v.user.username}_avatar" />
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <a class="user" href="{$v.user.url}">{$v.user.username}</a>
+                                            <span class="floor">#<?=($page - 1) * 10 + $key + 1; ?></span>
+                                            <abbr>• &nbsp;{$v.ctFmt}</abbr>
+                                            <div class="pull-right" id="r<?=($page - 1) * 10 + $key + 1; ?>">
+                                                <!-- -<a href="#reply" class="clickable" data-mention="{$v.username}">回复</a>-->
+                                                <span class="hideable">
+                                                    <if condition="$v.isDel">
+                                                        <a href="javascript:if(confirm('确实要删除吗?'))location='/comment/del?node_id={$topic.node_id}&topic_id={$v.topic_id}&id={$v.id}'">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a> -
+                                                    </if>
+                                                    <if condition="$v.isEdit">
+                                                        <a href="/comment/edit?node_id={$topic.nid}&topic_id={$v.topic_id}&id={$v.id}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a> -
+                                                    </if>
+                                                    <a class="btn-reply fa fa-mail-reply" href="#"></a> -
+                                                </span>
+                                                <a title="赞"class="likeable deactive" href="#"><i class="fa fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                        <p class="content">{$v.content}</p>
+                                    </div>
+
+                                </li>
+                            </volist>
+                        </ul>
+                        {$pagination}
+                    </div>
+                </div>
+            </if>
+
+            <!-- /.panel comment -->
+            <div id="error"></div>
+            <div class="card card-default" id="reply">
+                <h4 class="card-header">回复</h4>
+                <div class="card-body">
+                    <if condition="$auth.islogin">
+                        <input type="hidden" id="token" name="{$csrf_name}" value="{$csrf_token}">
+                        <input name="topic_id" id="topic_id" type="hidden" value="{$topic.id}"/>
+                        <input name="is_top" id="is_top" type="hidden" value="{$topic.is_top}"/>
+                        <input name="username" id="username" type="hidden" value="{$auth.username}"/>
+                        <input name="avatar" id="avatar" type="hidden" value="/{$auth.avatar}normal.png"/>
+                        <input name="lastpost" id="lastpost" type="hidden" value="{$auth.lastpost}"/>
+                        <div class="form-group">
+                            <textarea class="form-control" id="post_content" name="comment" rows="5"></textarea>
+                            <p>
+                                <span class="text-muted"><!--可直接粘贴链接和图片地址/发代码用&lt;pre&gt;标签--></span>
+                                <span class="pull-right">
+                                    <a class="text-muted" href="/comment/add?topic_id={$topic.id}"><i class="fa fa-reply"></i> 高级回复</a>
+                                </span>
+                            </p>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary" id="comment-submit"> 回 复 </button>
+                    <else />
+                        <div class="well text-center">
+                            <a class="btn btn-default" href="{$conf.login}">登录</a>发表 or 还没有账号？去<a href="{$conf.register}">注册</a>
+                        </div>
+                    </if>
+                </div>
+            </div><!-- /.panel add comment -->
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            <assign name="user" value="$topic.author" />
+            <include file="common/user" />
+            <include file="common/cateinfo" />
+            <include file="common/ad" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</div><!-- /.container -->
+</div>
+<include file="common/footer" />
+</body>
+</html>
+<script>
+    //toastr.info("你有新消息了!");
+    //toastr.success("你有新消息了!","消息提示");
+</script>

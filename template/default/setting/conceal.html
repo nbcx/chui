@@ -1,0 +1,61 @@
+<extend name="base" />
+<block name="main">
+    <div class="row">
+        <include file="setting/menu" />
+        <div class="col-md-10">
+            <div class="card module">
+                <h3 class="card-header">隐私设置</h3>
+                <div class="card-body">
+                    <div class="heading">我的昵称</div>
+                    <form action="{$auth.alterNickPost}" method="post">
+                        <div class="form-group">
+                            <p class="text-muted">昵称是你在社区活动的身份标识之一，别人可以通过昵称@你，所以你的昵称必须是唯一的。</p>
+                            <p class="text-muted">默认你的昵称为你的用户名，你只有一次免费修改它的机会！</p>
+                        </div>
+                        <div class='form-group'>
+                            <input class="form-control" name="nick" type="text" value="{$auth.nick}"/>
+                        </div>
+                        <if condition="$auth.ifNick">
+                            <div class='form-group'>
+                                <button type="submit" class="btn btn-primary btn-sm">确认修改</button>
+                            </div>
+                        <else />
+                            <div class='form-group'>
+                                <button type="submit" class="btn btn-secondary btn-sm" disabled>已经修改过</button>
+                            </div>
+                        </if>
+                    </form>
+
+                    <hr/>
+
+                    <div class="heading">联系方式</div>
+                    <form action="{$auth.alterNickPost}" method="post">
+                        <div class="form-group">
+                            <p class="text-muted">昵称是你在社区活动的身份标识之一，别人可以通过昵称@你，所以你的昵称必须是唯一的。</p>
+                            <p class="text-muted">默认你的昵称为你的用户名，你只有一次免费修改它的机会！</p>
+                        </div>
+                        <div class='form-group'>
+                            <input class="form-control" name="mail" type="text" value="{$auth.mail}" placeholder="电子邮箱"/>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="openmail" >
+                                <label class="form-check-label" for="openmail">公开邮箱</label>
+                            </div>
+                        </div>
+                        <div class='form-group'>
+                            <input class="form-control" name="homepage" type="text" value="{$auth.phone}" placeholder="手机号码"/>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="openphone" >
+                                <label class="form-check-label" for="openphone">公开联系电话</label>
+                            </div>
+                        </div>
+
+                        <div class='form-group'>
+                            <a href="/mail/bind" class="btn btn-primary btn-sm">确认修改</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

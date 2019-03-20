@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <include file="common/meta" />
+</head>
+<body>
+<include file="common/header" />
+<div class="masthead">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    与{$message.fromer.username}的对话
+                    <small class="pull-right"><a href="<?php echo site_url('message') ?>">返回私信列表</a></small>
+
+                </div>
+                <div class="card-body">
+                    <div class="clearfix">
+                        <form id="send-message" action="{$conf.letterUrl}" method="post" class="reply-message">
+                            <input type="hidden" id="token" name="{$csrf_name}" value="{$csrf_token}">
+                            <div class="form-group">
+                                <textarea id="content" class="form-control" name="content" rows="5" cols="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 pull-right">
+                                    <input type="hidden" id="receiver_uid" name="receiver_uid" value="{$message.fromer.uid}"/>
+                                    <button type="submit" class="btn btn-primary pull-right">发送</button>
+                                </div>
+                                <div class="col-md-offset-4 col-md-4">
+                                    <div id="error" class="red"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <hr />
+                    <style>
+                        /**/
+                        .card-body .clearfix{
+                            margin-bottom: 15px;
+                        }
+                        .media-body div{
+                            width: auto;
+                        }
+                        .media-body p {
+                            font-size: 10px;
+                            color: grey;
+                        }
+                        .talk-right{
+                            float: right;
+                            display: inline-block;
+                        }
+                        div.talk-right {
+                            margin-right: 10px;
+                            width: auto;
+
+                        }
+                    </style>
+                    <ul class="media-list">
+                        <volist name="talks" id="v">
+                            <if condition="$v.sender_uid==$auth.uid">
+                                <li class="media">
+                                    <div class="media-body">
+                                        <a class="media-right talk-right" href="{$v.sender.url}">
+                                            <img src="{$v.sender.avatar}" alt="{$v.sender.username}">
+                                        </a>
+                                        <div class="talk-right alert alert-warning">
+                                            {$v.content}
+                                            <p>{$v.ctFriendly}</p>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            <else />
+                                <li class="media">
+                                    <a class="media-left" href="{$v.sender.url}">
+                                        <img src="{$v.sender.avatar}" alt="{$v.sender.username}">
+                                    </a>
+                                    <div class="alert alert-info">
+                                        {$v.content}
+                                        <p>{$v.ctFriendly}</p>
+                                    </div>
+                                </li>
+                            </if>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <assign name="user" value="$message.fromer" />
+            <include file="common/user" />
+            <include file="common/ad" />
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+<include file="common/footer" />
+<script>
+    $(function(){
+        $('#send-message').on('submit',function(e) {
+            e.preventDefault();
+            var receiver_uid = $('#receiver_uid').val();
+            var content =$.trim($('#content').val());
+            var token=$('#token').val();
+            if (content == '') {
+                $('#error').html('内容不能为空!');
+                return  false;
+            }
+            $.ajax({
+                url: '/message/send',
+                type: 'post',
+                dataType: 'json',
+                data: {receiver_uid:receiver_uid,content:content,{$csrf_name}:token},
+                success: function(data) {
+                    //$('#content').val('');
+                    //$('#message').modal('hide');
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

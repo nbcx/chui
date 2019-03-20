@@ -1,0 +1,182 @@
+<extend name="base" />
+<block name="head">
+    <link href="//cdn.{$conf.root}/css/markdown.css" rel="stylesheet">
+    <style>
+        .markdown-body {
+            background: none;
+            border: none;
+            padding: 20px;
+            font-size: 14px;
+        }
+        .markdown-body ul li p,.markdown-body ol li p {
+            margin-bottom: 5px;
+        }
+        .markdown-body img{
+            width: auto;
+            max-width: 100%;
+        }
+    </style>
+</block>
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card module">
+                <!--
+                <h3 class="card-header"><a href="/">帖子</a> &gt; <a href="{$topic.node.url}">{$topic.node.name}</a></h3>
+                -->
+                <style>
+                    .card-header.topic-detail-heading {
+                        background: unset;
+                        color: #000;
+                    }
+                </style>
+                <div class="card-header topic-detail-heading">
+                    <div class="pull-right">
+                        <span style="color: red">
+                            <i class="glyphicon glyphicon-fire"></i>
+                        </span>
+                    </div>
+                    <h2 class="card-title">{$topic.title}</h2>
+                    <small class="text-muted">
+                        <span>by <a href="{$topic.author.url}">{$topic.author.username}</a></span>&nbsp;•&nbsp;
+                        <span>{$topic.date}</span>&nbsp;•&nbsp;
+                        <if condition="$topic.ruser">
+                            <span>最后由 <a href="{$topic.ruser.url}">{$topic.ruser.username}</a> </span>&nbsp;•
+                            <span>回复于 {$topic.lastdate}</span>&nbsp;•
+                        </if>
+
+                        <span>{$topic.views}次阅读</span>
+
+                        <!--<span>• <a href="javascript:void(0)" class="reply">回复</a></span>-->
+                        <span class="pull-right ">
+                            <style>
+                                .vote, .vote:link, .vote:visited {
+                                    text-decoration: none;
+                                    font-size: 10px;
+                                    line-height: 1;
+                                    padding: 2px 8px 2px 8px;
+                                    border: 1px solid #e2e2e2;
+                                    border-radius: 3px;
+                                    color: #778;
+                                    display: inline-block;
+                                    vertical-align: baseline;
+                                    text-align: center;
+                                }
+                            </style>
+                            <!--
+                            <a href="javascript:" class="vote text-muted"><li class="fa fa-chevron-up"></li></a>
+                            <a href="javascript:" class="vote text-muted"><li class="fa fa-chevron-down"></li></a>
+                            <a href="javascript:" class="vote text-muted"><i class="fa fa-heart-o" aria-label="收藏本帖"></i> 11</a>
+                            -->
+                            <!--
+                            <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark-o"></i> {$topic.favorites}</a>
+                            -->
+                            <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark"></i> {$topic.favorites}</a>
+                        </span>
+                    </small>
+                </div>
+                <div class="card-body markdown-body">
+                    {$topic.content|markdown}
+                    <!--
+                    <div class="plugin d-flex justify-content-center mt-3">
+                        <style>
+                            .haya-favoriter {
+                                position: relative;
+                                margin-top: 10px;
+                            }
+                            .haya-favorite-show-users {
+                                position: absolute;
+                                top: 5px;
+                                z-index: 100;
+                                width: 100%;
+                            }
+                            .haya-favorite-show-users .haya-favorite-users {
+                                max-height: 210px;
+                                overflow-y: auto;
+                            }
+                        </style>
+                        <div class="haya-favoriter px-2">
+                            <span class="btn-group haya-favoriter-info" role="group">
+                                <button class="btn btn-outline-secondary js-haya-favorite-add btn-sm" data-tid="18595" title="收藏本帖">
+					                <i class="fa fa-heart-o" aria-label="收藏本帖"></i>
+					                <span class="haya-favorite-btn">赞</span>
+				                </button>
+
+                                <button class="btn btn-outline-secondary js-haya-favorite-show-users btn-sm" data-tid="18595" title="点击查看收藏详情">
+                                    <span class="haya-favorite-user-count">0</span>
+                                </button>
+                            </span>
+
+	                        <span class="btn-group haya-favoriter-info" role="group">
+                                <button class="btn btn-outline-secondary js-haya-favorite-add btn-sm" data-tid="18595" title="收藏本帖">
+					                <i class="fa fa-star" aria-label="收藏本帖"></i>
+					                <span class="haya-favorite-btn">收藏</span>
+				                </button>
+
+                                <button class="btn btn-outline-secondary js-haya-favorite-show-users btn-sm" data-tid="18595" title="点击查看收藏详情">
+                                    <span class="haya-favorite-user-count">0</span>
+                                </button>
+                            </span>
+                        </div>
+
+                    </div>
+                    -->
+                    <div>
+                        <volist name="topic.tags" id="v">
+                            <a class="btn btn-light btn-sm" href='{$v.url}'>{$v.name}</a>&nbsp;
+                        </volist>
+                    </div>
+                </div>
+                <if condition="$topic.isAuthor">
+                    <div class="card-footer opts" >
+                        <a class="follow" href="{$topic.editUrl}"><i class="fa fa-edit"></i> 修改</a>
+                        <a class="follow" href="javascript:if(confirm('确实要删除吗?'))location='{$topic.editUrl}'"><i class="fa fa-trash"></i> 删除</a>
+                        <if condition="$topic.isTop">
+                            <a href="<?php echo site_url('topic/show/' . $topic['topic_id'] . '?act=set_top'); ?>" class="btn btn-default btn-sm unbookmark" data-method="edit" rel="nofollow">
+                                <?php if($topic['is_top'] == 0): ?> 置顶 <?php else: ?> 取消置顶 <?php endif; ?>
+                            </a>
+                        </if>
+                    </div>
+                </if>
+            </div><!-- /.panel content -->
+
+            <include file="parts/comment" />
+
+        </div><!-- /.col-md-9 -->
+        <div class="col-md-3 fluid">
+            <include file="parts/host" />
+
+            <!--
+            <div class="card module">
+                <div class="card-header">NB Framework</div>
+                <div class="card-body">
+                    <p>此板块用于反馈使用NB遇到的bug，以及对nb的改进建议等</p>
+                    <div style="margin-top: 10px;">
+                        <a href="{$node.postUrl}" class="btn btn-sm btn-success">发 帖</a>
+                        <a href="{$content.preUrl}" class="btn btn-dark btn-sm">上一贴</a>
+                        <a href="{$content.nextUrl}" class="btn btn-dark btn-sm">下一贴</a>
+                    </div>
+                </div>
+            </div>
+            -->
+
+        </div><!-- /.col-md-3 -->
+    </div><!-- /.row -->
+</block>
+
+<block name="js">
+    <include file="/home/www/sdk/html/backtop" />
+    <!-- 代码高亮 -->
+    <link href="https://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script src="//cdn.{$conf.root}/sticky-js/sticky.compile.js"></script>
+    <script type="text/javascript" >
+        $(document).ready(function(){
+            //代码高亮
+            hljs.initHighlightingOnLoad();
+            new Sticky('.user');
+        });
+    </script>
+</block>
+
+

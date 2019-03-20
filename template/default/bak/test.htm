@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<topic id="3" return="v">
+    <div>{$v.title}</div>
+</topic>
+<hr />
+<tags do="list" return="v">
+    <div>{$v.name}</div>
+</tags>
+<hr />
+<tag id="1" >
+    <div>{$data.name}</div>
+</tag>
+<plugin name="hello" func="node" args="1" return="result">
+    <volist name="result" id="v">
+        <div>{$v.pid}--{$v.cname}</div>
+    </volist>
+</plugin>
+<hr />
+<plugins name="hello" func="node" args="0">
+    <div>{$v.pid}--{$v.cname}</div>
+</plugins>
+<hr />
+<plugin name="hello" return="v">
+    <div>{$v}</div>
+</plugin>
+</body>
+</html>

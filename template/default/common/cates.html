@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">节点列表</h3>
+    </div>
+    <div class="panel-body">
+        <volist name="$catelist" id="v">
+            <p><span class="text-muted">{$v.cname}</span></p>
+            <p>
+                <volist name="$v.child" id="c">
+                    <a href="{c.url}">{$c.cname}</a>&nbsp;
+                </volist>
+            </p>
+        </volist>
+    </div>
+</div>

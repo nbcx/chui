@@ -1,0 +1,12 @@
+<div class="card card-default">
+    <div class="card-header">{$node.cname}</div>
+    <div class="card-body">
+        <p>{$node.content}</p>
+        <div style="margin-top: 10px;">
+            <a href="{$node.url}" class="btn btn-dark btn-sm">此节点</a>
+            <a href="{$node.postUrl}" class="btn btn-sm btn-success">发 帖</a>
+            <a href="{$content.preUrl}" class="btn btn-dark btn-sm">上一贴</a>
+            <a href="{$content.nextUrl}" class="btn btn-dark btn-sm">下一贴</a>
+        </div>
+    </div>
+</div>

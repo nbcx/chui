@@ -1,0 +1,56 @@
+<extend name="base" />
+
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card module">
+                <div class="card-header">
+                    <include file="user/nav" />
+                </div>
+                <div class="card-body">
+                    <div>
+                        <if condition="$topics">
+                            <ul class="media-list">
+                                <volist name="topics" id="v">
+                                    <li class="media">
+                                        <a class="media-left" href="{$v.author.url}">
+                                            <img class="img-rounded medium" src="{$v.author.avatar}" alt="{$v.author.username}">
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">
+                                                <a href="{$v.url}">{$v.title}</a><?php if ($v['is_top'] == '1') echo '<span class="badge badge-info">置顶</span>'; ?>
+                                            </h4>
+                                            <p class="text-muted">
+                                                <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
+                                                <span>{$v.updatetime}</span>&nbsp;•&nbsp;
+                                                <if condition="$v.ruser">
+                                                    <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>&nbsp;•&nbsp;
+                                                    <else />
+                                                    <span>暂无回复</span>&nbsp;•&nbsp;
+                                                </if>
+                                                <span>
+                                                <a href="{$v.favoriteDelUrl}" title="取消收藏">取消收藏 X</a>
+                                            </span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <?php if ($pagination): ?>
+                            <ul class="pagination"><?php echo $pagination; ?></ul>
+                            <?php endif; ?>
+                            <else />
+                            暂无话题
+                        </if>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='col-md-3'>
+            <include file="parts/user" />
+            <include file="parts/ad" />
+        </div>
+    </div>
+</block>

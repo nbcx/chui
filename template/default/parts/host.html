@@ -1,0 +1,57 @@
+<style>
+    .module.user .media {
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+    .module.user .media>img {
+        width: 48px;
+    }
+</style>
+<div class="card module user" data-margin-top="60">
+    <h3 class="card-header">楼主信息</h3>
+    <div class="card-body">
+        <div class="media">
+            <img class="mr-2 rounded" src="{$topic.author.gravatar}" alt="Generic placeholder image">
+            <div class="media-body">
+                <h4 class="mt-0 mb-1">{$topic.author.username}</h4>
+                <div class="mt-0">
+                    <small class="text-muted">注册于 2011-11-24</small>
+                </div>
+                <!--
+                <span class="badge badge-danger">版主</span>
+                <span class="badge badge-success">Success</span>
+                -->
+            </div>
+        </div>
+        <div>
+            <span class="badge badge-success">版主</span>
+            <span class="badge badge-danger">VIP2</span>
+            <span class="badge badge-info">Git</span>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <table class="w-100 small">
+            <tbody>
+                <tr align="center">
+                    <td>
+                        <span class="text-muted">粉丝数</span><br>
+                        <b>2</b>
+                    </td>
+
+                    <td>
+                        <span class="text-muted">帖子数</span><br>
+                        <b>27</b>
+                    </td>
+                    <td>
+                        <span class="text-muted">精华数</span><br>
+                        <b>0</b>
+                    </td>
+                    <td>
+                        <span class="text-muted">注册排名</span><br>
+                        <b>20736</b>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<extend name="base" />
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card module">
+                <h3 class="card-header">私信</h3>
+                <div class="card-body">
+                    <if condition="$messages">
+                        <ul class="media-list">
+                            <volist name="messages" id="v">
+                                <li class="media <if condition='$v.isRead'>alert alert-warning</if>">
+                                    <a class="media-left" href="{$v.fromer.url}">
+                                        <img src="{$v.fromer.avatar}" alt="{$v.fromer.username}">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <a href="{$v.fromer.url}">{$v.fromer.username}</a>-{$v.utFriendly}-<a href="{$v.url}">查看对话({$v.messages})</a>
+                                        </h5>
+                                        <p class="mt-1">{$v.last_content}</p>
+                                        <!--<a href="{$v.url}">查看对话({$v.messages})</a>-->
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                        <else />
+                        还没有私信
+                    </if>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <include file="parts/user" />
+            <include file="parts/ad" />
+        </div>
+    </div>
+</block>
+

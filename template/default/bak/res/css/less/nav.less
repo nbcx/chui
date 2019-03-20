@@ -1,0 +1,96 @@
+.item-navbar {
+  height: 40px;
+  background: #f9f9f9;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0 rgba(0, 0, 0, .1)
+}
+
+@media (max-width: 991.99px) {
+  .item-navbar {
+    height: 40px;
+    padding-right: .5rem;
+    padding-left: .5rem
+  }
+
+  .item-navbar .navbar-nav-scroll {
+    max-width: 100%;
+    margin-top: .25rem;
+    overflow: hidden;
+    font-size: .875rem
+  }
+  .item-navbar .navbar-nav-scroll .navbar-nav {
+    padding-bottom: .1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch
+  }
+}
+
+@media (min-width: 768px) {
+  @supports ((position:-webkit-sticky) or (position:sticky)) {
+    .item-navbar {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+    }
+  }
+}
+
+.item-navbar .navbar-nav .nav-link {
+  padding-right: .5rem;
+  padding-left: .5rem;
+  color: #606060;
+}
+
+.item-navbar .navbar-nav .nav-link.active, .item-navbar .navbar-nav .nav-link:hover {
+  /*color: #fff;*/
+  background-color: transparent;
+
+  color: #000;
+  text-decoration: none;
+  /*border-bottom: 2px dotted #666666;*/
+}
+
+.item-navbar .navbar-nav .nav-link.active {
+  font-weight: 500
+}
+
+.item-navbar .navbar-nav-svg {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: text-top
+}
+
+.item-navbar .dropdown-menu {
+  font-size: .875rem
+}
+
+.item-navbar .dropdown-item.active {
+  font-weight: 500;
+  color: #212529;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23292b2c' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: .4rem .6rem;
+  background-size: .75rem .75rem
+}
+@media (min-width: 768px) {
+  .header-navbar {
+    height: 40px;
+    padding: 0;
+    border: 0px;
+    color: #404040;
+    line-height: 100%;
+  }
+  .item-navbar .navbar-nav .btn{
+    margin-top: 2px;
+  }
+  .item-navbar .container {
+    padding-left: 10px;
+    padding-right: 18px;
+  }
+}
+
+.navbar-inverse .navbar-nav>.active>a {
+  background-color: transparent;
+}

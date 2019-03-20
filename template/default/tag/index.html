@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta content='True' name='HandheldFriendly'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <include file="common/meta" />
+</head>
+<body id="startbbs">
+<include file="common/header" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">最新标签</h3>
+                </div>
+                <div class="panel-body">
+                    <if condition="$tags.isHave">
+                        <ul class="list-unstyled">
+                            <volist name="tags" id="v">
+                                <span class="label label-grey">
+                                <a href="{$v.url}">{$v.name}</a>
+                            </span>
+                                <span class="text-muted">X{$v.topics}</span>
+                            </volist>
+                        </ul>
+                    <else />
+                        暂无标签
+                    </if>
+                </div>
+            </div>
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            <include file="common/login" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</div><!-- /.container -->
+<include file="common/footer" />
+</body>
+</html>

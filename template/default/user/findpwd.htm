@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <include file="common/meta" />
+</head>
+<body id="startbbs">
+<a id="top" name="top"></a>
+<include file="common/header" />
+<div class="masthead">
+<div class="container main">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{$title}</div>
+                <div class="card-body sm">
+                    <form action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label text-right">用户名</label>
+                            <div class="col-md-6">
+                                <input class="form-control form-control-sm" name="username" type="text" check="username"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label text-right">安全邮箱</label>
+                            <div class="col-md-6">
+                                <input class="form-control form-control-sm" name="mail" type="text" check="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label"></label>
+                            <div class="col-md-offset-5 col-md-9">
+                                <span onclick="javascript:get_mail_code();" class="btn btn-secondary btn-sm" name="commit">发送验证码</span>
+                            </div>
+                        </div>
+                        <hr />
+                        <!--
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label text-right">验证码</label>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm mb-4">
+                                    <input type="text" class="form-control form-control-sm" check="captcha">
+                                    <div class="input-group-append">
+                                        <span onclick="javascript:get_mail_code();" class="input-group-text pointer">获取验证码</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label text-right">验证码</label>
+                            <div class="col-md-6">
+                                <input class="form-control form-control-sm" name="code" type="text" check="code"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <p class="text-muted">点击上面的发送验证码按钮，你填写的安全邮箱将收到一份邮件。</p>
+                                <p class="text-muted">将邮件里的验证码填入此处。</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label text-right">新密码</label>
+                            <div class="col-md-6">
+                                <input class="form-control form-control-sm" name="password"type="password" check="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label text-right">再输入一次</label>
+                            <div class="col-md-6">
+                                <input class="form-control form-control-sm" name="repassword" type="password" check="repassword"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label"></label>
+                            <div class="col-md-offset-5 col-md-9">
+                                <button type="submit" class="btn btn-primary btn-sm" name="commit">重置密码</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            <include file="common/login" />
+            <include file="common/ad" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</div><!-- /.container -->
+</div>
+<include file="common/footer" />
+<include file="common/validator" />
+<script>
+    function get_mail_code() {
+        var username = $("input[name='username']").val();
+        var email = $("input[name='mail']").val();
+        if(username && email) {
+            var args = {username:username,mail:email};
+            $.post('/mail/code?type=findpwd', args, function(res) {
+                alert(res.msg);
+            }, 'json');
+        }
+        else {
+            alert('请填写用户名和安全邮箱')
+        }
+    }
+</script>
+</body>
+</html>

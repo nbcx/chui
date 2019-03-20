@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+    <title>{$msg}</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        #container {
+            width: 600px;
+            margin: 10px auto;
+            padding: 20px;
+            border: 1px solid #D0D0D0;
+            -webkit-box-shadow: 0 0 8px #D0D0D0;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <h2>提示信息</h2>
+    <div class="alert {$code?'alert-danger':'alert-success'}" role="alert">{$msg}</div>
+    <p>
+        <a href="{$url?:'javascript:history.back();'}" class="alert-link">
+            {:$time?'如果您的浏览器没有自动跳转，请点击这里！':'请点击这里跳转！'}
+        </a>
+        <if condition="$time">
+            <script language="javascript">
+                setTimeout(function () {
+                    var url = '{$url}';
+                    {:$url?"location.href=url;":"history.back();"}
+                }, {$time});
+            </script>
+        </if>
+    </p>
+</div>
+</body>
+</html>

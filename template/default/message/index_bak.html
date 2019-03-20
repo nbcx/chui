@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <include file="common/meta" />
+</head>
+<body>
+<include file="common/header" />
+<div class="masthead">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>私信</h4>
+                </div>
+                <div class="card-body">
+                    <if condition="$messages">
+                        <ul class="media-list">
+                            <volist name="messages" id="v">
+                                <li class="media <if condition='$v.isRead'>alert alert-warning</if>">
+                                    <a class="media-left" href="{$v.fromer.url}">
+                                        <img src="{$v.fromer.avatar}" alt="{$v.fromer.username}">
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <a href="{$v.fromer.url}">{$v.fromer.username}</a>-{$v.utFriendly}-<a href="{$v.url}">查看对话({$v.messages})</a>
+                                        </h5>
+                                        <p>{$v.last_content}</p>
+                                        <!--<a href="{$v.url}">查看对话({$v.messages})</a>-->
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    <else />
+                        还没有私信
+                    </if>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <include file="common/login" />
+            <include file="common/ad" />
+        </div>
+    </div>
+</div>
+</div>
+<include file="common/footer" />
+</body>
+</html>

@@ -1,0 +1,72 @@
+/* --- 3. LAYOUT --- */
+
+#container {
+  /*
+  min-width:700px;
+  max-width:1600px;
+  */
+}
+
+#bgwrap {
+  float:left;
+  position:relative;
+  width:100%;
+  background:url('img/stripe.png') fixed 0 0 repeat-y;
+}
+
+/* --- 3.1 SIDEBAR --- */
+
+#primary_left {
+  clear:both;
+  float:left;
+  width:230px;
+  position:relative;
+  height: 4000px;
+  z-index: 10;
+}
+
+/* --- 3.1.1 LOGO --- */
+
+#primary_left #logo {
+  clear:both;
+  float:left;
+  width:230px;
+  height:155px;
+  overflow:hidden;
+  background:url('img/logo_bg.png') 0 0 no-repeat;
+  padding-top:15px;
+}
+
+/* --- 3.2 MAIN CONTENT AREA --- */
+
+#primary_right {
+  width:100%;
+  /*
+  float:right;
+  margin-left:-255px;
+  min-height:1000px;
+  overflow:hidden;*/
+  position: absolute;
+  overflow: auto;
+}
+
+#primary_right .inner {
+  clear:both;
+  float:left;
+  padding:30px;
+  margin-left:220px;
+  position:relative;
+}
+
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}

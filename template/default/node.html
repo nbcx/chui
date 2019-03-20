@@ -1,0 +1,187 @@
+<extend name="base" />
+
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <!---->
+            <div class="card module">
+                <h3 class="card-header">新帖导读
+                    <span class='pull-right'>{$conf.system.site_name}</span>
+                </h3>
+                <div class="card-body">
+                    <style>
+                        .list-group {
+                            flex-direction: unset;
+                        }
+                        .list-group-flush:last-child  .list-group-item:last-child{
+                            border-top: 0;
+                            border-bottom: 1px solid rgba(0,0,0,.125);
+                        }
+                    </style>
+                    <ul class="row list-group list-group-flush">
+                        <volist name="new_topics" id="v">
+                            <li class="col-md-6">
+                                <a href="{$v.url}" class="list-group-item">{$v.title|sb_substr=18}</a>
+                            </li>
+                        </volist>
+
+                        <!--
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                        -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 手动调整0or1，后期完善-->
+            <if condition="0">
+                <div class="card module">
+                    <h3 class="card-header">所有节点
+                    </h3>
+                    <div class="card-body">
+                        <ul class="media-list">
+                            <volist name="catelist" id="v">
+                                <li class="media section">
+                                    <a class="media-left" href="#">
+                                        <img class="img-rounded" src="{$v.ico}" alt="{$v.cname}">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="{$v.url}">{$v.cname}</a>
+                                        </h4>
+                                        <p class="text-muted">{$v.content}</p>
+                                        <p class="text-muted">版主:{$v.master}</p>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+                <else />
+                <volist name="catelist" id="v">
+                    <div class="card module">
+                        <h3 class="card-header">
+                            {$v.name}
+                        </h3>
+                        <div class="card-body">
+                            <if condition="$v.child.have">
+                                <ul class="media-list list">
+                                    <volist name="$v.child" id="c">
+                                        <li class="media section">
+                                            <a class="media-left" href="{$c.url}">
+                                                <img class="img-rounded" src="{$c.ico}" alt="{$c.cname}" />
+                                            </a>
+
+                                            <div class="media-body">
+                                                <h4 class="media-heading">
+                                                    <a href="{$c.url}">{$c.name}</a>
+                                                </h4>
+                                                <p class="text-muted">{$c.content}</p>
+                                                <p class="text-muted">版主:{$c.master}</p>
+                                            </div>
+                                            <div class="media-right text-right">
+                                                <p>{$c.today}/今日</p>
+                                                <p>{$c.count}/总话题</p>
+                                            </div>
+                                        </li>
+                                    </volist>
+                                </ul>
+                                <else />
+                                暂无节点
+                            </if>
+                        </div>
+                    </div>
+                </volist>
+            </if>
+
+            <div class="card module">
+                <h3 class="card-header">热门话题
+                </h3>
+                <div class="card-body">
+                    <h2>
+                        <a href="#" class="btn badge badge-primary">PHP</a>
+                        <span class="badge badge-secondary">安装失败</span>
+                        <span class="badge badge-success">Success</span>
+                        <span class="badge badge-danger">大神</span>
+                        <span class="badge badge-warning">Warning</span>
+                        <span class="badge badge-danger">Danger</span>
+                        <span class="badge badge-warning">Warning</span>
+                        <span class="badge badge-info">Info</span>
+                        <span class="badge badge-light">Light</span>
+                        <span class="badge badge-success">Success</span>
+                        <span class="badge badge-danger">Danger</span>
+                        <span class="badge badge-warning">Warning</span>
+                        <span class="badge badge-info">Info</span>
+                        <span class="badge badge-light">Light</span>
+                        <span class="badge badge-dark">Dark</span>
+                        <span class="badge badge-info">Info</span>
+                        <span class="badge badge-light">Light</span>
+                        <span class="badge badge-dark">Dark</span>
+                        <button class="btn badge badge-primary">Primary</button>
+                        <span class="badge badge-secondary">Secondary</span>
+                        <span class="badge badge-success">Success</span>
+                    </h2>
+
+                </div>
+            </div>
+            <if condition="$catelist.isEmpty">
+                <div class="card card-default">
+                    <div class="card-body">
+                        暂无节点，请到后台添加
+                    </div>
+                </div>
+            </if>
+        </div><!-- /.col-md-9 -->
+
+        <div class="col-md-3 fluid">
+
+            <div class="card module">
+                <h3 class="card-header">快捷导航</h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">新人必读</div>
+                        <div class="col-6">Git仓库</div>
+                        <div class="col-6">积分规则</div>
+                        <div class="col-6">提问的智慧</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <include file="parts/member" />
+
+            <div class="card module">
+                <h3 class="card-header">社区统计</h3>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li>最新会员： X库{$stats.last_username}</li>
+                        <!--<li>注册会员： {$stats.total_users}</li>-->
+                        <li>今日发帖： {$stats.today_topics}</li>
+                        <li>昨日发帖： {$stats.yesterday_topics}</li>
+                        <li>发帖总数： {$stats.total_topics}</li>
+                        <li>回帖数量：  {$stats.total_comments}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <include file="parts/ad" />
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</block>

@@ -1,0 +1,93 @@
+<extend name="base" />
+
+<block name="main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card module">
+                <h3 class="card-header">
+                    版块帖子：51182 　 今日帖子：4　 今日回帖：8
+                    <!--<small>(版主:{$node.master})</small>-->
+                    <span class='pull-right'>
+                        <a href="/topic/add/{$node.node_id}" class="label label-success">快速发表</a>
+                    </span>
+                </h3>
+                <div class="card-body">
+                    悬赏问题仅限技术问题交流，严禁发布请求破解和违规的需求，外包项目请将项目需求提交我们，通过后将在众包平台发布；<br/>
+                    严禁留下email、QQ等信息私下解答！问题请直接在帖子里回答！<br/>
+                    若问题己解决，版主有权1月内强制结帖。<br/>
+                    若问题没人解决，作者自己解决，请把解决思路帖出分享，即可申诉退款。<br/>
+                    个人钱包满100元才可申请退款，退款或提现收5%手续费。
+                </div>
+            </div>
+            <div class="card module">
+                <h3 class="card-header">
+                    <a href="/"> 板块</a> > {$node.name}
+                    <!--
+                    <div class="pull-right">
+                        <a href="#"><span class="badge badge-pill badge-info">Danger</span></a>
+                        <span class="badge badge-pill badge-info">Info</span>
+                    </div>
+                    -->
+                </h3>
+                <div class="card-body">
+                    <if condition="$topics.have">
+                        <ul class="media-list list">
+                            <volist name="topics" id="v">
+                                <li class="media">
+                                    <a class="media-left" href="{$v.author.url}">
+                                        <img class="img-rounded medium rounded" src="{$v.author.gravatar}" alt="{$v.author.username} medium avatar" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading topic-list-heading">
+                                            <a href="{$v.url}">{$v.title}</a>
+                                            <if condition="$v.is_top">
+                                                <span class="badge badge-info">置顶</span>
+                                            </if>
+                                        </h4>
+                                        <p class="text-muted">
+                                            <span><a href="{$v.node.url}">{$v.node.name}</a></span>&nbsp;•&nbsp;
+                                            <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
+                                            <span>{$v.updatedate}</span>&nbsp;•&nbsp;
+                                            <if condition="$v.ruid">
+                                                <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                                <else />
+                                                <span>暂无回复</span>
+                                            </if>
+                                        </p>
+                                    </div>
+                                    <div class="media-right">
+                                    <span class="badge badge-info topic-comment">
+                                        <a href="{$v.replyUrl}">{$v.comments}</a>
+                                    </span>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                        <else />
+                        暂无话题
+                    </if>
+                </div>
+            </div>
+        </div><!-- /.col-md-8 -->
+
+        <div class="col-md-3 fluid">
+            <div class="card module">
+                <h3 class="card-header">{$node.name}</h3>
+                <div class="card-body text-center">
+                    <div class="py-2">
+                        <img alt="#large avatar" class="rounded" src="{$node.ico}"/>
+                    </div>
+                    <p class="card-text">{$node.content}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="#">lithium4010 (李丰)</a>
+                    </li>
+                    <li class="list-group-item"><a href="#">admin</a></li>
+                    <li class="list-group-item"><a href="#">快乐小猫</a></li>
+                </ul>
+            </div>
+        </div><!-- /.col-md-4 -->
+
+    </div><!-- /.row -->
+</block>

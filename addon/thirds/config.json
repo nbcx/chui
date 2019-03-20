@@ -1,0 +1,7 @@
+{
+  "name":  "第三方登陆",
+  "author": "collin",
+  "version":"1.0",
+  "link":"https://nb.cx",
+  "description":"目前支持的第三方登陆有：Github，Google，QQ，Weibo，Douban，后续看情况更新"
+}

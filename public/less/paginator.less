@@ -1,0 +1,80 @@
+/* --- 4.x PAGINATOR --- */
+
+ul.paginator {
+  list-style-type:none;
+  float:right;
+}
+
+ul.paginator li {
+  float:left;
+}
+
+ul.paginator li a {
+  padding:4px 6px;
+  margin:0 5px 0 0;
+  text-decoration:none;
+  font-size:11px;
+  color:#666;
+
+  border:1px solid #fff;
+
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+
+  -moz-box-shadow: 1px 1px 0px #999;
+  -webkit-box-shadow: 1px 1px 0px #999;
+  box-shadow: 1px 1px 0px #999;
+
+  background: -moz-linear-gradient(top,#fbfbfb,#f5f5f5);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#f5f5f5));
+}
+
+ul.paginator li a.current {
+  border:1px solid #1a1a1a;
+
+  color:#ccc;
+  background:url('img/blue/button_repeater.png') 0 0 repeat-x;
+
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+
+  -moz-box-shadow: 1px 1px 0px #999;
+  -webkit-box-shadow: 1px 1px 0px #999;
+  box-shadow: 1px 1px 0px #999;
+}
+
+
+
+/**** pag *****/
+.page {
+  float: right;
+  margin-top: -11px;
+}
+.page-box{
+  display: inline-block;
+}
+.page-contain{
+  text-align: center;
+  font-size: 0px;
+}
+.page-contain a{
+  font-size: 14px;
+  display: inline-block;
+  margin:5px 2px;
+  text-decoration: none;
+  color:#efefef;
+  background: rgba(0,0,0,.6);
+  width:28px;
+  height:28px;
+  line-height: 28px;
+  border-radius:3px;
+}
+.page-contain a.active{
+  background:#efefef;
+  color:#000;
+}
+.page-contain a:active{
+  background:#000;
+}
