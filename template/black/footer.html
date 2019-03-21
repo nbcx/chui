@@ -1,0 +1,62 @@
+<footer class="mastfoot mt-3 text-center">
+    <div class="inner">
+        <p><a href="#">NB Framework</a> is power by <a href="#">Collin</a>.</p>
+    </div>
+</footer>
+<div class="itop"></div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//cdn.nb.cx/jquery/jquery-3.3.1.min.js"></script>
+<script src="//cdn.nb.cx/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+<script src="//cdn.nb.cx/highlightjs/9.14.0/highlight.min.js"></script>
+<script src="//cdn.nb.cx/marked/0.6.0/marked.min.js"></script>
+<style>
+    .itop {
+        position: fixed;
+        right: 10px;
+        bottom: 40px;
+        display: none;
+        margin-bottom: 5px;
+        width: 40px;
+        height: 36px;
+        border-radius: 2px;
+        background: url(//cdn.nb.cx/img/backtop.png) 8px 6px no-repeat;
+        background-color: #444;
+        background-color: rgba(0,0,0,.6);
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    }
+</style>
+<script type="text/javascript" >
+    $(document).ready(function(){
+        /* 回到顶部 */
+        $(function(){
+
+            $(window).bind("scroll", backToTopFun);
+
+            $(".itop").click(function() {
+                $("html, body").animate({ scrollTop: 0 }, 300);
+                return false;
+            });
+            backToTopFun();
+        });
+        function backToTopFun() {
+            var st = $(document).scrollTop(), winh = $(window).height(),backToTopEle = $('.itop');
+            (st > 120)? backToTopEle.show(): backToTopEle.hide();
+            //IE6下的定位
+            if (!window.XMLHttpRequest) {
+                backToTopEle.css("top", st + winh - 166);
+            }
+        };
+    });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?e93c594fee892cb970231370d6af5dc5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>

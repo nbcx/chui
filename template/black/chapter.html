@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+</head>
+<body >
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead ">
+            <div class="inner">
+                <h3 class="masthead-brand">NBCX</h3>
+                <!---->
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link" href="//nb.cx">主页</a>
+                    <a class="nav-link active" href="//wiki.nb.cx">开发文档</a>
+                </nav>
+
+            </div>
+        </header>
+        <main role="main" class="rounded inner cover">
+            <h1 class="cover-heading">{$chapter.name}</h1>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" colspan="3">
+                            <a href="/">{$book.name}</a> /
+                            <if condition="$chapter.parent.have">
+                                <a href="{$chapter.parent.url}">{$chapter.parent.name}</a> /
+                            </if>
+                            <a>{$chapter.name}</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="$chapter.catalogue" id="v">
+                        <if condition="$v.childs">
+                            <tr>
+                                <td scope="row">
+                                    <a href="{$v.url}">
+                                        <i class="fa fa-folder"></i>
+                                        <span>{$v.name}</span>
+                                    </a>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        <else/>
+                            <tr>
+                                <td scope="row">
+                                    <a href="{$v.url}#content">
+                                        <i class="fa fa-file-text-o"></i>
+                                        <span>{$v.name}</span>
+                                    </a>
+                                </td>
+                                <td></td>
+                                <td class="text-right">
+                                    <a class="text-secondary">{$v.pubdate}</a>
+                                </td>
+                            </tr>
+                        </if>
+                    </volist>
+                </tbody>
+            </table>
+            <div id="content" class="markdown-body"></div>
+        </main>
+        <include file="footer" />
+        <if condition="$chapter.text">
+            <script>
+                $(document).ready(function(){
+                    $("#content").html(marked({$chapter.text|json_encode}));
+                    hljs.initHighlightingOnLoad(); //实例化高亮
+                })
+            </script>
+        </if>
+    </div>
+</body>
+</html>
+

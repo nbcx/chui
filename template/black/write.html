@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+    <style>
+        .card-body {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 1.25rem 0em;
+        }
+    </style>
+</head>
+
+<body >
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <include file="nav" />
+
+    <main role="main" class="rounded inner cover">
+        <h3 class="cover-heading">发表帖子</h3>
+        <p class="lead"></p>
+        <div>
+            <form name="topic" class="form" action="{$action}"  method="post" novalidate="novalidate" onkeydown="if(event.keyCode==13)return false;">
+                <div class="">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">正文</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile">选择话题</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link upload-refresh" id="contact-tab" data-toggle="tab" href="#contact">附件</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="form-group">
+                                    <label>帖子标题</label>
+                                    <input name="title" type="text" class="form-control form-control-sm" value="{$topic.title}" placeholder="请输入帖子标题">
+                                    <!--<small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                                </div>
+                                <div class="form-group row">
+                                    <!--<label class="col-12">板块</label>-->
+                                    <div class="col-6">
+                                        <select name="nid" class="form-control form-control-sm">
+                                            <option selected="selected" value="">请选择板块</option>
+                                            <volist name="nodes" id="v">
+                                                <if condition="$v.hasChild">
+                                                    <optgroup label="{$v.name}">
+                                                        <volist name="v.child" id="c">
+                                                            <option value="{$c.id}">{$c.name}</option>
+                                                        </volist>
+                                                    </optgroup>
+                                                    <else />
+                                                    <option value="{$v.id}">{$v.name}</option>
+                                                </if>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">发布(Ctrl+Enter)</button>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <include file="parts/tag" />
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <include file="parts/upload" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div >
+                    <textarea id="content" name="content" placeholder="文章内容">{$topic.content}</textarea>
+                </div>
+
+            </form>
+        </div>
+    </main>
+    <include file="footer" />
+    <include file="parts/editor" />
+    <script>
+        $(document).ready(function () {
+            $("select[name='nid']").val('{$topic.nid}');
+        })
+    </script>
+</div>
+
+</body>
+</html>
+

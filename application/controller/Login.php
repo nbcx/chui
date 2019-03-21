@@ -1,13 +1,9 @@
 <?php
-/*
- * This file is part of the NB Framework package.
- *
- * Copyright (c) 2018 https://nb.cx All rights reserved.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-class Login {
+namespace controller;
+
+use util\Controller;
+
+class Login extends Controller {
 
     public function index() {
         //记录referer
@@ -19,7 +15,7 @@ class Login {
             $action = $this->safe("/login/post?openid={$openid}&type={$type}");
         }
         else {
-            $action = $this->safe('/login/post');
+            $action = $this->safe('/login/post?action=in');
         }
 
         $this->assign('captcha',\sdk\Captcha::url());
@@ -27,16 +23,14 @@ class Login {
         $this->display('login');
     }
 
-    public function post() {
+    public function post($action) {
         $this->protect();
 
-        $run = Gateway::run('login',function ($msg) {
-            $this->back($msg);
-
+        $run = \service\Auth::run($action,function ($msg) {
+            ed($msg);
         });
 
         SdkAuth::cookieLogin($run->data->stack());
         $this->redirect();
-
     }
 }

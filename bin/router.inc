@@ -6,19 +6,15 @@ return [
     ],
     'login' => [
         'url' => '/login',
-        'action' => 'gateway/login'
+        'action' => 'login'
     ],
     'logout' => [
         'url' => '/logout',
-        'action' => 'gateway/logout'
+        'action' => 'login/out'
     ],
     'register' => [
         'url' => '/register',
-        'action' => 'gateway/register'
-    ],
-    'register' => [
-        'url' => '/register',
-        'action' => 'gateway/register'
+        'action' => 'register'
     ],
     'resetpwd' => [
         'url' => '/resetpwd',

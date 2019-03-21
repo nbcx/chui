@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+    <style>
+        .auth-form h4 {
+            color: #40485b;
+            line-height: 1.33em;
+            font-size: 1.071rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body >
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <include file="nav" />
+
+    <main role="main" class="rounded inner cover">
+        <h2 class="cover-heading">请注册</h2>
+        <p class="lead"></p>
+        {$alert}
+        <div id="content" class="auth-form" >
+            <form action="{$action}" method="post" data-validate="true">
+                <h4>用户名</h4>
+                <div class="form-group">
+                    <p class="text-muted">用户名可用于登录，将来也可以作为你个性主页的自定义域名部分</p>
+                </div>
+                <div class="form-group">
+                    <!--<label>用户名</label>-->
+                    <input name="username" type="text"class="form-control" placeholder="请输入用户名" check="xusername">
+                    <p><small class="text-muted">用户名需使用英文字母，阿拉伯数字以及`_`组成，且不区分大小写。</small></p>
+                    <p><small class="text-muted">用户名长度必须在5-12之间，且不能有违规字符。</small><p>
+                </div>
+                <hr />
+                <h4>安全邮箱</h4>
+                <div class="form-group">
+                    <p class="text-muted">安全邮箱，是你找回密码的方式之一，请填写你常用的邮箱地址</p>
+                    <p class="text-muted">安全邮箱也可以作为你的登录账号</p>
+                </div>
+                <div class="form-group">
+                    <input name="mail" type="text" class="form-control" placeholder="请输入邮箱地址" check="xemail">
+                    <!--<p><small class="text-muted">安全邮箱可以找回密码，接收系统消息。且可用于登录！</small></p>-->
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="mcode" class="form-control" placeholder="请输入邮箱验证码" check="captcha">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span id="sendcode" class="btn btn-secondary form-control">发送验证码</span>
+                    </div>
+                </div>
+                <hr />
+                <h4>登录密码</h4>
+                <div class="form-group">
+                    <input class="form-control" name="password" type="password" check="password" placeholder="请输入密码">
+                    <p><small class="text-muted">密码长度必须在6到30之间，且区分大小写。</small></p>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" name="repassword" type="password" check="repassword" placeholder="确认密码">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <input type="text" name="captcha" class="form-control" check="captcha" placeholder="输入验证码" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <img class="captcha" src="{$captcha}" border="0" />
+                </div>
+                <hr />
+                <button type="submit" class="btn btn-primary"> 注册账号 </button>
+                <a href="/login" class="btn"> 已有账号，前往登录 </a>
+            </form>
+        </div>
+    </main>
+    <include file="footer" />
+    <include file="validator" />
+
+</div>
+</body>
+</html>
+

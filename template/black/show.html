@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+    <style>
+        .card-header {
+            padding: .75rem 0rem;
+        }
+        .card-body {
+            padding: 1.25rem 0;
+        }
+        .card-header.segmentation {
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+            padding: .65rem 1.3rem;
+        }
+    </style>
+</head>
+
+<body >
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <include file="nav" />
+
+    <main role="main" class="rounded inner cover">
+        <div class="">
+            <!--
+            <h3 class="card-header"><a href="/">帖子</a> &gt; <a href="{$topic.node.url}">{$topic.node.name}</a></h3>
+            -->
+            <style>
+                .card-header.topic-detail-heading {
+                    background: unset;
+                    color: #000;
+                }
+            </style>
+            <div class="card-header topic-detail-heading">
+                <div class="pull-right">
+                        <span style="color: red">
+                            <i class="glyphicon glyphicon-fire"></i>
+                        </span>
+                </div>
+                <h2 class="cover-heading">{$topic.title}</h2>
+                <small class="text-muted">
+                    <span>by <a href="{$topic.author.url}">{$topic.author.username}</a></span>&nbsp;•&nbsp;
+                    <span>{$topic.date}</span>&nbsp;•&nbsp;
+                    <if condition="$topic.ruser">
+                        <span>最后由 <a href="{$topic.ruser.url}">{$topic.ruser.username}</a> </span>&nbsp;•
+                        <span>回复于 {$topic.lastdate}</span>&nbsp;•
+                    </if>
+
+                    <span>{$topic.views}次阅读</span>
+
+                    <!--<span>• <a href="javascript:void(0)" class="reply">回复</a></span>-->
+                    <span class="pull-right ">
+                            <style>
+                                .vote, .vote:link, .vote:visited {
+                                    text-decoration: none;
+                                    font-size: 10px;
+                                    line-height: 1;
+                                    padding: 2px 8px 2px 8px;
+                                    border: 1px solid #e2e2e2;
+                                    border-radius: 3px;
+                                    color: #778;
+                                    display: inline-block;
+                                    vertical-align: baseline;
+                                    text-align: center;
+                                }
+                            </style>
+                        <!--
+                        <a href="javascript:" class="vote text-muted"><li class="fa fa-chevron-up"></li></a>
+                        <a href="javascript:" class="vote text-muted"><li class="fa fa-chevron-down"></li></a>
+                        <a href="javascript:" class="vote text-muted"><i class="fa fa-heart-o" aria-label="收藏本帖"></i> 11</a>
+                        -->
+                        <!--
+                        <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark-o"></i> {$topic.favorites}</a>
+                        -->
+                            <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark"></i> {$topic.favorites}</a>
+                        </span>
+                </small>
+            </div>
+            <div class="card-body markdown-body">
+                {$topic.content|markdown}
+                <div>
+                    <volist name="topic.tags" id="v">
+                        <a class="btn btn-light btn-sm" href='{$v.url}'>{$v.name}</a>&nbsp;
+                    </volist>
+                </div>
+            </div>
+            <if condition="$topic.isAuthor">
+                <div class="card-footer opts" >
+                    <a class="follow" href="{$topic.editUrl}"><i class="fa fa-edit"></i> 修改</a>
+                    <a class="follow" href="javascript:if(confirm('确实要删除吗?'))location='{$topic.editUrl}'"><i class="fa fa-trash"></i> 删除</a>
+                    <if condition="$topic.isTop">
+                        <a href="<?php echo site_url('topic/show/' . $topic['topic_id'] . '?act=set_top'); ?>" class="btn btn-default btn-sm unbookmark" data-method="edit" rel="nofollow">
+                            <?php if($topic['is_top'] == 0): ?> 置顶 <?php else: ?> 取消置顶 <?php endif; ?>
+                        </a>
+                    </if>
+                </div>
+            </if>
+        </div><!-- /.panel content -->
+
+        <include file="comment" />
+    </main>
+    <include file="footer" />
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,69 @@
+<div class="card module">
+    <h3 class="card-header">回贴周榜</h3>
+    <style>
+        .module .rank {
+            padding: 0 0 0 12px;
+        }
+        .rank dl {
+            position: relative;
+            min-height: 100px;
+            overflow: hidden;
+            margin-left: 0px;
+            text-align: center;
+            font-size: 0;
+        }
+        .rank dd {
+            position: relative;
+            width: 60px;
+            height: 80px;
+            margin: 10px 10px 5px 0;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            vertical-align: top;
+            font-size: 12px;
+        }
+        .rank dd a img {
+            width: 60px;
+            height: 60px;
+            border-radius: 2px;
+        }
+        .rank dd a cite {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background-color: rgba(0,0,0,.2);
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .rank dd a i {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-style: normal;
+        }
+    </style>
+    <div class="card-body rank">
+        <dl>
+            <volist name="new_users" id="v">
+                <dd>
+                    <a href="{$v.url}"><img src="{$v.gravatar}">
+                        <cite>{$v.username}</cite>
+                        <i>99次回答</i>
+                    </a>
+                </dd>
+            </volist>
+        </dl>
+    </div>
+</div>
