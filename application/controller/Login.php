@@ -1,6 +1,7 @@
 <?php
 namespace controller;
 
+use nb\Cookie;
 use util\Controller;
 
 class Login extends Controller {
@@ -15,9 +16,8 @@ class Login extends Controller {
             $action = $this->safe("/login/post?openid={$openid}&type={$type}");
         }
         else {
-            $action = $this->safe('/login/post?action=in');
+            $action = $this->safe('/login/post?action=login');
         }
-
         $this->assign('captcha',\sdk\Captcha::url());
         $this->assign('action',$action);
         $this->display('login');
@@ -30,7 +30,7 @@ class Login extends Controller {
             ed($msg);
         });
 
-        SdkAuth::cookieLogin($run->data->stack());
-        $this->redirect();
+        Cookie::set('_user',$run->data->token);
+        $this->redirect('/');
     }
 }

@@ -202,10 +202,10 @@
                 });
                 if($val == 'ajax') {
                     validator.on('success.form.bv', function(e) {
-                        alert('hello ajax');
+                        //alert('hello ajax');
                         // 终止重复提交
-                        e.preventDefault();
-                        return;
+                        //e.preventDefault();
+                        //return;
                         againSubmit = true;
 
                         // 得到form表单对象
@@ -214,15 +214,7 @@
                         var bv = $form.data('bootstrapValidator');
                         // 使用Ajax提交form表单数据
                         $.post($form.attr('action'), $form.serialize(), function(result) {
-                            if(result=='1'){
-                                window.top.layer.alert('保存成功！', {icon: 6, title:"提示"},function(index){
-                                    window.top.layer.close(index);
-                                    closeLayer();
-                                });
-                            }else{
-                                parent.layer.alert("保存失败！", {title:"提示"});
-                                againSubmit = false;
-                            }
+                            alert('hello');
                         }, 'json');
                     })
                 }

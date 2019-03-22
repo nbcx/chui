@@ -84,89 +84,89 @@
 </style>
 
 <div class="card module">
-        <div class="card-header">
-            <h5>
-                <span id="comments">{$topic.comments}</span>
-                <span> 回复 | 直到<?php echo date('Y-m-d H:i', time()); ?></span>
-                <a href="javascript:void(0)" class="pull-right"><span class="text-muted">添加回复</span></a>
-            </h5>
-        </div>
-        <div class="card-body ">
-            <if condition="$comments.have">
+    <div class="card-header">
+        <h5>
+            <span id="comments">{$topic.comments}</span>
+            <span> 回复 | 直到<?php echo date('Y-m-d H:i', time()); ?></span>
+            <a href="javascript:void(0)" class="pull-right"><span class="text-muted">添加回复</span></a>
+        </h5>
+    </div>
+    <div class="card-body ">
+        <if condition="$comments.have">
+            <style>
+                .replys{
+                    padding-bottom: 30px;
+                }
+            </style>
+            <div class="replys">
+                <volist name="comments" id="v">
+                    <if condition="$v.type">
+                        <div class="item event">
+                            <a href="#">
+                                <img class="media-object avatar-16" src="{$v.user.gravatar}">
+                                {$v.user.username}
+                            </a>
+                            <span>关闭了讨论</span>
+                            <span class="text-muted ml-2">{$v.date}</span>
+                        </div>
+                        <elseif condition="$v.status" />
+                        <div class="item del">
+                            <p class="text-muted"><del>{$v.floor}楼 已删除</del></p>
+                        </div>
+                        <else />
+                        <div class="item">
+                            <div class="head media">
+                                <a href="#"><img class="mr-2 rounded" src="{$v.user.gravatar}" alt="gravatar"></a>
+                                <div class="media-body">
+                                    <div class="mt-0">
+                                        <h5 class="mt-0">
+                                            <a href="{$v.user.url}">{$v.user.username} </a>
+                                            <!--<span class="badge badge-danger">VIP3</span>-->
+                                            <span class="pull-right text-muted">#{$v.floor}</span>
+                                        </h5>
+                                    </div>
+                                    <div class="additional">{$v.date}</div>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                {$v.content}
+                            </div>
+                            <div class="option">
+                                <a href="#"><small class="text-muted"><i class="fa fa-heart"></i></small></a>
+                                <a href="#"><small class="text-muted"><i class="fa fa-reply"></i> 回复</small></a>
+                                <!---->
+                                <a href="{$v.delPost}"><small class="text-muted"><i class="fa fa-trash"></i> 删除</small></a>
+
+                            </div>
+                        </div>
+                    </if>
+                </volist>
+            </div>
+        </if>
+        <div id="reply">
+            <if condition="$auth.islogin">
+                <form action="{$topic.commentPost}" method="post" style="margin-top: 0">
+                    <textarea class="textarea" name="comment" placeholder="来说几句吧......"></textarea>
+                    <p class="text-muted">
+                        <a class="text-muted" href="{$topic.commentUrl}"> 使用高级回复</a>
+                        <button type="submit" class="btn btn-info pull-right btn-sm" > 评 论 </button>
+                    </p>
+                </form>
+                <else />
                 <style>
-                    .replys{
-                        padding-bottom: 30px;
+                    .jumbotron {
+                        margin-bottom: 0;
+                        padding: 2rem 2rem;
                     }
                 </style>
-                <div class="replys">
-                    <volist name="comments" id="v">
-                        <if condition="$v.type">
-                            <div class="item event">
-                                <a href="#">
-                                    <img class="media-object avatar-16" src="{$v.user.gravatar}">
-                                    {$v.user.username}
-                                </a>
-                                <span>关闭了讨论</span>
-                                <span class="text-muted ml-2">{$v.date}</span>
-                            </div>
-                            <elseif condition="$v.status" />
-                            <div class="item del">
-                                <p class="text-muted"><del>{$v.floor}楼 已删除</del></p>
-                            </div>
-                            <else />
-                            <div class="item">
-                                <div class="head media">
-                                    <a href="#"><img class="mr-2 rounded" src="{$v.user.gravatar}" alt="gravatar"></a>
-                                    <div class="media-body">
-                                        <div class="mt-0">
-                                            <h5 class="mt-0">
-                                                <a href="{$v.user.url}">{$v.user.username} </a>
-                                                <!--<span class="badge badge-danger">VIP3</span>-->
-                                                <span class="pull-right text-muted">#{$v.floor}</span>
-                                            </h5>
-                                        </div>
-                                        <div class="additional">{$v.date}</div>
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    {$v.content}
-                                </div>
-                                <div class="option">
-                                    <a href="#"><small class="text-muted"><i class="fa fa-heart"></i></small></a>
-                                    <a href="#"><small class="text-muted"><i class="fa fa-reply"></i> 回复</small></a>
-                                    <!---->
-                                    <a href="{$v.delPost}"><small class="text-muted"><i class="fa fa-trash"></i> 删除</small></a>
-
-                                </div>
-                            </div>
-                        </if>
-                    </volist>
+                <div class="text-center jumbotron">
+                    <a class="btn btn-primary " href="{$system.loginUrl}" role="button">登录</a>
+                    发表 or 还没有账号？去<a style="color: #01AAED" href="{$system.registerUrl}">注册</a>一个吧！
                 </div>
             </if>
-            <div id="reply">
-                <if condition="$auth.islogin">
-                    <form action="{$topic.commentPost}" method="post" style="margin-top: 0">
-                        <textarea class="textarea" name="comment" placeholder="来说几句吧......"></textarea>
-                        <p class="text-muted">
-                            <a class="text-muted" href="{$topic.commentUrl}"> 使用高级回复</a>
-                            <button type="submit" class="btn btn-info pull-right btn-sm" > 评 论 </button>
-                        </p>
-                    </form>
-                    <else />
-                    <style>
-                        .jumbotron {
-                            margin-bottom: 0;
-                            padding: 2rem 2rem;
-                        }
-                    </style>
-                    <div class="text-center jumbotron">
-                        <a class="btn btn-primary " href="{$system.loginUrl}" role="button">登录</a>
-                        发表 or 还没有账号？去<a style="color: #01AAED" href="{$system.registerUrl}">注册</a>一个吧！
-                    </div>
-                </if>
-            </div>
         </div>
     </div>
+</div>
 
 <!-- /.panel comment -->
 <!--

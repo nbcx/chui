@@ -22,7 +22,6 @@ use nb\Middle;
  */
 class Controller extends Base {
 
-
     /**
      * 当前登陆的用户信息
      * @var array
@@ -127,5 +126,18 @@ class Controller extends Base {
         //结束程序运行
         quit();
     }
+
+    protected function tips($hint) {
+        $this->assign('msg',$hint);
+        $this->display('hint');
+        quit();
+    }
+
+    protected function redirect($url, $http_response_code=302) {
+        //检查是否存在referer
+        redirect($url,$http_response_code);
+        quit();
+    }
+
 
 }

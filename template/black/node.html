@@ -6,6 +6,16 @@
         ol, ul {
             list-style: none;
         }
+        h4 {
+            font-size: 20px;
+        }
+        .section img {
+            width: 50px;
+            height: 50px;
+        }
+        .card-header {
+            padding: .75rem .25rem;
+        }
     </style>
     <style>
         @media (min-width: 900px){
@@ -126,7 +136,9 @@
         }
     </style>
     <style>
-
+        .module .list-group-item {
+            padding: .25rem 1.0rem;
+        }
         .list li {
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
@@ -171,12 +183,27 @@
     <include file="nav" />
 
     <main role="main" class="rounded inner cover">
-        <h3 class="cover-heading">社区板块</h3>
+        <h3 class="cover-heading">社区板块
+            <if condition="$auth.islogin">
+                <a href="/posted" class="pull-right small" style="font-size: 12px;line-height: 46px;">
+                    发帖
+                </a>
+                <else />
+                <div class="pull-right small">
+                    <a href="/login"  style="font-size: 12px;line-height: 46px;">
+                        登录
+                    </a> .
+                    <a href="/register" style="font-size: 12px;line-height: 46px;">
+                        注册
+                    </a>
+                </div>
+            </if>
+        </h3>
         <p class="lead"></p>
         {$alert}
-        <div id="content" >
+        <div>
             <!---->
-            <div class="">
+            <div class="module">
                 <h3 class="card-header">新帖导读
                     <span class='pull-right'>{$conf.system.site_name}</span>
                 </h3>
@@ -286,7 +313,7 @@
                 <h3 class="card-header">热门话题
                 </h3>
                 <div class="card-body">
-                    <h2>
+                    <h4>
                         <a href="#" class="btn badge badge-primary">PHP</a>
                         <span class="badge badge-secondary">安装失败</span>
                         <span class="badge badge-success">Success</span>
@@ -308,7 +335,7 @@
                         <button class="btn badge badge-primary">Primary</button>
                         <span class="badge badge-secondary">Secondary</span>
                         <span class="badge badge-success">Success</span>
-                    </h2>
+                    </h4>
 
                 </div>
             </div>

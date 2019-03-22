@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+</head>
+
+<body >
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <include file="nav" />
+
+    <main role="main" class="rounded inner cover">
+        <h2 class="cover-heading">时间show的主页
+            <a href="/setting" class="pull-right small" style="font-size: 12px;line-height: 46px;">
+                个人设置
+            </a>
+        </h2>
+        <p class="lead"></p>
+        <div class="">
+            <div class="card-header">
+                <!--<div class="card-title">创建新主题</div>-->
+                <include file="user/nav" />
+            </div>
+            <div class="card-body">
+                <div >
+                    <div class="col-md-12">
+                        <h4>{$user.username}</h4>
+                        <p class="text-muted">
+                            <small>{$user.username}是第{$user.uid} 号会员，加入于{$user.regtime}</small>
+                        </p>
+                        <p>签名：{$user.signature}</p>
+                        <p>个人主页：<a href="{$user.homepage}">{$user.homepage}</a></p>
+                        <p>所在地：{$user.location}</p>
+                    </div>
+                    <div class="col-md-12">
+                        <p>{$user.introduction}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="">
+            <h3 class="card-header">
+                <small>{$user.username} 最近创建的主题</small>
+            </h3>
+            <div class="card-body">
+                <if condition="$topics.have">
+                    <ul class="media-list list">
+                        <volist name="topics" id="v">
+                            <li class="media ">
+                                <div class="media-body">
+                                    <h4 class="media-heading topic-list-heading">
+                                        <a href="{$v.url}">{$v.title}</a>
+                                    </h4>
+                                    <p class="small text-muted">
+                                        <span><a href="{$v.node.url}">{$v.node.cname}</a></span>&nbsp;•&nbsp;
+                                        <span>{$v.addtime}</span>&nbsp;•&nbsp;
+                                        <if condition="$v.rname.isHave" >
+                                            <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                            <else />
+                                            <span>暂无回复</span>
+                                        </if>
+                                    </p>
+                                </div>
+                                <div class="media-right">
+                                    <span class="badge badge-info">{$v.comments}</span>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                    <else />
+                    <div>{$auth.nick}还没有发表任何帖子</div>
+                </if>
+
+                <ul class="pagination"></ul>
+            </div>
+        </div><!-- /.topics -->
+
+        <div class="">
+            <div class="card-header">
+                <small>{$user.username} 最近回复了</small>
+            </div>
+            <div class="card-body">
+                <if condition="$comments.have">
+                    <ul class="media-list list">
+                        <volist name="comments" id="v">
+                            <li class="media">
+                                <div class="media-body reply_content">
+                                    <h4 class="media-heading topic-list-heading">
+                                        <small>回复了 <a href="{$v.user.url}" title="{$v.user.username}">{$v.user.username}</a>
+                                            创建的主题
+                                        </small>
+                                        <a href="{$v.topic.url}">{$v.topic.title}</a>
+                                    </h4>
+                                    <blockquote>
+                                        {$v.content}
+                                        <small>{$v.replytime}</small>
+                                    </blockquote>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                    <else />
+                    <div>{$auth.nick}还没有发表任何回复</div>
+                </if>
+
+                <!--<ul class="pagination"></ul>-->
+            </div>
+        </div><!-- /.comments -->
+    </main>
+    <include file="footer" />
+    <include file="validator" />
+</div>
+
+</body>
+</html>
+

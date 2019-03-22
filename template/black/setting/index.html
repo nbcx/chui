@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+</head>
+
+<body >
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <include file="nav" />
+
+    <main role="main" class="rounded inner cover">
+        <h2 class="cover-heading">设置</h2>
+        <p class="lead"></p>
+        <div >
+            <h3 class="card-header">个人设置</h3>
+            <div class="card-body">
+                <form method="post" action="{$action}">
+                    <div class="form-group">
+                        <label>所在地</label>
+                        <input class="form-control col-md-6" name="location" type="text" value="{$auth.location}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>性别</label>
+                        <div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input value="1" type="radio" id="sex-1" name="sex" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="sex-1">男</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input value="2" type="radio" id="sex-2" name="sex" class="custom-control-input">
+                                <label class="custom-control-label" for="sex-2">女</label>
+                            </div>
+                        </div>
+                        <small class="text-muted"></small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label>生日</label>
+                            <select class="custom-select d-block w-100" name="year">
+                                <option value="0">年</option>
+                                <option value="1991">1991年</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label>&nbsp;</label>
+                            <select class="custom-select d-block w-100" name="month">
+                                <option value="0">月</option>
+                                <option value="9">9月</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label>&nbsp;</label>
+                            <select class="custom-select d-block w-100" name="day">
+                                <option value="0">日</option>
+                                <option value="15">15日</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>职业</label>
+                        <input class="form-control" name="occupation" type="text" value="{$auth.occupation}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>个人网页</label>
+                        <input class="form-control" name="homepage" type="text" value="{$auth.homepage}" placeholder="需要以https:// 或 http://开头"/>
+                        <small class="text-muted">你的个人网页信息会出现在你的个人面板等处展示</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>签名</label>
+                        <textarea class="form-control" cols="40" name="signature" rows="5">{$auth.signature}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary"> 更新资料 </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="">
+            <h3 class="card-header">头像上传</h3>
+            <div class="card-body">
+                <div class="setting">
+                    <form enctype="multipart/form-data" method="post">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">当前头像</label>
+                                <div class="col-md-8">
+                                    <img class="large_avatar" src="http://gravatar.ol.cx/121232123212321" class="img-rounded">&nbsp;
+                                    <img class="middle_avatar" src="http://gravatar.ol.cx/121232123212321" class="img-rounded">&nbsp;
+                                    <img class="small_avatar" src="{$auth.avatarSmall}" class="img-rounded">
+                                    <div class="alert alert-info alert-avatar">
+                                        <strong>注意</strong> 支持 512k 以内的 PNG / GIF / JPG 图片文件作为头像，推荐使用正方形的图片以获得最佳效果。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" >选择上传头像</label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control-file" name="upfile">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-6">
+                                    <button type="submit" class="btn btn-primary">提交新头像</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <include file="footer" />
+    <include file="validator" />
+</div>
+
+</body>
+</html>
+

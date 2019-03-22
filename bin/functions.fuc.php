@@ -4,19 +4,24 @@
  * 登陆成功将返回用户详细信息
  * 失败返回false
  *
- * @param $usrname
+ * @param $usrname|user
  * @return bool|\model\User
  */
-function login($usrname) {
-    $user = \model\User::find('username=?',$usrname);
-    if(!$user) {
-        return false;
+function login($user) {
+    if(!is_object($user)) {
+        $user = \model\User::find('username=?',$user);
+        if($user->empty) {
+            return false;
+        }
     }
-    \nb\Cookie::set('_user',$user->uid);
+    //生产一个登录token，存放数据库
+    //\nb\Cookie::set('_user',$user->uid);
+    $token = md5($user->id+'u'+time());
     //更新最后登录时间
     $data['lastlogin'] = time();
-    $rows =  \model\User::updateId($user->uid,$data);
-    return $rows?$user:false;
+    $data['token'] = $token;
+    $rows =  \model\User::updateId($user->id,$data);
+    return $rows?$token:false;
 }
 
 function logout() {
@@ -33,19 +38,19 @@ function logout() {
  * @param int $is_active
  * @return bool|\model\User
  */
-function register($user,$pass,$email,$group_type=2,$gid=3,$is_active=1) {
+function register($user,$pass,$email,$group_type=2,$gid=3,$is_active=1,$ip='127.0.0.1') {
     $salt = get_salt();
-    $conf = \model\Conf::init();
+    $conf = \model\System::init();
     $data = [
         'username' => strip_tags($user),
         'password' => password_dohash($pass,$salt),
         'salt' => $salt,
-        'email' => $email,//$this->input->post('email', true),
+        'mail' => $email,
         'credit' => $conf->credit_start,
-        'ip' => get_onlineip(),
-        'group_type' => $group_type,
+        'ip' => $ip,
+        //'group_type' => $group_type,
         'gid' => $gid,
-        'regtime' => $conf->timestamp,
+        'ct' => $conf->timestamp,
         'is_active' => $is_active
     ];
     $id = \model\User::insert($data);

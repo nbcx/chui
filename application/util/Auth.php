@@ -26,19 +26,19 @@ class Auth extends User {
     /**
      * @return $this
      */
-    public static function init_bak() {
+    public static function init() {
         if($user = Pool::get(get_class())) {
             return $user;
         }
-        $uid = \nb\Cookie::get('_user');//session('_user');
-        $user = $uid?self::findId($uid):new self();
+        $token = \nb\Cookie::get('_user');
+        $user = $token?self::find('token=?',$token):new self();
         return Pool::value(
             get_class(),
             $user
         );
     }
 
-    public static function init() {
+    public static function init_bak() {
         if($user = Pool::get(get_class())) {
             return $user;
         }

@@ -7,6 +7,7 @@
  */
 namespace service;
 
+use model\System;
 use util\Controller;
 use model\Conf;
 use model\Stats;
@@ -15,34 +16,38 @@ use util\Service;
 
 class Auth extends Service {
 
-    public function in() {
+    public function login() {
 
         //验证码
-        if(Auxiliary::captcha('login') === false) {
-            $this->fail = '验证码错误!';
-            return false;
-        }
+        //if(Auxiliary::captcha('login') === false) {
+        //    $this->msg = '验证码错误!';
+        //    return false;
+        //}
 
         list($username,$password) = $this->input(
-            'username',
+            'login',
             'password'
         );
 
         $user = \model\User::find('username=?',$username);
 
-        if (!$user) {
-            $this->fail = '用户名不存在!';
+        if ($user->empty) {
+            $this->msg = '用户名不存在!';
             return false;
         }
 
         $pass = password_dohash($password, $user->salt);
 
         if ($user['password'] != $pass) {
-            $this->fail = '密码错误!';
+            $this->msg = '密码错误!';
             return false;
         }
-        $user = login($username);
-
+        $token  = login($user);
+        if($token === false) {
+            $this->msg = '登录失败!';
+            return false;
+        }
+        $user['token'] = $token;
         $this->data = $user;
         return true;
     }
@@ -53,41 +58,40 @@ class Auth extends Service {
      * @param Controller $that
      */
     public function register() {
-        list($username,$password,$email) = $this->input(
+        list($username,$password,$mail) = $this->input(
             'username',
             'password',
-            'email'
+            'mail'
         );
 
         $user = \model\User::find(
-            'username=? or email=?',
-            [$username,$email]
+            'username=? or mail=?',
+            [$username,$mail]
         );
-        if($user) {
-            $this->fail = $user->username==$username?'用户名已经存在':'邮箱已经使用';
+
+        if($user->have) {
+            $this->msg = $user->username==$username?'用户名已经存在':'邮箱已经使用';
             return false;
         }
-        $user = register($username,$password,$email,2,3,1);
+
+        $user = register($username,$password,$mail,2,3,1);
 
         if(!$user) {
-            $this->fail = '当前注册人数太多，请稍后再注册！';
+            $this->msg = '当前注册人数太多，请稍后再注册！';
             return false;
         }
 
-        $conf = Conf::init();
+        $conf = System::init();
 
-        //发送注册邮件
+        //发送注册激活邮件邮件
         if ($conf->mail_reg == 'on') {
             $subject = '欢迎加入' . $conf->site_name;
             $message = '欢迎来到 ' . $conf->site_name . ' 论坛<br/>请妥善保管这封信件。您的帐户信息如下所示：<br/>----------------------------<br/>用户名：' . $username . '<br/>论坛链接: ' . site_url() . '<br/>----------------------------<br/><br/>感谢您的注册！<br/><br/>-- <br/>' . $conf->site_name;
-            sendmail($email, $subject, $message);
+            sendmail($mail, $subject, $message);
         }
 
         Stats::update(['value'=>$user->uid],'name=?','last_uid');
         Stats::update('value=value+1','name=?','total_users');
-
-        //注册成功后的插件点
-        $this->hook()->trigger($signal)->end($user);
 
         $this->success = $user;
         return true;
