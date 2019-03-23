@@ -42,7 +42,7 @@ class Config extends \sdk\Config {
     ];
 
     protected function _cookie() {
-        $ex = explode('.',\nb\Request::ins()->host);
+        $ex = explode('.',\nb\Request::driver()->host);
         $n = count($ex);
         $domain = $ex[$n-2].'.'.$ex[$n-1];
         return [

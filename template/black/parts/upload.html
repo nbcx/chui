@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="//cdn.{$conf.root}/webuploader/uploader.css">
+<link rel="stylesheet" type="text/css" href="//cdn.nb.cx/webuploader/uploader.css">
 <div id="uploader" class="wu-example">
     <div class="queueList">
         <div id="dndArea" class="placeholder">
@@ -32,10 +32,8 @@
         </tr>
     </volist>
 </table>
-<script type="text/javascript" src="//cdn.{$conf.root}/webuploader/webuploader.js"></script>
-<!--
-<script type="text/javascript" src="_theme_uploader.js"></script>
--->
+<script type="text/javascript" src="//cdn.nb.cx/webuploader/webuploader.js"></script>
+
 <style>
     #screenshot {
         position:absolute;
@@ -470,7 +468,6 @@
         });
         //collin add
         uploader.onUploadSuccess = function(file, response) {
-            console.log(response);
             uploader.removeFile(file);
             attaList.append('<tr>\n' +
                 ' <td><a class="screenshot" rel="'+response.url+'" title="'+response.title+'">'+response.title+'</a></td>\n' +

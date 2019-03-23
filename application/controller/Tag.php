@@ -8,12 +8,6 @@ class Tag extends Controller  {
     public function index($page = 1) {
         $rows = 30;
 
-        //分页
-        //$data['page'] = [
-        //    'rows'=>$rows,
-        //    'total'=>TopicDao::obj()->count_topics($node_id),
-        //];
-
         $data['title'] = "标签列表";
         $tags = \model\Tag::page($rows, $page);
         $data['num'] = $tags[0];
