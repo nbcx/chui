@@ -2,93 +2,9 @@
 <html lang="en">
 <head>
     <include file="header" />
+
     <style>
-        ol, ul {
-            list-style: none;
-        }
-        h4 {
-            font-size: 20px;
-        }
-        .section img {
-            width: 50px;
-            height: 50px;
-        }
-        .card-header {
-            padding: .75rem .25rem;
-        }
-    </style>
-    <style>
-        .node {
-            margin-bottom: .25rem;
-            border-top: 0;
-            box-shadow: 0 0 0;
-            border-color: #e5e6e9 #dfe0e4 #d0d1d5;
-        }
-        .node .card-header {
-            color: #777;
-            font-size: 14px;
-            background: #fafafa;
-            border-bottom-color: #eee;
-        }
-        .node .card-header a {
-            color: #404040;
-            font-size: 14px;
-        }
-        .node .card-body {
-            word-wrap: break-word;
-            word-break: normal;
-            padding: .25rem .5rem;
-        }
-        .node .card-header,
-        .node .card-footer {
-            padding: 3px 5px;
-        }
-        .node .list-group-item {
-            padding: .25rem 1.0rem;
-        }
-        .node p.text-muted,.node .text-right {
-            font-size: 14px;
-        }
-    </style>
-    <style>
-        .node .list-group-item {
-            padding: .25rem 1.0rem;
-        }
-        .list li {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
 
-        .list li:last-child {
-            border-bottom: none;
-        }
-
-        .topic-list-heading {
-            margin: 0 0 5px 0;
-        }
-
-        .topic-list-heading a {
-            font-size: 16px;
-            color: #444;
-        }
-
-        .topic-list li,
-        .reply-list li {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .topic-list li:last-child {
-            border-bottom: none;
-        }
-
-        .media {
-            margin-top: 10px;
-        }
-
-        .media-left {
-            margin-right: 10px;
-        }
     </style>
 </head>
 
@@ -118,54 +34,24 @@
         {$alert}
         <div>
             <!---->
-            <div class="node">
+            <div class="module node">
                 <h3 class="card-header">新帖导读
                     <span class='pull-right'>{$conf.system.site_name}</span>
                 </h3>
                 <div class="card-body">
-                    <style>
-                        .list-group {
-                            flex-direction: unset;
-                        }
-                        .list-group-flush:last-child  .list-group-item:last-child{
-                            border-top: 0;
-                            border-bottom: 1px solid rgba(0,0,0,.125);
-                        }
-                    </style>
                     <ul class="row list-group list-group-flush">
                         <volist name="new_topics" id="v">
                             <li class="col-md-6">
                                 <a href="{$v.url}" class="list-group-item">{$v.title|sb_substr=18}</a>
                             </li>
                         </volist>
-
-                        <!--
-                        <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>
-                        -->
                     </ul>
                 </div>
             </div>
 
             <!-- 手动调整0or1，后期完善-->
             <if condition="0">
-                <div class="node">
+                <div class="module node">
                     <h3 class="card-header">所有节点
                     </h3>
                     <div class="card-body">
@@ -189,10 +75,8 @@
                 </div>
                 <else />
                 <volist name="catelist" id="v">
-                    <div class="node">
-                        <h5 class="card-header">
-                            {$v.name}
-                        </h5>
+                    <div class="module node">
+                        <h5 class="card-header">{$v.name}</h5>
                         <div class="card-body">
                             <if condition="$v.child.have">
                                 <ul class="media-list list">
@@ -201,7 +85,6 @@
                                             <a class="media-left" href="{$c.url}">
                                                 <img class="img-rounded" src="{$c.ico}" alt="{$c.cname}" />
                                             </a>
-
                                             <div class="media-body">
                                                 <h4 class="media-heading">
                                                     <a href="{$c.url}">{$c.name}</a>
@@ -216,7 +99,7 @@
                                         </li>
                                     </volist>
                                 </ul>
-                                <else />
+                            <else />
                                 暂无节点
                             </if>
                         </div>
@@ -224,7 +107,7 @@
                 </volist>
             </if>
 
-            <div class="node">
+            <div class="module node">
                 <h3 class="card-header">热门话题
                 </h3>
                 <div class="card-body">

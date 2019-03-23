@@ -76,7 +76,6 @@ class Topic extends Controller  {
 
     public function add($nid=0) {
 
-        //$this->on($this->isPost)->post_add($nid);
         $this->middle($this->isPost,'add',function ($new_topic_id){
             $conf = Conf::init();
             //审核未开启时

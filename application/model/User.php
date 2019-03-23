@@ -1,14 +1,11 @@
 <?php
 namespace model;
 
-use sdk\Bar;
 use util\Auth;
 use nb\Collection;
 use nb\Model;
 
 class User extends Model {
-
-    use Bar;
 
     protected static function __config() {
         return ['user', 'id'];

@@ -2,16 +2,6 @@
 <html lang="en">
 <head>
     <include file="header" />
-    <style>
-        .card-header {
-            padding: .75rem 0rem;
-        }
-        .card-header.segmentation {
-            margin-left: -1.5rem;
-            margin-right: -1.5rem;
-            padding: .65rem 1.3rem;
-        }
-    </style>
 </head>
 
 <body >
@@ -20,21 +10,12 @@
     <include file="nav" />
 
     <main role="main" class="rounded inner cover">
-        <div class="">
-            <!--
-            <h3 class="card-header"><a href="/">帖子</a> &gt; <a href="{$topic.node.url}">{$topic.node.name}</a></h3>
-            -->
-            <style>
-                .card-header.topic-detail-heading {
-                    background: unset;
-                    color: #000;
-                }
-            </style>
+        <div class="module show">
             <div class="card-header topic-detail-heading">
                 <div class="pull-right">
-                        <span style="color: red">
-                            <i class="glyphicon glyphicon-fire"></i>
-                        </span>
+                    <span style="color: red">
+                        <i class="glyphicon glyphicon-fire"></i>
+                    </span>
                 </div>
                 <h2 class="cover-heading">{$topic.title}</h2>
                 <small class="text-muted">
@@ -44,47 +25,26 @@
                         <span>最后由 <a href="{$topic.ruser.url}">{$topic.ruser.username}</a> </span>&nbsp;•
                         <span>回复于 {$topic.lastdate}</span>&nbsp;•
                     </if>
-
                     <span>{$topic.views}次阅读</span>
-
-                    <!--<span>• <a href="javascript:void(0)" class="reply">回复</a></span>-->
                     <span class="pull-right ">
-                            <style>
-                                .vote, .vote:link, .vote:visited {
-                                    text-decoration: none;
-                                    font-size: 10px;
-                                    line-height: 1;
-                                    padding: 2px 8px 2px 8px;
-                                    border: 1px solid #e2e2e2;
-                                    border-radius: 3px;
-                                    color: #778;
-                                    display: inline-block;
-                                    vertical-align: baseline;
-                                    text-align: center;
-                                }
-                            </style>
-                        <!--
-                        <a href="javascript:" class="vote text-muted"><li class="fa fa-chevron-up"></li></a>
-                        <a href="javascript:" class="vote text-muted"><li class="fa fa-chevron-down"></li></a>
-                        <a href="javascript:" class="vote text-muted"><i class="fa fa-heart-o" aria-label="收藏本帖"></i> 11</a>
-                        -->
-                        <!--
-                        <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark-o"></i> {$topic.favorites}</a>
-                        -->
-                            <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark"></i> {$topic.favorites}</a>
-                        </span>
+                    <style>
+                        .vote, .vote:link, .vote:visited {
+                            text-decoration: none;
+                            font-size: 10px;
+                            line-height: 1;
+                            padding: 2px 8px 2px 8px;
+                            border: 1px solid #e2e2e2;
+                            border-radius: 3px;
+                            color: #778;
+                            display: inline-block;
+                            vertical-align: baseline;
+                            text-align: center;
+                        }
+                    </style>
+                    <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark"></i> {$topic.favorites}</a>
+                </span>
                 </small>
             </div>
-            <style>
-                .media.auth {
-                    margin-top: 10px;
-                    padding: 10px;
-                    background: #f2f2f2;
-                }
-                .media.auth img {
-                    max-width: 45px;
-                }
-            </style>
             <div class="media auth">
                 <img class="mr-3" src="{$topic.author.avatar}" alt="gravatar">
                 <div class="media-body">
@@ -101,13 +61,6 @@
                 </div>
             </div>
             <if condition="$topic.isAuthor">
-                <style>
-                    .card-footer {
-                        padding: .35rem .45rem;
-                        background-color: rgba(0,0,0,.03);
-                        border-top: none;
-                    }
-                </style>
                 <div class="card-footer opts mb-3" >
                     <a class="follow" href="{$topic.editUrl}"><i class="fa fa-edit"></i> 修改</a>
                     <a class="follow" href="javascript:if(confirm('确实要删除吗?'))location='{$topic.editUrl}'"><i class="fa fa-trash"></i> 删除</a>
