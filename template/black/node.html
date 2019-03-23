@@ -18,125 +18,40 @@
         }
     </style>
     <style>
-        @media (min-width: 900px){
-            .container {
-                max-width: 1000px;
-            }
-        }
-        @media (min-width: 1400px){
-            .container {
-                max-width: 1100px;
-            }
-        }
-        .container {
-            width: 100%;
-        }
-        .col-md-3.fluid {
-            padding-left: 0;
-        }
-        .col-md-2.fluid {
-            padding-right: 0;
-        }
-        .hide {
-            display: none !important;
-        }
-        .module {
-            margin-bottom: 1.25rem;
+        .node {
+            margin-bottom: .25rem;
             border-top: 0;
             box-shadow: 0 0 0;
             border-color: #e5e6e9 #dfe0e4 #d0d1d5;
         }
-        .module .card-header {
+        .node .card-header {
             color: #777;
             font-size: 14px;
             background: #fafafa;
             border-bottom-color: #eee;
         }
-        .module .card-header a {
+        .node .card-header a {
             color: #404040;
             font-size: 14px;
         }
-        .module .card-body {
+        .node .card-body {
             word-wrap: break-word;
             word-break: normal;
-            padding: 10px 15px;
+            padding: .25rem .5rem;
         }
-        .module .card-header,
-        .module .card-footer {
-            padding: 6px 15px;
+        .node .card-header,
+        .node .card-footer {
+            padding: 3px 5px;
         }
-        .module .card-footer {
-            border-top-color: #eee;
-            background: #fff;
-        }
-        .module .card-header-tabs {
-            margin-bottom: -.4rem;
-            margin-left: .0rem;
-        }
-        .module .nav-link {
-            padding: .3rem 1rem;
-        }
-
-        .module .list-group-item {
+        .node .list-group-item {
             padding: .25rem 1.0rem;
         }
-        .nobody {
-            border: none;
-        }
-        img.captcha {
-            cursor: pointer;
-        }
-
-        .textarea {
-            line-height: 1.7;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 100%;
-            padding: 10px 15px;
-            border: 1px solid #c6c8ce;
-            width: 100%;
-            -webkit-appearance: none;
-            background: #fff;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            -moz-background-clip: padding;
-            -webkit-background-clip: padding-box;
-            background-clip: padding-box;
-            -webkit-box-shadow: 0 0 8px rgba(182, 195, 214, .6) inset, 0 1px 1px #fff;
-            -moz-box-shadow: 0 0 8px rgba(182, 195, 214, .6) inset, 0 1px 1px #fff;
-            box-shadow: 0 0 8px rgba(182, 195, 214, .6) inset, 0 1px 1px #fff;
-            -webkit-transition-duration: 300ms;
-            -moz-transition-duration: 300ms;
-            -o-transition-duration: 300ms;
-            -ms-transition-duration: 300ms;
-            transition-duration: 300ms;
-            -webkit-transition-easing: ease-in-out;
-            -moz-transition-easing: ease-in-out;
-            -o-transition-easing: ease-in-out;
-            -ms-transition-easing: ease-in-out;
-            transition-easing: ease-in-out;
-            -webkit-transition-property: border-color, -webkit-box-shadow;
-            -webkit-transition-property: border-color, box-shadow;
-            -moz-transition-property: border-color, -moz-box-shadow;
-            -moz-transition-property: border-color, box-shadow;
-            -o-transition-property: border-color, box-shadow;
-            -ms-transition-property: border-color, box-shadow;
-            transition-property: border-color, box-shadow;
-
-            overflow: auto;
-            word-break: break-all;
-            height: 120px;
-            color: #000;
-            font-size: 1em;
-            resize: vertical;
-        }
-        .bd-navbar {
-            line-height: 1;
-            padding: 0.3rem 1rem;
+        .node p.text-muted,.node .text-right {
+            font-size: 14px;
         }
     </style>
     <style>
-        .module .list-group-item {
+        .node .list-group-item {
             padding: .25rem 1.0rem;
         }
         .list li {
@@ -203,7 +118,7 @@
         {$alert}
         <div>
             <!---->
-            <div class="module">
+            <div class="node">
                 <h3 class="card-header">新帖导读
                     <span class='pull-right'>{$conf.system.site_name}</span>
                 </h3>
@@ -250,7 +165,7 @@
 
             <!-- 手动调整0or1，后期完善-->
             <if condition="0">
-                <div class="">
+                <div class="node">
                     <h3 class="card-header">所有节点
                     </h3>
                     <div class="card-body">
@@ -274,7 +189,7 @@
                 </div>
                 <else />
                 <volist name="catelist" id="v">
-                    <div class="">
+                    <div class="node">
                         <h5 class="card-header">
                             {$v.name}
                         </h5>
@@ -309,7 +224,7 @@
                 </volist>
             </if>
 
-            <div class="">
+            <div class="node">
                 <h3 class="card-header">热门话题
                 </h3>
                 <div class="card-body">

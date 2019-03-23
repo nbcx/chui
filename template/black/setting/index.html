@@ -15,6 +15,68 @@
         <div >
             <h3 class="card-header">个人设置</h3>
             <div class="card-body">
+                <form>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-7">
+                            <input type="email" class="form-control form-control-sm" id="inputEmail3" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control form-control-sm" id="inputPassword3" placeholder="Password">
+                        </div>
+                    </div>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        First radio
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                    <label class="form-check-label" for="gridRadios2">
+                                        Second radio
+                                    </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                                    <label class="form-check-label" for="gridRadios3">
+                                        Third disabled radio
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Checkbox</div>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                <label class="form-check-label" for="gridCheck1">
+                                    Example checkbox
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div >
+            <h3 class="card-header">个人设置</h3>
+            <div class="card-body">
                 <form method="post" action="{$action}">
                     <div class="form-group">
                         <label>所在地</label>
@@ -88,26 +150,26 @@
                     <form enctype="multipart/form-data" method="post">
                         <fieldset>
                             <div class="form-group">
-                                <label class="col-md-2 control-label">当前头像</label>
-                                <div class="col-md-8">
-                                    <img class="large_avatar" src="http://gravatar.ol.cx/121232123212321" class="img-rounded">&nbsp;
-                                    <img class="middle_avatar" src="http://gravatar.ol.cx/121232123212321" class="img-rounded">&nbsp;
+                                <label class="control-label">当前头像</label>
+                                <div>
+                                    <img class="large_avatar" src="{$auth.avatarBig}" class="img-rounded">&nbsp;
+                                    <img class="middle_avatar" src="{$auth.avatar}" class="img-rounded">&nbsp;
                                     <img class="small_avatar" src="{$auth.avatarSmall}" class="img-rounded">
-                                    <div class="alert alert-info alert-avatar">
+                                    <div class="alert alert-info alert-avatar mt-2">
                                         <strong>注意</strong> 支持 512k 以内的 PNG / GIF / JPG 图片文件作为头像，推荐使用正方形的图片以获得最佳效果。
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-6 control-label" >选择上传头像</label>
-                                <div class="col-md-6">
+                                <label class=" control-label" >选择上传头像</label>
+                                <div class="">
                                     <input type="file" class="form-control-file" name="upfile">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-6">
+                                <div class="">
                                     <button type="submit" class="btn btn-primary">提交新头像</button>
                                 </div>
                             </div>
