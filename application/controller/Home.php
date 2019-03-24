@@ -40,6 +40,40 @@ class Home extends Controller {
         $this->display('index');
     }
 
+
+    public function recent() {
+        $home_page_num = 20;//($this->set->home_page_num) ? $this->set->home_page_num : 20;
+
+        //获取列表
+        list($total,$topics) = \model\Topic::page($home_page_num,$page); //TopicDao::obj()->get_topics_list_nopage($this->home_page_num);
+
+        $data['total'] = $total;
+        $data['topics'] = $topics;
+        $data['page'] = $page;
+        $data['size'] = $home_page_num;
+
+        //置顶帖子
+        $data['top'] = \model\Topic::rank(5);
+
+        //节点
+        $data['catelist'] = \model\Node::pid();// NodeDao::obj()->get_all_cates();
+
+        //统计
+        $data['stats'] = Stats::kv();
+
+        //links
+        //$data['links'] = Link::all();
+
+        //action
+        $data['action'] = 'home';
+
+        //最新会员列表
+        $data['new_users'] = \model\User::rank(15);
+
+        $this->assign($data);
+        $this->display('recent');
+    }
+
     public function search($page = 1) {
         $keyword = $this->input->post('keyword', true);
         $data['title'] = urldecode($keyword) . '搜索结果';

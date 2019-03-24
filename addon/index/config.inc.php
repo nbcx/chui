@@ -25,8 +25,8 @@ return [
         'close'=>false,//是否关闭默认路由，true 是，false 不关闭
         'match'=>[
             'jsp'=>[
-                'url'=>'/good.jsp',
-                'action'=>'test/jsp'
+                'url'=>'/',
+                'action'=>'action/index'
             ],
             'user2'=>[
                 'url'=>'/usr/[id:alpha].htm',

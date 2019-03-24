@@ -18,7 +18,7 @@ class Login extends Controller {
         else {
             $action = $this->safe('/login/post?action=login');
         }
-        $this->assign('captcha',\sdk\Captcha::url());
+        //$this->assign('captcha',\sdk\Captcha::url());
         $this->assign('action',$action);
         $this->display('login');
     }

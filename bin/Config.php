@@ -14,7 +14,7 @@ class Config extends \nb\Config {
         'include'=>__APP__.'bin'.DS
     ];
 
-    public $folder_module = 'plugin';
+    public $folder_module = 'addon';
 
     public $module_register = [
         'links', 'thirds','index'

@@ -5,7 +5,7 @@
  * QQ: 1169986
  * Date: 2018/4/18 下午2:02
  */
-namespace plugin\index\controller;
+namespace addon\index\controller;
 
 use util\Controller;
 

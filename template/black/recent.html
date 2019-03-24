@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+    <style>
+        .list li {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .list li:last-child {
+            border-bottom: none;
+        }
+
+        .topic-list-heading {
+            margin: 0 0 5px 0;
+        }
+
+        .topic-list-heading a {
+            font-size: 16px;
+            color: #444;
+        }
+
+        .topic-list li,
+        .reply-list li {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .topic-list li:last-child {
+            border-bottom: none;
+        }
+
+        .media {
+            margin-top: 10px;
+        }
+
+        .media-left {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body >
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <include file="nav" />
+
+    <main role="main" class="rounded inner cover">
+        <h2 class="cover-heading">
+            社区
+            <div class="pull-right small">
+                <a href="/tag" style="font-size: 12px;line-height: 46px;">
+                    话题广场
+                </a> .
+                <if condition="$auth.islogin">
+                    <a href="/posted" style="font-size: 12px;line-height: 46px;">
+                        发帖
+                    </a>
+                <else />
+                    <a href="/login"  style="font-size: 12px;line-height: 46px;">
+                        登录
+                    </a> .
+                    <a href="/register" style="font-size: 12px;line-height: 46px;">
+                        注册
+                    </a>
+                </if>
+            </div>
+        </h2>
+        <p class="lead"></p>
+        <div class="module node" >
+            <ul class="media-list topic-list">
+                <volist name="topics" id="v">
+                <li class="media">
+                    <a class="media-left" href="{$v.author.url}">
+                        <img class="img-rounded medium" src="{$v.author.avatar}" alt="{$v.author.username} medium avatar" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading topic-list-heading">
+                            <a href="{$v.url}">{$v.title}</a>
+                            <if condition="$v.is_top">
+                                <span class="badge badge-info">置顶</span>
+                            </if>
+                        </h4>
+                        <p class="text-muted">
+                            <span><a href="{$v.node.url}">{$v.node.cname}</a></span>&nbsp;•&nbsp;
+                            <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
+                            <span>{$v.utFmt}</span>&nbsp;•&nbsp;
+                            <if condition="$v.ruid">
+                                <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                <else />
+                                <span>暂无回复</span>
+                            </if>
+                        </p>
+                    </div>
+                    <div class="media-right">
+                            <span class="badge badge-info topic-comment">
+                                <a href="{$v.replyUrl}">{$v.comments}</a>
+                            </span>
+                    </div>
+                </li>
+            </volist>
+                <volist name="topics" id="v">
+                    <li class="media">
+                        <a class="media-left" href="{$v.author.url}">
+                            <img class="img-rounded medium" src="{$v.author.avatar}" alt="{$v.author.username} medium avatar" />
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading topic-list-heading">
+                                <a href="{$v.url}">{$v.title}</a>
+                                <if condition="$v.is_top">
+                                    <span class="badge badge-info">置顶</span>
+                                </if>
+                            </h4>
+                            <p class="text-muted">
+                                <span><a href="{$v.node.url}">{$v.node.cname}</a></span>&nbsp;•&nbsp;
+                                <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
+                                <span>{$v.utFmt}</span>&nbsp;•&nbsp;
+                                <if condition="$v.ruid">
+                                    <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                    <else />
+                                    <span>暂无回复</span>
+                                </if>
+                            </p>
+                        </div>
+                        <div class="media-right">
+                            <span class="badge badge-info topic-comment">
+                                <a href="{$v.replyUrl}">{$v.comments}</a>
+                            </span>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination ">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">上一页</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">下一页</a>
+                </li>
+            </ul>
+        </nav>
+    </main>
+    <include file="footer" />
+</div>
+
+</body>
+</html>
+
