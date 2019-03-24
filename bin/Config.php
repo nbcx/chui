@@ -5,7 +5,7 @@ use model\System;
 /**
  * 系统框架配置
  */
-class Config extends \sdk\Config {
+class Config extends \nb\Config {
 
     public $register    = 'util\\Framework';
 
@@ -14,20 +14,10 @@ class Config extends \sdk\Config {
         'include'=>__APP__.'bin'.DS
     ];
 
-    public $path_autoext = [
-        'chui.nb.cx'=>'nb',
-        'nb.cx'=>'nb',
-        'www.nb.cx'=>'nb',
-        'wiki.nb.cx'=>'nb',
-        'chui.ol.cx'=>'ol',
-        'ol.cx'=>'ol',
-        'wiki.ol.cx'=>'ol',
-    ];
-
     public $folder_module = 'plugin';
 
     public $module_register = [
-        'doc', 'links', 'thirds','index'
+        'links', 'thirds','index'
     ];
 
     //给bind模块配置独立使用域名
@@ -35,10 +25,6 @@ class Config extends \sdk\Config {
         'ol.cx'=>'index',
         'nb.cx'=>'index',
         'www.nb.cx'=>'index',
-        'wiki.ol.cx'=>'doc',
-        'wiki.nb.cx'=>'doc',
-        'sblog.nb.cx'=>'sblog',
-        's.ol.cx'=>'sblog'
     ];
 
     protected function _cookie() {
