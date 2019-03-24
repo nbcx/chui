@@ -114,8 +114,8 @@
                             <h1>NB Framework.</h1>
                             <p>一款深度兼容Swoole和FPM双模式运行，并且轻量，全功能，自由度高，无上手门槛的PHP开发框架！</p>
                             <p>
-                                <a class="btn btn-lg btn-primary" href="#" role="button">Github</a>
                                 <a class="btn btn-lg btn-primary" href="#" role="button">Gitee</a>
+                                <a class="btn btn-lg btn-info" href="#" role="button">Document</a>
                             </p>
                         </div>
                     </div>
@@ -227,6 +227,63 @@
                         网站（英文：Website）是指在互联网上，根据一定的规则，使用HTML等工具制作的用于展示特定内容的相关网页的集合。简……
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="module">
+            <h3 class="card-header">新会员</h3>
+            <style>
+                .module .rank {
+                    padding: 0 0 0 1px;
+                }
+                .rank dl {
+                    position: relative;
+                    min-height: 100px;
+                    overflow: hidden;
+                    margin-left: 0px;
+                }
+                .rank dd {
+                    position: relative;
+                    width: 60px;
+                    height: 60px;
+                    margin: 10px 9px 5px 0;
+                    display: inline-block;
+                    *display: inline;
+                    *zoom: 1;
+                    vertical-align: top;
+                    font-size: 12px;
+                }
+                .rank dd a img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 2px;
+                }
+                .rank dd a cite {
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0;
+                    width: 100%;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    background-color: rgba(0,0,0,.2);
+                    color: #fff;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            </style>
+            <div class="card-body rank">
+                <dl>
+                    <volist name="new_users" id="v">
+                        <dd>
+                            <a href="{$v.url}"><img src="{$v.avatar}">
+                                <cite>{$v.username}</cite>
+                                <!--<i>99次回答</i>-->
+                            </a>
+                        </dd>
+                    </volist>
+                </dl>
             </div>
         </div>
     </main>

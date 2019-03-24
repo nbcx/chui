@@ -9,48 +9,50 @@
         </div>
         <div class="card-body">
             <div class="">
-                    <volist name="comments" id="v">
-                        <if condition="$v.type">
-                            <div class="item event">
-                                <a href="#">
-                                    <img class="media-object avatar-16" src="{$v.user.avatar}">
-                                    {$v.user.username}
-                                </a>
-                                <span>关闭了讨论</span>
-                                <span class="text-muted ml-2">{$v.date}</span>
-                            </div>
-                            <elseif condition="$v.status" />
-                            <div class="item del">
-                                <p class="text-muted"><del>{$v.floor}楼 已删除</del></p>
-                            </div>
-                        <else />
-                            <div class="item">
-                                <div class="head media">
-                                    <a href="#"><img class="mr-2 rounded" src="{$v.user.avatar}" alt="gravatar"></a>
-                                    <div class="media-body">
-                                        <div class="mt-0">
-                                            <h5 class="mt-0">
-                                                <a href="{$v.user.url}">{$v.user.username} </a>
-                                                <!--<span class="badge badge-danger">VIP3</span>-->
-                                                <span class="pull-right text-muted">#{$v.floor}</span>
-                                            </h5>
-                                        </div>
-                                        <div class="additional">{$v.date}</div>
+                <volist name="comments" id="v">
+                    <if condition="$v.type">
+                        <div class="item event">
+                            <a href="#">
+                                <img class="media-object avatar-16" src="{$v.user.avatar}">
+                                {$v.user.username}
+                            </a>
+                            <span>关闭了讨论</span>
+                            <span class="text-muted ml-2">{$v.date}</span>
+                        </div>
+                        <elseif condition="$v.status" />
+                        <div class="item del">
+                            <p class="text-muted"><del>{$v.floor}楼 已删除</del></p>
+                        </div>
+                    <else />
+                        <div class="item">
+                            <div class="head media">
+                                <a href="#"><img class="mr-2 rounded" src="{$v.user.avatar}" alt="gravatar"></a>
+                                <div class="media-body">
+                                    <div class="mt-0">
+                                        <h5 class="mt-0">
+                                            <a href="{$v.user.url}">{$v.user.username} </a>
+                                            <!--<span class="badge badge-danger">VIP3</span>-->
+                                            <span class="pull-right text-muted">#{$v.floor}</span>
+                                        </h5>
                                     </div>
-                                </div>
-                                <div class="detail">
-                                    {$v.content}
-                                </div>
-                                <div class="option">
-                                    <a href="#"><small class="text-muted"><i class="fa fa-heart"></i></small></a>
-                                    <a href="#"><small class="text-muted"><i class="fa fa-reply"></i> 回复</small></a>
-                                    <a href="{$v.delPost}"><small class="text-muted"><i class="fa fa-trash"></i> 删除</small></a>
+                                    <div class="additional">{$v.date}</div>
                                 </div>
                             </div>
-                        </if>
-                    </volist>
-                </div>
+                            <div class="detail">
+                                {$v.content}
+                            </div>
+                            <div class="option">
+                                <a href="#"><small class="text-muted"><i class="fa fa-heart"></i></small></a>
+                                <a href="#"><small class="text-muted"><i class="fa fa-reply"></i> 回复</small></a>
+                                <a href="{$v.delPost}"><small class="text-muted"><i class="fa fa-trash"></i> 删除</small></a>
+                            </div>
+                        </div>
+                    </if>
+                </volist>
+            </div>
         </div>
+    <else />
+        <hr />
     </if>
     <div id="reply">
         <if condition="$auth.islogin">
@@ -58,7 +60,7 @@
                 <textarea class="textarea" name="comment" placeholder="来说几句吧......"></textarea>
                 <p class="text-muted">
                     <a class="text-muted" href="{$topic.commentUrl}"> 使用高级回复</a>
-                    <button type="submit" class="btn btn-info pull-right btn-sm" > 评 论 </button>
+                    <button type="submit" class="btn btn-info pull-right btn-sm" > 提交评论 </button>
                 </p>
             </form>
         <else />

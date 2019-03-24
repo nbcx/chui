@@ -27,12 +27,12 @@ class Topic extends Service {
     }
 
     private function add() {
-        $nid = $this->input('nid');
+        $nid = $this->input('nid')?:0;
 
-        if (!Auth::init()->user_permit($nid)) {//权限
-            $this->fail = '您无权在此节点发表话题!请重新选择节点';
-            return false;
-        }
+        //if (!Auth::init()->user_permit($nid)) {//权限
+        //    $this->fail = '您无权在此节点发表话题!请重新选择节点';
+        //    return false;
+        //}
 
         $user = Auth::init();
         $sys = System::init();
@@ -106,9 +106,9 @@ class Topic extends Service {
             return true;
         }
         catch (\Exception $e) {
-            ed($e);
             \model\Topic::dao()->rollback();
             $this->msg = '系统错误';
+            ed($e);
             return false;
         }
     }

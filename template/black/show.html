@@ -21,28 +21,28 @@
                 <small class="text-muted">
                     <span>于 <a href="{$topic.node.url}">{$topic.node.name}</a></span>&nbsp;板块 •&nbsp;
                     <span>{$topic.date}</span>&nbsp;•&nbsp;
-                    <if condition="$topic.ruser">
-                        <span>最后由 <a href="{$topic.ruser.url}">{$topic.ruser.username}</a> </span>&nbsp;
-                        <span>回复于 {$topic.lastdate}</span>&nbsp;•
-                    </if>
-                    <span>{$topic.views}次阅读</span>
-                    <span class="pull-right ">
-                    <style>
-                        .vote, .vote:link, .vote:visited {
-                            text-decoration: none;
-                            font-size: 10px;
-                            line-height: 1;
-                            padding: 2px 8px 2px 8px;
-                            border: 1px solid #e2e2e2;
-                            border-radius: 3px;
-                            color: #778;
-                            display: inline-block;
-                            vertical-align: baseline;
-                            text-align: center;
-                        }
-                    </style>
-                    <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark"></i> {$topic.favorites}</a>
-                </span>
+                        <if condition="$topic.ruser">
+                            <span>最后由 <a href="{$topic.ruser.url}">{$topic.ruser.username}</a> </span>&nbsp;
+                            <span>回复于 {$topic.lastdate}</span>&nbsp;•
+                        </if>
+                        <span>{$topic.views}次阅读</span>
+                        <span class="pull-right ">
+                        <style>
+                            .vote, .vote:link, .vote:visited {
+                                text-decoration: none;
+                                font-size: 10px;
+                                line-height: 1;
+                                padding: 2px 8px 2px 8px;
+                                border: 1px solid #e2e2e2;
+                                border-radius: 3px;
+                                color: #778;
+                                display: inline-block;
+                                vertical-align: baseline;
+                                text-align: center;
+                            }
+                        </style>
+                        <a href="javascript:" class="vote text-muted"><i class="fa fa-bookmark"></i> {$topic.favorites}</a>
+                    </span>
                 </small>
             </div>
             <div class="media auth">
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <if condition="$topic.isAuthor">
-                <div class="card-footer opts mb-3" >
+                <div class="card-footer opts mb-1 mt-2" >
                     <a class="follow" href="{$topic.editUrl}"><i class="fa fa-edit"></i> 修改</a>
                     <a class="follow" href="javascript:if(confirm('确实要删除吗?'))location='{$topic.editUrl}'"><i class="fa fa-trash"></i> 删除</a>
                     <if condition="$topic.isTop">
@@ -72,7 +72,6 @@
                 </div>
             </if>
         </div><!-- /.panel content -->
-
         <include file="comment" />
     </main>
     <include file="footer" />

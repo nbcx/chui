@@ -20,7 +20,7 @@
     <main role="main" class="rounded inner cover">
         <h3 class="cover-heading">发表帖子</h3>
         <p class="lead"></p>
-        <div>
+        <div class="write">
             <form name="topic" class="form" action="{$action}"  method="post" novalidate="novalidate" onkeydown="if(event.keyCode==13)return false;">
                 <div class="">
                     <div class="card-header">
@@ -62,7 +62,7 @@
                 <div>
                     <textarea id="content" name="content" placeholder="文章内容">{$topic.content}</textarea>
                 </div>
-
+                <p class="tips text-muted">支持markdown语法！<a href="#">格式参考</a></p>
             </form>
         </div>
     </main>

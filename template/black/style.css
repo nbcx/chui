@@ -432,4 +432,22 @@ h4 {
 .module.topic .topic-img {
     max-width: 200px;
 }
+/** write */
+.write .card-header {
+    padding: .45rem 1.25rem;
+}
+.write .card-header-tabs {
+    margin-right: -.625rem;
+    margin-bottom: -.45rem;
+    margin-left: -.625rem;
+    border-bottom: 0;
+}
+.write .nav-link {
+    padding: .3rem 1rem;
+}
+.write .tips {
+    margin-top: 3px;
+    margin-left: 2px;
+    font-size: 14px;
+}
 
