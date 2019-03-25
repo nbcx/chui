@@ -25,16 +25,15 @@ class Administrator extends Base {
     protected $config;
 
     public function __before(){
-
         //在模版里读取配置
         $data['conf'] = Config::$o;
 
         $this->security = new Security();
 
         $this->view->config([
-            'view_suffix' => 'php',
-            'layout_on'   => true,
-            'layout_name' => 'application@layout',
+            'view_suffix' => 'html',
+            /*'layout_on'   => true,
+            'layout_name' => 'application@layout',*/
         ]);
 
         //初始化权限模块
@@ -42,7 +41,7 @@ class Administrator extends Base {
 
         /** 检查登陆 */
         if(!$auth->islogin) {
-            quit('pleash welcome in login!');
+            quit('please welcome in login!');
             show_message('请登陆后访问！', '/login');
         }
         if (!$auth->isadmin) {

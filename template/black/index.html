@@ -2,48 +2,10 @@
 <html lang="en">
 <head>
     <include file="header" />
-    <style>
-        .list li {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .list li:last-child {
-            border-bottom: none;
-        }
-
-        .topic-list-heading {
-            margin: 0 0 5px 0;
-        }
-
-        .topic-list-heading a {
-            font-size: 16px;
-            color: #444;
-        }
-
-        .topic-list li,
-        .reply-list li {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .topic-list li:last-child {
-            border-bottom: none;
-        }
-
-        .media {
-            margin-top: 10px;
-        }
-
-        .media-left {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 
-<body >
-
-<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+<body>
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     <include file="nav" />
 
     <main role="main" class="rounded inner cover">
@@ -98,7 +60,6 @@
                     line-height: 1.4;
                 }
             }
-
         </style>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -169,7 +130,7 @@
                             <p class="text-muted">
                                 <span><a href="{$v.node.url}">{$v.node.cname}</a></span>&nbsp;•&nbsp;
                                 <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
-                                <span>{$v.utFmt}</span>&nbsp;•&nbsp;
+                                <span>{$v.date}</span>&nbsp;•&nbsp;
                                 <if condition="$v.ruid">
                                     <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
                                     <else />
@@ -289,7 +250,6 @@
     </main>
     <include file="footer" />
 </div>
-
 </body>
 </html>
 

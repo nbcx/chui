@@ -12,9 +12,7 @@
     <main role="main" class="rounded inner cover">
         <h2 class="cover-heading">请登录</h2>
         <p class="lead"></p>
-        {$alert}
         <div id="content" >
-
             <form action="{$action}" method="post">
                 <div class="form-group">
                     <label>用户名</label>
@@ -23,16 +21,6 @@
                 <div class="form-group">
                     <label>密码</label>
                     <input type="password" name="password" class="form-control" placeholder="密码">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <label>验证码</label>
-                        <input type="text" name="captcha" class="form-control" check="captcha" placeholder="输入验证码" autocomplete="off">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <img src="{$captcha}" border="0" />
                 </div>
                 <button type="submit" class="btn btn-primary"> 登 入 </button>
                 <button type="submit" class="btn">忘记密码</button>

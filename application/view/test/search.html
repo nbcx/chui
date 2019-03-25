@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <include file="header" />
+</head>
+
+<body>
+
+<include file="nav" />
+<div class="alert alert-full alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+<div class="container">
+    <div class="col-12">
+        <h3 class="page-header">功能权限列表</h3>
+        <div class="tool">
+            <a class="btn btn-success" href="/permission/add"><span class="glyphicon glyphicon-plus"></span> 添加</a>
+            <button confirm="确定删除吗？" type="submit" class="btn btn-danger del"><span class="glyphicon glyphicon-trash"></span> 删除</button>
+
+            <div class="pull-right">
+                <div class="form-inline">
+                    <button data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" type="button" class="btn btn-primary">显示搜索 <span class="caret"></span></button>
+                </div>
+            </div>
+            <div id="collapseExample" class="collapse panel panel-default" style="margin-top: 10px">
+                <div class="panel-body">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="exampleInputName2">Name</label>
+                            <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+                        </div>
+                        <button type="submit" class="btn btn-default">Send invitation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <table class="table" data-toggle="table" data-classes="table table-striped table-no-bordered" data-pagination="true">
+            <thead>
+                <tr>
+                    <th width="10"><input data-index="1" name="btSelectItem" type="checkbox"></th>
+                    <th>名称</th>
+                    <th>规则</th>
+                    <th>状态</th>
+                    <th>模块</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="permissions" id="v">
+                <tr>
+                    <td><input data-index="1" name="btSelectItem" type="checkbox"></td>
+                    <td>{$v.title}</td>
+                    <td>{$v.name}</td>
+                    <td>Item 1</td>
+                    <td>default</td>
+                    <td class="text-right">
+                        <a href="javascript:;" class="btn btn-xs btn-primary btn-dragsort" data-toggle="tooltip" title="" data-table-id="table" data-field-index="11" data-row-index="0" data-button-index="0" data-original-title="拖动进行排序"><span class="glyphicon glyphicon-glass"></span></a>
+                        <a href="/admin/edit?id={$v.id}" class="btn btn-xs btn-primary btn-dragsort"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="/admin/post?action=del&id={$v.id}" confirm="确定删除该用户吗？" class="btn btn-danger btn-xs btn-dragsort"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+
+    </div>
+
+</div> <!-- /container -->
+
+
+<include file="footer" />
+<script>
+    $(document).keydown(function(event){
+        if(event.keyCode==13){
+            $("#btn-search").click();
+            return false;
+        }
+    });
+    //checkbox全选/取消全选
+    $('.checkall').click(function() {
+        $("tbody input:checkbox").prop("checked",this.checked);
+    })
+    $('.del').click(function() {
+        $("tbody input:checkbox").prop("checked",this.checked);
+    })
+    $('#btn-search').click(function () {
+        var search = $('#search').val();
+        if(search) {
+            search = "?search="+search;
+        }
+        window.location.href="/supplier"+search;
+    });
+</script>
+<if condition="$num gt 10">
+    <script type="text/javascript" src="_pub_jq-paginator.min.js"></script>
+    <script>
+        $('#page').jqPaginator({
+            totalCounts: {$num},
+            pageSize:10,
+            visiblePages: 8,
+            currentPage: {$start},
+            first:'',last:'',
+            prev:'<li><a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>',
+            next:'<li><a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>',
+            page:' <li><a href="javascript:void(0)">{{page}}</a></li>',
+            onPageChange: function (num, type) {
+                if(type == 'init') {
+                    return;
+                }
+                num = 'start='+num;
+                var search = $('#search').val();
+                if(search) {
+                    num += '&search='+search
+                }
+                window.location.href="/supplier?"+num;
+            }
+        });
+    </script>
+</if>
+</body>
+</html>

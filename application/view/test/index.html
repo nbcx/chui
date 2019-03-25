@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <include file="header" />
+</head>
+
+<body>
+
+<include file="nav" />
+<div class="alert alert-full alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+<div class="container">
+    <div class="col-12">
+        <h3 class="page-header">基本设置</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <form method="post" action="/supplier/post?action=add">
+                    <div class="form-group">
+                        <label>站点名称</label>
+                        <input name="name" type="text" class="form-control" placeholder="公司名称">
+                    </div>
+
+                    <div class="form-group">
+                        <label>站点介绍</label>
+                        <textarea name="superiority" class="form-control" rows="3"></textarea>
+                        <p class="help-block">注：支持 HTML 标签，换行请使用 &gt;br&gt;</p>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label>站点访问限制</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                Option one is this and that&mdash;be sure to include why it's great
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                Option two can be something else and selecting it will deselect option one
+                            </label>
+                        </div>
+                        <div class="radio disabled">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+                                Option three is disabled
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>站点访问限制</label><br/>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 站点关闭
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 管理员可读写
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 管理员可读写
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>开启用户注册</label><br/>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"value="option1"> 是
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" value="option2"> 否
+                        </label>
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label>联系</label>
+                            <input name="linkman" type="text" class="form-control" placeholder="联系人">
+                        </div>
+                        <div class="col-md-5">
+                            <label>&nbsp;</label>
+                            <input name="phone" type="text" class="form-control" placeholder="联系电话">
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label>商家地址</label>
+                        <input name="address" type="text" class="form-control" placeholder="商家地址">
+                    </div>
+
+                    <hr />
+
+
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+            <div class="col-md-4 left-tips">
+                <h3>公司经纬度</h3>
+                <p>公司经纬度可以根据已经填写的地址自动从百度地图获取，如果获取不到，可能是地址没有被百度收录或填写错误。</p>
+                <p>此时可以先检查地址是否填写错误，如果无误，可以手动到下面网站获取：<a target="_blank" href="http://www.gpsspg.com/maps.htm">经纬度</a> </p>
+            </div>
+        </div>
+
+    </div>
+</div> <!-- /container -->
+
+<include file="footer" />
+
+</body>
+</html>
