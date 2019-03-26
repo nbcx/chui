@@ -241,7 +241,7 @@ class Plugin extends Model {
      * 插件自定义设置接口地址
      */
     public function _configUrl() {
-        $conf = __APP__.'addon/'.$this->folder.'/conf/'.'config.php';
+        $conf = __APP__.'addon/'.$this->folder.'/conf/'.'config.html';
         if(is_file($conf)) {
             return '/admin/plugin/configure?id='.$this->folder;
         }
