@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <include file="header" />
+</head>
+
+<body>
+
+<include file="nav" />
+
+<div class="container">
+    <div class="col-12">
+        <h2 class="page-header">插件管理</h2>
+
+        <h4 class="text-center text-muted">启用的插件</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>描述</th>
+                    <th>版本</th>
+                    <th>作者</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="text-center">无启用插件</td>
+                </tr>
+                <volist name="enables" id="v">
+                    <tr>
+                        <td>{$v.info.name}</td>
+                        <td>{$v.info.description}</td>
+                        <td>{$v.info.version}</td>
+                        <td><a target="_blank" href="{$v.info.link}">{$v.info.author}</a></td>
+                        <td>
+                            <if condition="$v.configUrl">
+                                <a href="{$v.configUrl}">设置</a> •
+                            </if>
+                            <if condition="$v.overall">
+                                <a href="{$v.userUrl}">用户</a> •
+                            </if>
+                            <a href="{$v.deactivateUrl}">禁用</a>
+                            <!--
+                            <a href="#" title="Edit this user" class="tooltip table_icon"><img src="_pub_img/icons/actions_small/Pencil.png" alt="" /></a>
+                            <a href="#" title="Preferences" class="tooltip table_icon"><img src="_pub_img/icons/actions_small/Preferences.png" alt="" /></a>
+                            <a href="#" title="Delete this user" class="tooltip table_icon"><img src="_pub_img/icons/actions_small/Trash.png" alt="" /></a>
+                            -->
+                        </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+        <!--
+        <a href="presentation.html" class="button_link" >Back to index</a>
+        -->
+        <h4 class="text-center text-muted">禁用的插件</h4>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>描述</th>
+                <th>版本</th>
+                <th>作者</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="unenables" id="v">
+                <tr>
+                    <td>{$v.info.name}</td>
+                    <td>{$v.info.description}</td>
+                    <td>{$v.info.version}</td>
+                    <td><a target="_blank" href="{$v.info.link}">{$v.info.author}</a></td>
+                    <td>
+                        <if condition="$v.isInstall">
+                            <if condition="$v.uninstallConf">
+                                <a href="{$v.uninstallUrl}">卸载</a>
+                            <else />
+                                <a href="{$v.uninstallUrl}">卸载</a>
+                            </if>
+                            <if condition="$v.configUrl">
+                                <a href="{$v.configUrl}">设置</a>
+                            </if>
+                            <a href="{$v.activateUrl}">启用</a>
+                        <else />
+                            <a href="{$v.del}">删除</a>
+                            <if condition="$v.installConf">
+                                <a href="{$v.installUrl}" title="插件安装:{$v.info.name}">安装</a>
+                                <a href="{$v.installActivateUrl}">安装并启用</a>
+                                <else />
+                                <a href="{$v.installUrl}">安装</a>
+                                <a href="{$v.installActivateUrl}">安装并启用</a>
+                            </if>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+
+
+<include file="footer" />
+
+</body>
+</html>
+
+

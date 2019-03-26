@@ -57,7 +57,7 @@ class Plugin extends Model {
         $db = self::dao(false)->field('handle');
 
         //$uid = $auth->id;
-        if($auth->id) { //$auth instanceof Auth &&
+        if($auth->id) {
             $db->left('user_plugin up','up.pname=p.folder');
             $db->where('((up.uid=? and up.activate=1) or p.overall=1) and p.activate=1',$auth->id);
         }
@@ -140,7 +140,7 @@ class Plugin extends Model {
         $install = self::dao(false)->kv('folder,*');
 
         //所有主题
-        $plugin = glob(__APP__.'plugin/*/');
+        $plugin = glob(__APP__.'addon/*/');
 
         $activate = [];//已经激活
         $unactivate = [];//未激活
@@ -172,7 +172,7 @@ class Plugin extends Model {
      * @return Collection
      */
     public function _info() {
-        $json = __APP__.'plugin/'.$this->folder.'/'.'config.json';
+        $json = __APP__.'addon/'.$this->folder.'/'.'config.json';
         $info = [];
         if(is_file($json)) {
             $info = file_get_contents($json);
@@ -186,7 +186,7 @@ class Plugin extends Model {
      * @return bool
      */
     public function _isHave() {
-        $json = __APP__.'plugin/'.$this->folder.'/'.'config.json';
+        $json = __APP__.'addon/'.$this->folder.'/'.'config.json';
         if(is_file($json)) {
             return true;
         }
@@ -218,7 +218,7 @@ class Plugin extends Model {
      * @return null|string
      */
     public function _installConf() {
-        $install = __APP__.'plugin/'.$this->folder.'/conf/'.'install.php';
+        $install = __APP__.'addon/'.$this->folder.'/conf/'.'install.php';
         if(is_file($install)) {
             return $install;
         }
@@ -230,7 +230,7 @@ class Plugin extends Model {
      * @return null|string
      */
     public function _uninstallConf() {
-        $uninstall = __APP__.'plugin/'.$this->folder.'/conf/'.'uninstall.php';
+        $uninstall = __APP__.'addon/'.$this->folder.'/conf/'.'uninstall.php';
         if(is_file($uninstall)) {
             return $uninstall;
         }
@@ -241,9 +241,9 @@ class Plugin extends Model {
      * 插件自定义设置接口地址
      */
     public function _configUrl() {
-        $conf = __APP__.'plugin/'.$this->folder.'/conf/'.'config.php';
+        $conf = __APP__.'addon/'.$this->folder.'/conf/'.'config.php';
         if(is_file($conf)) {
-            return '/admin/plugin/config?id='.$this->folder;
+            return '/admin/plugin/configure?id='.$this->folder;
         }
         return false;
     }
@@ -261,7 +261,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _uninstallUrl() {
-        return '/admin/plugin/uninstall?id='.$this->folder;
+        return '/admin/addon/uninstall?id='.$this->folder;
     }
 
     /**
@@ -269,7 +269,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _activateUrl() {
-        return '/admin/plugin/activate?id='.$this->folder;
+        return '/admin/addon/activate?id='.$this->folder;
     }
 
     /**
@@ -277,7 +277,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _installActivateUrl() {
-        return '/admin/plugin/activate?id='.$this->folder;
+        return '/admin/addon/activate?id='.$this->folder;
     }
 
     /**
@@ -285,7 +285,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _deactivateUrl() {
-        return '/admin/plugin/deactivate?id='.$this->folder;
+        return '/admin/addon/deactivate?id='.$this->folder;
     }
 
     /**
@@ -293,7 +293,7 @@ class Plugin extends Model {
      */
     public function _userUrl() {
         if($this->overall) {
-            return '/admin/plugin/user?id='.$this->folder;
+            return '/admin/addon/user?id='.$this->folder;
         }
         return '#';
     }

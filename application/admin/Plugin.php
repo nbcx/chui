@@ -9,11 +9,7 @@
 namespace controller\admin;
 
 use util\Administrator;
-use model\User;
 use model\UserPlugin;
-use nb\Cookie;
-use nb\Dispatcher;
-use plugins\hello\Hello;
 use util\Notice;
 
 class Plugin extends Administrator {
@@ -28,18 +24,18 @@ class Plugin extends Administrator {
         $this->display();
     }
 
-    public function config($id) {
-        $this->_no_pjax_redirect();
+    public function configure($id) {
+        //$this->_no_pjax_redirect();
 
         $plugin = \model\Plugin::id($id);
 
 
-        $this->layout('plugin/config');
+        //$this->layout('plugin/config');
 
         $this->assign('title',$plugin->info['name']);
         $this->assign('plugin',$plugin);
 
-        $tpl = __APP__ . "plugin/{$id}/conf/config";
+        $tpl = __APP__ . "addon/{$id}/conf/config";
 
         $this->display($tpl);
     }

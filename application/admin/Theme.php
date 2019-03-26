@@ -28,7 +28,7 @@ class Theme extends Administrator {
         $this->display();
     }
 
-    public function config($theme=null) {
+    public function configure($theme=null) {
         $theme = $theme?:Conf::init()->themes;
 
         $this->_no_pjax_redirect();

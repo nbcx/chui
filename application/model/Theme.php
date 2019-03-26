@@ -32,7 +32,7 @@ class Theme extends Model {
     }
 
     public static function all() {
-        $use = Conf::init()->themes;
+        $use = System::init()->themes;
         //已经安装过的主题
         $install = self::dao(false)->kv('folder,config');
 
