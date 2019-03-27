@@ -13,11 +13,10 @@ use \nb\event\Framework as Frame;
 
 class Framework extends Frame {
 
-    public function redirect() {
+    public function request() {
         $auth = Auth::init();
 
         $handle = Plugin::handle($auth);
-
         //加载插件
         Hook::init($handle);
     }

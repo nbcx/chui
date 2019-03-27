@@ -17,7 +17,7 @@ class Config extends \nb\Config {
     public $folder_module = 'addon';
 
     public $module_register = [
-        'links', 'thirds','index'
+        'links', 'captcha','index'
     ];
 
     //给bind模块配置独立使用域名

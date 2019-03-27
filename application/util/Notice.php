@@ -6,7 +6,7 @@
  */
 namespace util;
 
-use nb\driver\Cookie;
+use nb\Cookie;
 use nb\Pool;
 
 class Notice {

@@ -1,5 +1,5 @@
 <?php
-namespace plugin\simplemde;
+namespace addon\captcha;
 
 use util\IPlugin;
 
@@ -14,11 +14,13 @@ class Hook extends IPlugin {
      * @throws \Exception
      */
     public function install($form=[]) {
-        $this->pos('controller\Upload')->before = ['addon\simplemde\Editor','before'];
-        $this->pos('themes/add.htm')->richEditor = ['addon\simplemde\Editor','render'];
-        $this->pos('controller\Comment')->insert = ['addon\simplemde\Editor','insert'];
+        $this->pos('themes/login.html')->form = ['addon\captcha\Hook','show'];
         $this->conf($form);
-        return '恭喜了，你的百度编辑器插件安装成功了！';
+        return '恭喜了，图形验证码插件安装成功了！';
+    }
+
+    public function show($id=0) {
+        return '<img src="/captcha/action/show"/>';
     }
 
     /**

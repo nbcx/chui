@@ -2,6 +2,7 @@
 namespace addon\captcha;
 
 use nb\Config;
+use nb\Cookie;
 use nb\Session;
 
 class Captcha {
@@ -87,14 +88,7 @@ class Captcha {
         return isset($this->config[$name]);
     }
 
-    /**
-     * 输出验证码并把验证码的值保存的session中
-     * 验证码保存到session的格式为： array('verify_code' => '验证码值', 'verify_time' => '验证码创建时间');
-     * @access public
-     * @param string $id 要生成验证码的标识
-     * @return \nb\Response
-     */
-    public function show($id = 0, $appid = 0) {
+    public function create($id = 0, $appid = 0) {
         // 图片宽(px)
         $this->imageW || $this->imageW = $this->length * $this->fontSize * 1.5 + $this->length * $this->fontSize / 2;
         // 图片高(px)
@@ -157,7 +151,18 @@ class Captcha {
 
         // 保存验证码
         $key =$this->getSaveKey();// $this->authcode($this->seKey);
-        Captcha::save($key,$code,$appid,$id);
+        $this->save($key,$code,$appid,$id);
+    }
+
+    /**
+     * 输出验证码并把验证码的值保存的session中
+     * 验证码保存到session的格式为： array('verify_code' => '验证码值', 'verify_time' => '验证码创建时间');
+     * @access public
+     * @param string $id 要生成验证码的标识
+     * @return \nb\Response
+     */
+    public function show($id = 0, $appid = 0) {
+        $this->create($id,$appid);
 
         header('Pragma: public');
         header('Expires: 0');
@@ -171,9 +176,20 @@ class Captcha {
         imagedestroy($this->im);
     }
 
+    public function base64($id = 0, $appid = 0) {
+        $this->create($id,$appid);
+        ob_start();
+        // 输出图像
+        imagepng($this->im);
+        $content = ob_get_clean();
+        $img_src = "data:image/png;base64," . base64_encode($content);
+        imagedestroy($this->im);
+        return $img_src;
+    }
+
     //返回用于存储验证码的会话变量名。
     protected function getSaveKey() {
-        if($cookey = Captcha::cookey()) {
+        if($cookey = Cookie::get('_captcha')) {
             return $cookey;
         }
         return md5(rand(10000,99999).time());
@@ -310,6 +326,13 @@ class Captcha {
         $bgImage = @imagecreatefromjpeg($gb);
         @imagecopyresampled($this->im, $bgImage, 0, 0, 0, 0, $this->imageW, $this->imageH, $width, $height);
         @imagedestroy($bgImage);
+    }
+
+    public function save($key,$code,$appid=0,$id=0) {
+        b('save-$key',$key);
+        return Cookie::set('_captcha',$key);
+        $key = "captcha:{$appid}:{$id}:{$key}";
+        return Redis::set($key,$code);
     }
 
 }

@@ -7,19 +7,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace service;
-use util\Service;
+namespace addon\captcha\controller;
+use addon\captcha\Captcha;
 
 /**
- * Plugin
+ * Action
  *
- * @package service
+ * @package addon\captcha
  * @link https://nb.cx
  * @author: collin <collin@nb.cx>
- * @date: 2019/3/26
+ * @date: 2019/3/27
  */
-class Plugin extends Service {
+class Action {
 
-
+    public function show() {
+        $captcha = new Captcha();
+        $captcha->show();
+    }
 
 }

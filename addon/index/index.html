@@ -1,144 +1,347 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="description" content="nb,nb framework,nbcx,nullbb">
-    <meta name="author" content="collin,nb,nbcx">
-    <meta name="generator" content="nb v1.0.0">
+    <meta name="author" content="">
 
-    <meta name="theme-color" content="#343a40">
-    <title>NB Framework · PHP 开发框架。</title>
-
-    <link rel="icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/favicon.png" sizes="180x180">
+    <title>{$title}</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.nb.cx/bootstrap/4.0.0/css/bootstrap.min.css">
-
-    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="//cdn.nb.cx/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.nb.cx/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="//cdn.nb.cx/highlightjs/9.14.0/styles/default.min.css">
+    <link href="//cdn.nb.cx/css/markdown.css" rel="stylesheet">
+    <link href="_theme_style.css?v={:time()}" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- markdown -->
     <style>
-        /* Links */
-        a,
-        a:focus,
-        a:hover {
-            color: #fff;
-        }
-        /* Custom default button */
-        .btn-secondary,
-        .btn-secondary:hover,
-        .btn-secondary:focus {
-            color: #333;
-            text-shadow: none; /* Prevent inheritance from `body` */
-            background-color: #fff;
-            border: .05rem solid #fff;
-        }
-        html,
-        body {
-            height: 100%;
-            background-color: #333;
-        }
-        body {
-            display: -ms-flexbox;
-            display: -webkit-box;
-            display: flex;
-            -ms-flex-pack: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            color: #fff;
-            text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-            box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-        }
-
-        .cover-container {
-            max-width: 42em;
-        }
-        .masthead {
-            margin-bottom: 2rem;
-        }
-        .masthead-brand {
-            margin-bottom: 0;
-        }
-        .nav-masthead .nav-link {
-            padding: .25rem 0;
-            font-weight: 700;
-            color: rgba(255, 255, 255, .5);
-            background-color: transparent;
-            border-bottom: .25rem solid transparent;
-        }
-        .nav-masthead .nav-link:hover,
-        .nav-masthead .nav-link:focus {
-            border-bottom-color: rgba(255, 255, 255, .25);
-        }
-        .nav-masthead .nav-link + .nav-link {
-            margin-left: 1rem;
-        }
-        .nav-masthead .active {
-            color: #fff;
-            border-bottom-color: #fff;
-        }
-        @media (min-width: 48em) {
-            .masthead-brand {
-                float: left;
-            }
-            .nav-masthead {
-                float: right;
-            }
-        }
-        .cover {
-            padding: 0 1.5rem;
-        }
-        .cover .btn-lg {
-            padding: .75rem 1.25rem;
-            font-weight: 700;
-        }
-        .mastfoot {
-            color: rgba(255, 255, 255, .5);
+        .lead {
+            border-top: 1px solid #d1d5da;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            width: 100%;
         }
     </style>
 </head>
 
-<body class="text-center">
-
+<body>
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
+    <header class="masthead ">
         <div class="inner">
             <h3 class="masthead-brand">NBCX</h3>
             <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">主页</a>
-                <a class="nav-link" href="//wiki.{$conf.root}">开发文档</a>
-                <!--
-                <a class="nav-link" href="//chui.{$conf.root}">社区</a>
-                -->
+                <a class="nav-link active" href="//chui.ol.cx">主页</a><!---->
+                <a class="nav-link" href="//chui.ol.cx/home/recent">社区</a>
+                <a class="nav-link" href="//wiki.nb.cx">文档</a>
+                <a class="nav-link" href="{$auth.url}">个人中心</a>
             </nav>
         </div>
     </header>
 
-    <main role="main" class="inner cover">
-        <h1 class="cover-heading">NB Framework.</h1>
-        <p class="lead">
-            一款深度兼容Swoole和FPM双模式运行，并且轻量，全功能，自由度高，无上手门槛的PHP开发框架！
-        </p>
-        <p class="lead">
-            <a href="https://wiki.nb.cx" class="btn btn-lg btn-secondary">了解更多</a>
-        </p>
-    </main>
+    <main role="main" class="rounded inner cover">
+        <h3 class="cover-heading">
+            主页
+            <if condition="$auth.islogin">
+                <a href="/posted" class="pull-right small" style="font-size: 12px;line-height: 46px;">
+                    发帖
+                </a>
+                <else />
+                <div class="pull-right small">
+                    <a href="/login"  style="font-size: 12px;line-height: 46px;">
+                        登录
+                    </a> .
+                    <a href="/register" style="font-size: 12px;line-height: 46px;">
+                        注册
+                    </a>
+                </div>
+            </if>
+        </h3>
+        <p class="lead"></p>
 
-    <footer class="mastfoot mt-auto">
+        <style>
+            /* Carousel base class */
+            .carousel {
+                margin-bottom: 1.5rem;
+            }
+            /* Since positioning the image, we need to help out the caption */
+            .carousel-caption {
+                bottom: 3rem;
+                z-index: 10;
+            }
+
+            /* Declare heights because of positioning of img element */
+            .carousel-item {
+                height: 20rem;
+                background-color: #777;
+            }
+            .carousel-item > img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                min-width: 100%;
+                height: 32rem;
+            }
+
+            @media (min-width: 40em) {
+                /* Bump up size of carousel content */
+                .carousel-caption p {
+                    margin-bottom: 1.25rem;
+                    font-size: 1.25rem;
+                    line-height: 1.4;
+                }
+            }
+        </style>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+                    <div class="container">
+                        <div class="carousel-caption text-left">
+                            <h1>NB Framework.</h1>
+                            <p>一款深度兼容Swoole和FPM双模式运行，并且轻量，全功能，自由度高，无上手门槛的PHP开发框架！</p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#" role="button">Gitee</a>
+                                <a class="btn btn-lg btn-info" href="#" role="button">Document</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>网盘盒子</h1>
+                            <p>网盘盒子是基于阿里云的OSS服务提供的API，开发的一个网盘客户端。</p>
+                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Github</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+                    <div class="container">
+                        <div class="carousel-caption text-right">
+                            <h1>Start.</h1>
+                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                            <p><a class="btn btn-lg btn-primary" href="#" role="button">请期待吧</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div class="module node" >
+            <h5 class="card-header">最新主题</h5>
+            <ul class="media-list topic-list">
+                <volist name="topics" id="v">
+                    <li class="media">
+                        <a class="media-left" href="{$v.author.url}">
+                            <img class="img-rounded medium" src="{$v.author.avatar}" alt="{$v.author.username} medium avatar" />
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading topic-list-heading">
+                                <a href="{$v.url}">{$v.title}</a>
+                                <if condition="$v.is_top">
+                                    <span class="badge badge-info">置顶</span>
+                                </if>
+                            </h4>
+                            <p class="text-muted">
+                                <span><a href="{$v.node.url}">{$v.node.cname}</a></span>&nbsp;•&nbsp;
+                                <span><a href="{$v.author.url}">{$v.author.username}</a></span>&nbsp;•&nbsp;
+                                <span>{$v.date}</span>&nbsp;•&nbsp;
+                                <if condition="$v.ruid">
+                                    <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
+                                    <else />
+                                    <span>暂无回复</span>
+                                </if>
+                            </p>
+                        </div>
+                        <div class="media-right">
+                            <span class="badge badge-info topic-comment">
+                                <a href="{$v.replyUrl}">{$v.comments}</a>
+                            </span>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+
+        <div class="module node">
+            <h5 class="card-header">热门话题</h5>
+            <div class="row">
+                <div class="col-6 tags">
+                    <div class="media">
+                        <img class="align-self-start mr-3" src="https://cdn.94cb.com/upload/tag/middle/207.png" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <h4 class="mt-0">PHP</h4>
+                            <p class="text-muted">9240个主题	     54人收藏</p>
+                        </div>
+                    </div>
+                    <div class="intro">
+                        最流行的Web开发语言，跨平台，高撸棒性。
+                    </div>
+                </div>
+                <div class="col-6 tags">
+                    <div class="media">
+                        <img class="align-self-start mr-3" src="https://cdn.94cb.com/upload/tag/middle/607.png" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <h4 class="mt-0">Android</h4>
+                            <p class="text-muted">9240个主题	     54人收藏</p>
+                        </div>
+                    </div>
+                    <div class="intro">
+                        网站（英文：Website）是指在互联网上，根据一定的规则，使用HTML等工具制作的用于展示特定内容的相关网页的集合。简……
+                    </div>
+                </div>
+
+                <div class="col-6 tags">
+                    <div class="media">
+                        <img class="align-self-start mr-3" src="https://cdn.94cb.com/upload/tag/middle/607.png" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <h4 class="mt-0">建议</h4>
+                            <p class="text-muted">9240个主题	     54人收藏</p>
+                        </div>
+                    </div>
+                    <div class="intro">
+                        网站（英文：Website）是指在互联网上，根据一定的规则，使用HTML等工具制作的用于展示特定内容的相关网页的集合。简……
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="module">
+            <h3 class="card-header">新会员</h3>
+            <style>
+                .module .rank {
+                    padding: 0 0 0 1px;
+                }
+                .rank dl {
+                    position: relative;
+                    min-height: 100px;
+                    overflow: hidden;
+                    margin-left: 0px;
+                }
+                .rank dd {
+                    position: relative;
+                    width: 60px;
+                    height: 60px;
+                    margin: 10px 9px 5px 0;
+                    display: inline-block;
+                    *display: inline;
+                    *zoom: 1;
+                    vertical-align: top;
+                    font-size: 12px;
+                }
+                .rank dd a img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 2px;
+                }
+                .rank dd a cite {
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0;
+                    width: 100%;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    background-color: rgba(0,0,0,.2);
+                    color: #fff;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            </style>
+            <div class="card-body rank">
+                <dl>
+                    <volist name="new_users" id="v">
+                        <dd>
+                            <a href="{$v.url}"><img src="{$v.avatar}">
+                                <cite>{$v.username}</cite>
+                                <!--<i>99次回答</i>-->
+                            </a>
+                        </dd>
+                    </volist>
+                </dl>
+            </div>
+        </div>
+    </main>
+    <footer class="mastfoot mt-3 mb-3 text-center">
         <div class="inner">
-            <p><a href="#">NB Framework</a> is power by <a href="#">Collin</a>.</p>
+            <p><a href="#">Chui</a> is power by <a target="_blank" href="https://github.com/nbcx">NB Framework</a>.</p>
         </div>
     </footer>
+    <div class="itop"></div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.nb.cx/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    <script src="//cdn.nb.cx/highlightjs/9.14.0/highlight.min.js"></script>
+    <script src="//cdn.nb.cx/marked/0.6.0/marked.min.js"></script>
+    <style>
+        .itop {
+            position: fixed;
+            right: 10px;
+            bottom: 40px;
+            display: none;
+            margin-bottom: 5px;
+            width: 40px;
+            height: 36px;
+            border-radius: 2px;
+            background: url(//cdn.nb.cx/img/backtop.png) 8px 6px no-repeat;
+            background-color: #444;
+            background-color: rgba(0,0,0,.6);
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,.2);
+        }
+    </style>
+    <script type="text/javascript" >
+        $(document).ready(function(){
+            /* 回到顶部 */
+            $(function(){
+
+                $(window).bind("scroll", backToTopFun);
+
+                $(".itop").click(function() {
+                    $("html, body").animate({ scrollTop: 0 }, 300);
+                    return false;
+                });
+                backToTopFun();
+            });
+            function backToTopFun() {
+                var st = $(document).scrollTop(), winh = $(window).height(),backToTopEle = $('.itop');
+                (st > 120)? backToTopEle.show(): backToTopEle.hide();
+                //IE6下的定位
+                if (!window.XMLHttpRequest) {
+                    backToTopEle.css("top", st + winh - 166);
+                }
+            };
+        });
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e93c594fee892cb970231370d6af5dc5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </div>
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?e93c594fee892cb970231370d6af5dc5";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
 </body>
 </html>
+

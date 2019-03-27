@@ -186,7 +186,7 @@ class Plugin extends Model {
      * @return bool
      */
     public function _isHave() {
-        $json = __APP__.'addon/'.$this->folder.'/'.'config.json';
+        $json = __APP__.'addon/'.$this->folder.'/config.json';
         if(is_file($json)) {
             return true;
         }
@@ -261,7 +261,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _uninstallUrl() {
-        return '/admin/addon/uninstall?id='.$this->folder;
+        return '/admin/plugin/uninstall?id='.$this->folder;
     }
 
     /**
@@ -269,7 +269,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _activateUrl() {
-        return '/admin/addon/activate?id='.$this->folder;
+        return '/admin/plugin/post?action=activate&id='.$this->folder;
     }
 
     /**
@@ -277,7 +277,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _installActivateUrl() {
-        return '/admin/addon/activate?id='.$this->folder;
+        return '/admin/plugin/post?action=activate&id='.$this->folder;
     }
 
     /**
@@ -285,7 +285,7 @@ class Plugin extends Model {
      * @return string
      */
     public function _deactivateUrl() {
-        return '/admin/addon/deactivate?id='.$this->folder;
+        return '/admin/plugin/post?action=deactivate&id='.$this->folder;
     }
 
     /**
@@ -293,7 +293,7 @@ class Plugin extends Model {
      */
     public function _userUrl() {
         if($this->overall) {
-            return '/admin/addon/user?id='.$this->folder;
+            return '/admin/plugin/user?id='.$this->folder;
         }
         return '#';
     }
