@@ -20,7 +20,7 @@ class Hook extends IPlugin {
     }
 
     public function show($id=0) {
-        return '<img src="/captcha/action/show"/>';
+        include __APP__.'addon/captcha/html/login.html';
     }
 
     /**
