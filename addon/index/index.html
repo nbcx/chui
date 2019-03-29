@@ -23,9 +23,8 @@
         }
     </style>
 </head>
-
 <body>
-<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     <header class="masthead ">
         <div class="inner">
             <h3 class="masthead-brand">NBCX</h3>
@@ -163,7 +162,7 @@
                                 <span>{$v.date}</span>&nbsp;•&nbsp;
                                 <if condition="$v.ruid">
                                     <span>最后回复来自 <a href="{$v.ruser.url}">{$v.ruser.username}</a></span>
-                                    <else />
+                                <else />
                                     <span>暂无回复</span>
                                 </if>
                             </p>
