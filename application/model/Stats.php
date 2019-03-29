@@ -25,6 +25,10 @@ class Stats extends Model {
         return self::dao()->kv('name,value',$condition,$params);
     }
 
+    public static function test() {
+        return 'hello';
+    }
+
 
     /**
      *

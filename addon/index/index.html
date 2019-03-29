@@ -266,14 +266,15 @@
             </style>
             <div class="card-body rank">
                 <dl>
-                    <volist name="new_users" id="v">
-                        <dd>
-                            <a href="{$v.url}"><img src="{$v.avatar}">
-                                <cite>{$v.username}</cite>
-                                <!--<i>99次回答</i>-->
-                            </a>
-                        </dd>
-                    </volist>
+                    <model name="User" func="page" args="10,1">
+                        <volist name="data" id="v">
+                            <dd>
+                                <a href="{$v.url}"><img src="{$v.avatar}">
+                                    <cite>{$v.username}</cite>
+                                </a>
+                            </dd>
+                        </volist>
+                    </model>
                 </dl>
             </div>
         </div>
@@ -342,4 +343,6 @@
 </div>
 </body>
 </html>
+
+
 

@@ -34,9 +34,31 @@ class Label extends Driver {
         'comments'     => ['attr' => 'do,num,page,sort,return,tid', 'close' => 1],
         'comment'      => ['attr' => 'do,num,page,sort,return,tid', 'close' => 1],
 
-        //业务标签
         'navigation'   => ['attr' => 'name,type', 'close' => 1],
+
+        'model'   => ['attr' => 'name,type', 'close' => 1],
     ];
+
+    /**
+     * 执行Model方法
+     * @param $tag
+     *     name Model名字
+     *     func Model方法
+     *     args Model方法参数
+     *     return 接受返回值的变量名字
+     * @param $content
+     * @return string
+     */
+    public function tagModel($tag, $content) {
+        $name = isset($tag['name'])?$tag['name']:trigger_error('model must have attr name');
+        $func = isset($tag['func'])?$tag['func']:trigger_error('model must have attr func');
+        $args = isset($tag['args'])?$tag['args']:'';
+        $return = isset($tag['return'])?$tag['return']:'data';
+        $method = "\\model\\{$name}::{$func}({$args})";
+        $parse = '<?php $'.$return.' = '.$method."; ?>\n";
+        $parse .= $content;
+        return $parse;
+    }
 
 
     public function tagTopic($tag, $content) {
