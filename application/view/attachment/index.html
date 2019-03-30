@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <include file="header" />
+</head>
+
+<body>
+
+<include file="nav" />
+
+<div class="container">
+    <div class="col-12">
+        <h2 class="page-header">附件管理</h2>
+
+        <div class="tool">
+            <a class="btn btn-success" href="/supplier/add"><span class="glyphicon glyphicon-plus"></span> 添加</a>
+            <button confirm="确定删除吗？" type="submit" class="btn btn-danger del"><span class="glyphicon glyphicon-trash"></span> 删除</button>
+
+            <div class="pull-right">
+                <div class="form-inline">
+                    <div class="form-group" style="">
+                        <input id="search" type="text" class="form-control" placeholder="公司名称" value="{$search}">
+                    </div>
+                    <button id="btn-search" type="button" class="btn btn-primary">搜索</button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>选择</th>
+                <th>ID</th>
+                <th>文件名</th>
+                <th>上传者</th>
+                <th>类型</th>
+                <th>所属</th>
+                <th>上传日期</th>
+            </tr>
+            </thead>
+            <tbody>
+                <volist name="attachs" id="v">
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>{$v.topic_id}</td>
+                        <td>{$v.node.cname}</td>
+                        <td>{$v.title}</td>
+                        <td>{$v.author.username}</td>
+                        <td>{$v.comments}</td>
+                        <td>{$v.date}</td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+        <!--page -->
+        <a href="presentation.html" class="btn btn-default" >回收站</a>
+        <div id='page' class="page"></div>
+
+    </div>
+</div> <!-- /container -->
+
+
+<include file="footer" />
+
+</body>
+</html>
+
+
+
+
+
+

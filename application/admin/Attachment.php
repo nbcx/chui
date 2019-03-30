@@ -9,13 +9,14 @@
 namespace controller\admin;
 
 
+use model\Attach;
 use util\Administrator;
 
 class Attachment extends Administrator {
 
     public function index() {
         $data['title'] = '管理后台';
-
+        $this->assign('attachs',Attach::fetchs());
         $this->display();
     }
 

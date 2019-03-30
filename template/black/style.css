@@ -396,7 +396,6 @@ h4 {
 .module.node .media {
     margin-top: 10px;
 }
-
 .module.node .media-left {
     margin-right: 10px;
 }
@@ -429,11 +428,18 @@ h4 {
     font-size: 12px;
     color: #9e9e9e;
 }
-/** module topic */
-.module.topic .media {
-    margin-bottom: 20px;
-}
 
+
+/** module topic */
+.module.topic .media.no-tags {
+    margin-bottom: 15px;
+}
+.module.topic hr.no-tags {
+    margin-top: -10px;
+}
+.module.topic .media-left.has-tags {
+     margin-top: 4px;
+ }
 .module.topic .intro {
     font-size: 14px;
     margin-bottom: 10px;

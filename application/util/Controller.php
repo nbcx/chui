@@ -115,7 +115,7 @@ class Controller extends Base {
         $file = theme_file_exist('tips.html');
 
         //显示默认错误模版
-        $file = $file?:__APP__ . 'application/view/tips.php';
+        $file = $file?:__APP__ . 'application/view/tips.html';
 
         //渲染模版
         $this->assign('status',$status);
