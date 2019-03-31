@@ -15,7 +15,6 @@ class Register extends Controller {
         $this->assignSafe('action','/register/post');
         $this->assignSafe('unique','/register/unique');
 
-        $this->assign('captcha',\sdk\Captcha::url());
         //显示注册界面
         $this->display('register');
     }

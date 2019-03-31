@@ -9,7 +9,7 @@ namespace controller;
 
 use util\Controller;
 
-class Mail extends Controller {
+class Action extends Controller {
 
     public function code() {
         $this->middle(true,'code',function($msg) {

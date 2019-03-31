@@ -46,10 +46,20 @@
                 </small>
             </div>
             <div class="media auth">
-                <img class="mr-3" src="{$topic.author.avatar}" alt="gravatar">
+                <style>
+                    .auth .detail {
+                        font-size: 14px;
+                        margin-top: 6px;
+                        color: #FF7200;
+                    }
+                    .auth .detail span {
+                        padding-right: 10px;
+                    }
+                </style>
+                <img class="mr-3 rounded" src="{$topic.author.avatar}" alt="gravatar">
                 <div class="media-body">
                     <h5 class="mt-0">{$topic.author.username} <span class="badge badge-primary">vip</span></h5>
-                    悬赏：80飞吻
+                    <p class="detail"><span>主题数: {$topic.author.topics}</span> <span>回帖数: {$topic.author.replies} </span>  </p>
                 </div>
             </div>
             <div class="card-body markdown-body">

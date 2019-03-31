@@ -6,7 +6,7 @@ use util\Auth;
 use nb\Middle;
 use util\Auxiliary;
 
-class Mail extends Service  {
+class MailService extends Service  {
 
     protected $subject = [
         'update'=>'修改安全邮箱',
