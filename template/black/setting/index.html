@@ -10,7 +10,9 @@
     <include file="nav" />
 
     <main role="main" class="rounded inner cover">
-        <h2 class="cover-heading">设置</h2>
+        <h2 class="cover-heading">
+            设置
+        </h2>
         <p class="lead"></p>
         <div class="module">
             <h3 class="card-header">个人设置</h3>
@@ -147,34 +149,23 @@
             <h3 class="card-header">头像上传</h3>
             <div class="card-body">
                 <div class="setting">
-                    <form enctype="multipart/form-data" method="post">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="control-label">当前头像</label>
-                                <div>
-                                    <img class="large_avatar rounded" src="{$auth.avatarBig}" class="img-rounded">&nbsp;
-                                    <img class="middle_avatar rounded" src="{$auth.avatar}" class="img-rounded">&nbsp;
-                                    <img class="small_avatar rounded" src="{$auth.avatarSmall}" class="img-rounded">
-                                    <div class="alert alert-info alert-avatar mt-2">
-                                        <strong>注意</strong> 支持 512k 以内的 PNG / GIF / JPG 图片文件作为头像，推荐使用正方形的图片以获得最佳效果。
-                                    </div>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="control-label">当前头像</label>
+                            <div>
+                                <img class="large_avatar rounded" src="{$auth.avatarBig}" class="img-rounded">&nbsp;
+                                <img class="middle_avatar rounded" src="{$auth.avatar}" class="img-rounded">&nbsp;
+                                <img class="small_avatar rounded" src="{$auth.avatarSmall}" class="img-rounded">
+                                <div >
+                                    <a href="/setting/avatar">上传新头像</a>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label class=" control-label" >选择上传头像</label>
-                                <div class="">
-                                    <input type="file" class="form-control-file" name="upfile">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="">
-                                    <button type="submit" class="btn btn-primary">提交新头像</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                        <hr />
+                        <p class="text-muted">NBCX 禁止使用任何低俗或者敏感图片作为头像</p>
+                        <p class="text-muted">如果你是男的，请不要用女人的照片作为头像，这样可能会对其他会员产生误导</p>
+                        <p class="text-muted">建议请尽量不要使用真人头像，即使是自己的照片，使用别人的照片则是坚决被禁止的行为</p>
+                    </fieldset>
                 </div>
             </div>
         </div>

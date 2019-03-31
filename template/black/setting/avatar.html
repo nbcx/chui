@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <include file="header" />
+</head>
+
+<body >
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <include file="nav" />
+
+    <main role="main" class="rounded inner cover">
+        <h3 class="cover-heading">设置 <span style="font-size: 12px">< 设置 </span></h3>
+        <p class="lead"></p>
+
+        <div class="module">
+
+            <div class="card-body">
+                <div class="setting">
+                    <form enctype="multipart/form-data" method="post" action="/setting">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="control-label">当前头像</label>
+                                <div>
+                                    <img class="large_avatar rounded" src="{$auth.avatarBig}" class="img-rounded">&nbsp;
+                                    <img class="middle_avatar rounded" src="{$auth.avatar}" class="img-rounded">&nbsp;
+                                    <img class="small_avatar rounded" src="{$auth.avatarSmall}" class="img-rounded">
+                                    <div class="alert alert-info alert-avatar mt-2">
+                                        <strong>注意</strong> 支持 512k 以内的 PNG / GIF / JPG 图片文件作为头像，推荐使用正方形的图片以获得最佳效果。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class=" control-label" >选择上传头像</label>
+                                <div class="">
+                                    <input type="file" class="form-control-file" name="upfile">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="">
+                                    <button type="submit" class="btn btn-primary">提交新头像</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <include file="footer" />
+    <include file="validator" />
+</div>
+
+</body>
+</html>

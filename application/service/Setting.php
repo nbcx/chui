@@ -43,7 +43,7 @@ class Setting extends Service {
         $avatar = $up->upload($file);
         b('$avatar',$avatar);
         if(!$avatar) {
-            $this->fail=$avatar['state'];
+            $this->fail = $avatar['state'];
             return false;
         }
 
