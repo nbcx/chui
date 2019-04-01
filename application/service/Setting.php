@@ -23,7 +23,7 @@ class Setting extends Service {
         $data['birthday'] = $year.'/'.$month.'/'.$day;
 
         \model\User::updateId(Auth::init()->id,$data);
-        $this->success = '修改成功';
+        $this->msg = '修改成功';
         return true;
     }
 
@@ -60,7 +60,7 @@ class Setting extends Service {
             $ri->resize('small', 30, 30)
         ) {
             \model\User::updateId(Auth::init()->id,[
-                'avatar' => $up['ext'],
+                'avatar' => "/uploads/$resizePath%s{$up['ext']}",
                 'ut'=> time()
             ]);
             //删除tmp下的原图

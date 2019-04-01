@@ -82,15 +82,15 @@ class User extends Model {
      * @return string
      */
     public function _avatar() {
-        return '/uploads/avatar/'.$this->id.'/normal'.$this->row['avatar'].'?'.$this->ut;
+        return sprintf($this->row['avatar'],'normal').'?'.$this->ut;
     }
 
     public function _avatarBig() {
-        return '/uploads/avatar/'.$this->id.'/big'.$this->row['avatar'].'?'.$this->ut;
+        return sprintf($this->row['avatar'],'big').'?'.$this->ut;
     }
 
     public function _avatarSmall() {
-        return '/uploads/avatar/'.$this->id.'/small'.$this->row['avatar'].'?'.$this->ut;
+        return sprintf($this->row['avatar'],'small').'?'.$this->ut;
     }
 
     public function _regtime() {

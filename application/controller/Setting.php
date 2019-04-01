@@ -3,6 +3,7 @@ namespace controller;
 
 use model\System;
 use util\Auth;
+use util\Auxiliary;
 use util\Controller;
 use model\Conf;
 use model\Plugin;

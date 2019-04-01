@@ -9,6 +9,7 @@
  */
 namespace addon\captcha\controller;
 use addon\captcha\Captcha;
+use nb\Request;
 
 /**
  * Action
@@ -23,6 +24,25 @@ class Action {
     public function show() {
         $captcha = new Captcha();
         $captcha->show();
+    }
+
+    /**
+     * 检测验证码是否正确
+     * @param string $type
+     * @return bool
+     */
+    public static function captcha($type = 'show_captcha') {
+        //$type = 'show_captcha';
+        $on = 'show_captcha';
+        if(Conf::init()->$on != 'on') {
+            return true;
+        }
+        $captcha = Request::input('captcha');
+
+        if(session('yzm') == strtolower($captcha)){
+            return true;
+        }
+        return false;
     }
 
 }
