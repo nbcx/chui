@@ -98,7 +98,6 @@ function tagsDiff($arr1, $arr2) {
 
 //关键词过滤
 function filter($content) {
-
     $filtering = load('words');
     $prohibited = false;
     $gag_time = 0;
@@ -570,30 +569,6 @@ function markdown($text) {
                 return $parser->makeHolder('<!--more-->');
             }, $html);
         });
-        $parser->enableHtml(true);
-        $parser->_commonWhiteList .= '|img|cite|embed|iframe';
-        $parser->_specialWhiteList = array_merge($parser->_specialWhiteList, [
-            'ol' => 'ol|li',
-            'ul' => 'ul|li',
-            'blockquote' => 'blockquote',
-            'pre' => 'pre|code'
-        ]);
-        return $parser;
-    });
-    return $parser->makeHtml($text);
-}
-
-/**
- * 将markdown转为html
- * @param $text
- * @return mixed
- */
-function markdown_bak($text) {
-    $parser = \nb\Pool::value('util\HyperDown',function (){
-        $parser = new \util\HyperDown();
-        //$parser->hook('afterParseCode', ['Markdown', 'transerCodeClass']);
-        //$parser->hook('beforeParseInline', ['Markdown', 'transerComment']);
-
         $parser->enableHtml(true);
         $parser->_commonWhiteList .= '|img|cite|embed|iframe';
         $parser->_specialWhiteList = array_merge($parser->_specialWhiteList, [

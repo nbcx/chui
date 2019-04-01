@@ -8,17 +8,22 @@
 namespace util;
 
 use model\Plugin;
+use nb\Config;
 use nb\Hook;
 use \nb\event\Framework as Frame;
 
 class Framework extends Frame {
 
-    public function request() {
+    public function config(Config &$conf) {
         $auth = Auth::init();
 
         $handle = Plugin::handle($auth);
         //加载插件
         Hook::init($handle);
+    }
+
+    public function request(\nb\request\Driver $request) {
+
     }
 
     public function validate($msg,$args) {

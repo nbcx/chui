@@ -1,10 +1,12 @@
 <?php
 namespace service;
 
+use bin\Config;
 use util\Auth;
 use model\Conf;
 use nb\Middle;
 use util\AvatarResize;
+use util\ResizeImage;
 use util\Service;
 use util\Uploader;
 
@@ -31,10 +33,10 @@ class Setting extends Service {
      * @param string $msg
      */
     public function avatar() {
-        $conf = load('upload');
-        $conf = $conf['storage'];
-        //$conf['path'] .= 'user'.DS;
-        $conf['name'] = Auth::init()->id;
+        $conf = load('avatar');
+        $resizePath = 'avatar/' . Auth::init()->id.'/';
+
+        $conf['name'] = $resizePath.'raw';
 
         $up = new Uploader($conf);
 
@@ -43,30 +45,31 @@ class Setting extends Service {
         $avatar = $up->upload($file);
         b('$avatar',$avatar);
         if(!$avatar) {
-            $this->fail = $avatar['state'];
+            $this->msg = $up['state'];
             return false;
         }
-
-        $path = $avatar['full'];
-        $ar = new AvatarResize($conf['path']);
+        $path = $up['fullPath'];
+        $ri = new ResizeImage([
+            'source_image' => $path,
+            'target_image_dir' => $conf['path'].$resizePath,
+            'format'=>$up['ext']
+        ]);
         if (
-            $ar->resize($path, 100, 100, 'big') &&
-            $ar->resize($path, 48, 48, 'normal') &&
-            $ar->resize($path, 24, 24, 'small')
+            $ri->resize('big',120, 120 ) &&
+            $ri->resize('normal',74, 74) &&
+            $ri->resize('small', 30, 30)
         ) {
             \model\User::updateId(Auth::init()->id,[
-                'avatar' => $ar->dir,
-                'ut'=> Conf::init()->timestamp
+                'avatar' => $up['ext'],
+                'ut'=> time()
             ]);
             //删除tmp下的原图
             unlink($path);
             return true;
         }
-        else {
-            //设置三个头像没有成功
-            $this->fail = '头像上传失败，请重试！';
-            return false;
-        }
+        //设置三个头像没有成功
+        $this->msg = '头像上传失败，请重试！';
+        return false;
     }
 
     /**

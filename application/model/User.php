@@ -82,19 +82,15 @@ class User extends Model {
      * @return string
      */
     public function _avatar() {
-        return "/uploads/avatar/default/default.png";
-        return '//gravatar.nb.cx/'.md5($this->id);
-        //return System::init()->uploadUrl.$this->row['avatar'] . 'normal.png?'.$this->ut;
+        return '/uploads/avatar/'.$this->id.'/normal'.$this->row['avatar'].'?'.$this->ut;
     }
 
     public function _avatarBig() {
-        return "/uploads/avatar/default/big.png";
-        return System::init()->uploadUrl.$this->row['avatar'] . 'big.png?'.$this->ut;
+        return '/uploads/avatar/'.$this->id.'/big'.$this->row['avatar'].'?'.$this->ut;
     }
 
     public function _avatarSmall() {
-        return "/uploads/avatar/default/small.png";
-        return System::init()->uploadUrl.$this->row['avatar'] . 'small.png?'.$this->ut;
+        return '/uploads/avatar/'.$this->id.'/small'.$this->row['avatar'].'?'.$this->ut;
     }
 
     public function _regtime() {

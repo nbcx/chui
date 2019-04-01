@@ -1,6 +1,7 @@
 <?php
 namespace controller;
 
+use model\System;
 use util\Auth;
 use util\Controller;
 use model\Conf;
@@ -8,10 +9,10 @@ use model\Plugin;
 
 class Setting extends Controller  {
 
-    public function __before(){
+    public function __before() {
         $pass = parent::__before();
         if(Auth::init()->isNotLogin) {
-            $this->jump('请登录后再查看', Conf::init()->loginUrl);
+            $this->jump('请登录后再查看', System::init()->loginUrl);
             return false;
         }
         return $pass;
@@ -21,10 +22,11 @@ class Setting extends Controller  {
         $this->protect();
 
         $run = \service\Setting::run($action,function ($fail){
+            b('$fail',$fail);
             $this->fail($fail);
         });
-
-        Auth::init()->freshen();
+        b('$run->msg',$run->msg);
+        //Auth::init()->freshen();
         $this->success($run->msg);
     }
 

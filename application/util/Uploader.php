@@ -30,7 +30,6 @@ class Uploader extends Access {
     private $fileType; //文件类型
     private $stateInfo; //上传状态信息
 
-
     //上传状态映射表，国际化用户需考虑此处数据的国际化
     private $stateMap = [
         "SUCCESS", //上传成功标记，在UEditor中内不可改变，否则flash判断会出错

@@ -36,6 +36,7 @@ class Label extends Driver {
 
         'navigation'   => ['attr' => 'name,type', 'close' => 1],
 
+        //模型
         'model'   => ['attr' => 'name,type', 'close' => 1],
     ];
 
