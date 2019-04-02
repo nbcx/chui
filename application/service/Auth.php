@@ -18,12 +18,6 @@ class Auth extends Service {
 
     public function login() {
 
-        //验证码
-        //if(Auxiliary::captcha('login') === false) {
-        //    $this->msg = '验证码错误!';
-        //    return false;
-        //}
-
         list($username,$password) = $this->input(
             'login',
             'password'
@@ -42,6 +36,7 @@ class Auth extends Service {
             $this->msg = '密码错误!';
             return false;
         }
+
         $token  = login($user);
         if($token === false) {
             $this->msg = '登录失败!';
@@ -108,6 +103,10 @@ class Auth extends Service {
         return $result;
     }
 
+    /**
+     * 找回密码
+     * @return bool|int
+     */
     public function findpwd() {
         list($username,$mail,$code,$password) = $this->input(
             'username','mail','code','password'

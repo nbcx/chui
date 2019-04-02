@@ -5,7 +5,9 @@
             <a class="nav-link" href="//chui.ol.cx">主页</a><!---->
             <a class="nav-link active" href="//chui.ol.cx/home/recent">社区</a>
             <a class="nav-link" href="//wiki.nb.cx">文档</a>
-            <a class="nav-link" href="{$auth.url}">个人中心</a>
+            <if condition="$auth.islogin">
+                <a class="nav-link" href="{$auth.url}">个人中心</a>
+            </if>
         </nav>
     </div>
 </header>

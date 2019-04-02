@@ -9,23 +9,14 @@
     <include file="nav" />
 
     <main role="main" class="rounded inner cover">
-        <h3 class="cover-heading">
-            主页
-            <div class="pull-right small" style="font-size: 12px;line-height: 46px;">
-                <a href="/tag" >
-                    话题广场
-                </a> •
+        <h3 class="cover-heading"> 主页
+            <div class="pull-right small" style="">
+                <a href="/tag" >话题广场</a> •
                 <if condition="$auth.islogin">
-                    <a href="/posted">
-                        发帖
-                    </a>
+                    <a href="/posted">发帖</a>
                 <else />
-                    <a href="/login">
-                        登录
-                    </a> •
-                    <a href="/register">
-                        注册
-                    </a>
+                    <a href="{$system.loginUrl}">登录</a> •
+                    <a href="/register">注册</a>
                 </if>
             </div>
         </h3>

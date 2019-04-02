@@ -42,7 +42,7 @@ class System extends Model {
      * 站点地址
      */
     protected function _url() {
-        return Request::ins()->domain;
+        return Request::driver()->domain;
     }
 
 
@@ -51,9 +51,6 @@ class System extends Model {
      * @return string
      */
     protected function _loginUrl() {
-
-        return '//auth.'.Config::$o->root;
-
         return '/login';
     }
 
@@ -62,7 +59,7 @@ class System extends Model {
      * @return string
      */
     protected function _logoutUrl() {
-        return '/logout';
+        return '/login/out';
     }
 
 
@@ -90,7 +87,7 @@ class System extends Model {
      * @return int
      */
     protected function _timestamp() {
-        return intval(Request::ins()->requestTime);
+        return intval(Request::driver()->requestTime);
     }
 
     /**
@@ -106,8 +103,6 @@ class System extends Model {
      * @return string
      */
     protected function _registerUrl() {
-        return '//auth.'.Config::$o->root.'/register';
-
         return '/register';
     }
 

@@ -470,3 +470,7 @@ h4 {
     margin-bottom: 1px;
 }
 
+main .cover-heading div.pull-right {
+    font-size: 12px;
+    line-height: 46px;
+}

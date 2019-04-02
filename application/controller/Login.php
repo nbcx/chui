@@ -27,10 +27,17 @@ class Login extends Controller {
         $this->protect();
 
         $run = \service\Auth::run($action,function ($msg) {
-            ed($msg);
+            $this->fail($msg);
         });
 
         Cookie::set('_user',$run->data->token);
+        $this->redirect('/');
+    }
+
+    public function out() {
+        $run = \service\Auth::run('logout',function ($msg) {
+            ed($msg);
+        });
         $this->redirect('/');
     }
 }
