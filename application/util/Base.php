@@ -79,4 +79,36 @@ class Base extends \nb\Controller {
         return $this->assign($var,$this->safe($url,$prefix));
     }
 
+    /*
+    public function __after($content) {
+        if($content) {
+            echo $content;
+        }
+    }
+    */
+
+    public function __after($ser=null) {
+        if(!($ser  instanceof \nb\Service)) {
+            return;
+        }
+        if($ser->code) {
+            $this->fail($ser->code,$ser->msg);
+        }
+        $this->success($ser->msg?:'操作成功',is_array($ser->data)?$ser->data:[]);
+        return;
+        switch ($ser->code) {
+            case 0:
+                //api&ajax 显示成功信息
+                //or 跳转
+                break;
+            case 301:
+                //api&ajax 显示data
+                //or 跳转URL页面
+                break;
+            default:
+                //api&ajax 显示错误信息
+                //or 跳转错误页面
+                break;
+        }
+    }
 }

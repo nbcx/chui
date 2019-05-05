@@ -75,7 +75,6 @@ class Topic extends Controller  {
     }
 
     public function add($nid=0) {
-
         $this->middle($this->isPost,'add',function ($new_topic_id){
             $conf = Conf::init();
             //审核未开启时
@@ -176,4 +175,7 @@ class Topic extends Controller  {
     }
 
 
+    public function post($action) {
+        \service\Topic::run($action);
+    }
 }

@@ -13,6 +13,7 @@ use bin\Config;
 use model\Conf;
 use model\System;
 use nb\Middle;
+use nb\Response;
 
 /**
  *
@@ -74,11 +75,6 @@ class Controller extends Base {
         $this->assign('title',$title);
     }
 
-    public function __after($content) {
-        if($content) {
-            echo $content;
-        }
-    }
 
     public function __error($msg,$args) {
         $this->fail($msg);
@@ -134,8 +130,7 @@ class Controller extends Base {
     }
 
     protected function redirect($url, $http_response_code=302) {
-        //检查是否存在referer
-        redirect($url,$http_response_code);
+        Response::redirect($url,$http_response_code);
         quit();
     }
 

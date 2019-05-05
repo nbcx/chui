@@ -36,7 +36,7 @@ class Login extends Controller {
 
     public function out() {
         $run = \service\Auth::run('logout',function ($msg) {
-            ed($msg);
+            ed('msg',$msg);
         });
         $this->redirect('/');
     }

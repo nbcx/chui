@@ -26,7 +26,7 @@ class Topic extends Service {
         return $id?$this->edit($id):$this->add();
     }
 
-    private function add() {
+    public function add() {
         $nid = $this->input('nid')?:0;
 
         //if (!Auth::init()->user_permit($nid)) {//权限
@@ -107,13 +107,12 @@ class Topic extends Service {
         }
         catch (\Exception $e) {
             \model\Topic::dao()->rollback();
-            $this->msg = '系统错误';
-            ed($e);
+            $this->msg = $e->getMessage();
             return false;
         }
     }
 
-    private function edit($id) {
+    public function edit($id) {
         list($nid) = $this->input('nid');
         $topic = \model\Topic::findId($id);
 
@@ -243,7 +242,6 @@ class Topic extends Service {
         }
         //$tags_arr = array_merge($tags_exist,$new_tags);
         //\model\Topic::updateId($topicid,['tag'=>implode("|", $tags_arr)]);
-
 
         //记录标签与TopicID的对应关系
         $ttDao  = new Dao('tag_topic');
