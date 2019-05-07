@@ -79,13 +79,6 @@ class Base extends \nb\Controller {
         return $this->assign($var,$this->safe($url,$prefix));
     }
 
-    /*
-    public function __after($content) {
-        if($content) {
-            echo $content;
-        }
-    }
-    */
 
     public function __after($ser=null) {
         if(!($ser  instanceof \nb\Service)) {
